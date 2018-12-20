@@ -63,7 +63,7 @@
 <li>fixed，生成绝对定位的元素，相对于浏览器窗口进行定位。（老IE不支持）</li>
 </ul>
 <blockquote>
-<h5 id="清除浮动的方法和为什么清除浮动"><a href="#清除浮动的方法和为什么清除浮动" class="headerlink" title="清除浮动的方法和为什么清除浮动"></a>清除浮动的方法和为什么清除浮动</h5></blockquote>
+<h5 id="清除浮动的方法和清除浮动理由"><a href="#清除浮动的方法和清除浮动理由" class="headerlink" title="清除浮动的方法和清除浮动理由"></a>清除浮动的方法和清除浮动理由</h5></blockquote>
 <p>1.由于使用了浮动，导致在页面排版上面出现了问题：</p>
 <ul>
 <li>会导致父元素高度塌陷为零</li>
@@ -83,21 +83,18 @@
 </li>
 </ul>
 <blockquote>
-<p>position:absolute和float的区别</p>
-</blockquote>
+<h5 id="position-absolute和float的区别"><a href="#position-absolute和float的区别" class="headerlink" title="position:absolute和float的区别"></a>position:absolute和float的区别</h5></blockquote>
 <ul>
 <li>共同点：对内联元素设置<code>float</code>和<code>absolute</code>属性，可以让元素脱离文档流，并且可以设置其宽高。</li>
 <li>不同点：float仍会占据位置，position会覆盖文档流中的其他元素。</li>
 </ul>
 <blockquote>
-<p>z-index属性</p>
-</blockquote>
+<h5 id="z-index属性"><a href="#z-index属性" class="headerlink" title="z-index属性"></a>z-index属性</h5></blockquote>
 <p>​    z-index只能在position属性值为relative或absolute或fixed的元素上有效</p>
 <p>​    原理说明：z-index的值可以控制定位元素在垂直于显示屏幕方向（z轴）上的堆叠顺序(stack order),值大的元素发生重叠时会在值小的元素上面。</p>
 <p>​    </p>
 <blockquote>
-<p>CSS 盒子模型</p>
-</blockquote>
+<h5 id="CSS-盒子模型"><a href="#CSS-盒子模型" class="headerlink" title="CSS 盒子模型"></a>CSS 盒子模型</h5></blockquote>
 <ul>
 <li><p>标准盒模型</p>
 <p>​    元素的宽度/高度由border + padding + content的宽度/高度决定，设置元素的width/height属性指的是content部分的宽/高，盒子的宽高为border + padding + content(宽高)+margin</p>
@@ -107,8 +104,7 @@
 </li>
 </ul>
 <blockquote>
-<p>三栏布局</p>
-</blockquote>
+<h5 id="三栏布局"><a href="#三栏布局" class="headerlink" title="三栏布局"></a>三栏布局</h5></blockquote>
 <ul>
 <li><p>float+margin：</p>
 <p>​    <strong>原理说明</strong>：设置两个侧栏分别向左向右浮动，中间列通过外边距给两个侧栏腾出空间，中间列的宽度根据浏览器窗口自适应。</p>
@@ -125,8 +121,7 @@
 </li>
 </ul>
 <blockquote>
-<p>垂直水平居中的方法</p>
-</blockquote>
+<h5 id="垂直水平居中的方法"><a href="#垂直水平居中的方法" class="headerlink" title="垂直水平居中的方法"></a>垂直水平居中的方法</h5></blockquote>
 <ul>
 <li>绝对定位+margin反向偏移</li>
 <li>绝对定位+margin：auto</li>
@@ -134,13 +129,11 @@
 <li>flex垂直水平居中</li>
 </ul>
 <blockquote>
-<p>display:none和visibility:hidden的区别</p>
-</blockquote>
+<h5 id="display-none和visibility-hidden的区别"><a href="#display-none和visibility-hidden的区别" class="headerlink" title="display:none和visibility:hidden的区别"></a>display:none和visibility:hidden的区别</h5></blockquote>
 <p>display:none 隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，就当他从来不存在。</p>
 <p>visibility:hidden 隐藏对应的元素，但是在文档布局中仍保留原来的空间。</p>
 <blockquote>
-<p>display属性：block、inline-block和inline的区别</p>
-</blockquote>
+<h5 id="display属性：block、inline-block和inline的区别"><a href="#display属性：block、inline-block和inline的区别" class="headerlink" title="display属性：block、inline-block和inline的区别"></a>display属性：block、inline-block和inline的区别</h5></blockquote>
 <ul>
 <li>block：形成会级元素，而且前后都有换行符，可以定义元素宽高</li>
 <li>inline：形成内联元素，不换行，内联元素的宽度高度由元素内部的结构撑开。定义元素宽高不生效。</li>
@@ -150,8 +143,7 @@
 <p>css</p>
 </blockquote>
 <blockquote>
-<p>link 和 @import 的区别</p>
-</blockquote>
+<h5 id="link-和-import-的区别"><a href="#link-和-import-的区别" class="headerlink" title="link 和 @import 的区别"></a>link 和 @import 的区别</h5></blockquote>
 <ol>
 <li>link 是 XHTML 标签，除了加载 CSS 外，还可以定义 RSS 等其他事务； @import 属于 CSS 范畴，只能加载 CSS</li>
 <li>link 引用 CSS 时，在页面载入时同时加载； @import 需要页面网页完全载入以后加载</li>
@@ -159,13 +151,9 @@
 <li>Javascript 控制 DOM 去改变样式；而 @import 不支持</li>
 </ol>
 <blockquote>
-<p>媒体查询</p>
-</blockquote>
+<h5 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h5></blockquote>
 <blockquote>
-<p>解释浏览器是如何判断元素是否匹配某个CSS选择器</p>
-</blockquote>
-<blockquote>
-</blockquote>
+<h5 id="解释浏览器是如何判断元素是否匹配某个CSS选择器"><a href="#解释浏览器是如何判断元素是否匹配某个CSS选择器" class="headerlink" title="解释浏览器是如何判断元素是否匹配某个CSS选择器"></a>解释浏览器是如何判断元素是否匹配某个CSS选择器</h5></blockquote>
 <h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><blockquote>
 <p>闭包</p>
 </blockquote>
@@ -473,7 +461,7 @@
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS"><span class="toc-number">2.</span> <span class="toc-text">CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#position属性值"><span class="toc-number">2.0.1.</span> <span class="toc-text">position属性值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#清除浮动的方法和为什么清除浮动"><span class="toc-number">2.0.2.</span> <span class="toc-text">清除浮动的方法和为什么清除浮动</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript"><span class="toc-number">3.</span> <span class="toc-text">JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机网路"><span class="toc-number">4.</span> <span class="toc-text">计算机网路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-number">5.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#框架类"><span class="toc-number">6.</span> <span class="toc-text">框架类</span></a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS"><span class="toc-number">2.</span> <span class="toc-text">CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#position属性值"><span class="toc-number">2.0.1.</span> <span class="toc-text">position属性值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#清除浮动的方法和清除浮动理由"><span class="toc-number">2.0.2.</span> <span class="toc-text">清除浮动的方法和清除浮动理由</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#position-absolute和float的区别"><span class="toc-number">2.0.3.</span> <span class="toc-text">position:absolute和float的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#z-index属性"><span class="toc-number">2.0.4.</span> <span class="toc-text">z-index属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CSS-盒子模型"><span class="toc-number">2.0.5.</span> <span class="toc-text">CSS 盒子模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#三栏布局"><span class="toc-number">2.0.6.</span> <span class="toc-text">三栏布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#垂直水平居中的方法"><span class="toc-number">2.0.7.</span> <span class="toc-text">垂直水平居中的方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#display-none和visibility-hidden的区别"><span class="toc-number">2.0.8.</span> <span class="toc-text">display:none和visibility:hidden的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#display属性：block、inline-block和inline的区别"><span class="toc-number">2.0.9.</span> <span class="toc-text">display属性：block、inline-block和inline的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#link-和-import-的区别"><span class="toc-number">2.0.10.</span> <span class="toc-text">link 和 @import 的区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#媒体查询"><span class="toc-number">2.0.11.</span> <span class="toc-text">媒体查询</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解释浏览器是如何判断元素是否匹配某个CSS选择器"><span class="toc-number">2.0.12.</span> <span class="toc-text">解释浏览器是如何判断元素是否匹配某个CSS选择器</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript"><span class="toc-number">3.</span> <span class="toc-text">JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机网路"><span class="toc-number">4.</span> <span class="toc-text">计算机网路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-number">5.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#框架类"><span class="toc-number">6.</span> <span class="toc-text">框架类</span></a></li>
         </div>
     
 </div>
