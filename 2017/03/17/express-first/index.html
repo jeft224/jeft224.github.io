@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abert</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Abert,"> 
+    <meta name="description" content="Vue源码学习在今年的10月份尤大大在多伦多发布了在明年发布Vue3.0的消息，但是我自己对vue的源码不是很了解，虽然在去年看了一下vue的源码，了解到数据双向绑定的原理，但是其他的方面没了解过，,"> 
+    <meta name="author" content="Abert"> 
+    <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
+    <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">express 入门</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">express 入门</h1>
+        <div class="stuff">
+            <span>三月 17, 2017</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/express/">express</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a><strong>安装</strong></h5><pre><code>express是基于node.js的web服务器端框架，首先要安装node.js和npm，npm相当于一个依赖管理器，有助于你项目结构的搭建。
+</code></pre><hr>
+<p><strong>demo地址：</strong><a href="https://github.com/jeft224/expressDemo" target="_blank" rel="noopener">https://github.com/jeft224/expressDemo</a></p>
+<a id="more"></a>
+<hr>
+<h5 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a><strong>新建项目</strong></h5><p>你可以在命令行运行以下命令：<br>node init<br>在项目中你就可以看到一个json文件(package.json),可以在这个文件里手动的添加项目所需的express依赖<br>代码块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;demo&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;ejs&quot;: &quot;^2.5.6&quot;,</span><br><span class="line">    &quot;express&quot;: &quot;^4.15.2&quot;,</span><br><span class="line">    &quot;path&quot;: &quot;^0.12.7&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后：</p>
+<blockquote>
+<p>npm install</p>
+</blockquote>
+<p>或者你可直接在命令行输入以下命令：</p>
+<blockquote>
+<p>npm install express –save</p>
+</blockquote>
+<h5 id="安装express的脚手架"><a href="#安装express的脚手架" class="headerlink" title="安装express的脚手架"></a>安装express的脚手架</h5><p>倘若你看了express的开发文档，你可以安装express的脚手架express-generator，不过你要先安装这个express的脚手架<br>在命令行里输入：</p>
+<blockquote>
+<p>npm install express-generator -g</p>
+</blockquote>
+<hr>
+<h5 id="express编程之路"><a href="#express编程之路" class="headerlink" title="express编程之路"></a><strong>express编程之路</strong></h5><p>前面这些工作是express的铺垫，此时就可以开始express的编程：<br>    新建app.js,写一个简单的应用，是一个express的实例：<br>    代码块：<br>     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//引用express</span><br><span class="line">  var express = require(&apos;express&apos;);</span><br><span class="line">  var app = express();</span><br><span class="line"></span><br><span class="line">  //页面渲染（app.use()????）</span><br><span class="line">  app.use(&apos;/&apos;,function(res,req,next)&#123;</span><br><span class="line">      res.send(&apos;hello,world!!!!&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  //监听端口</span><br><span class="line">  app.listen(4000)enter code here</span><br></pre></td></tr></table></figure></p>
+<p> 在其根目录下的命令行里输入：<br>     &gt;node index.js</p>
+<p> 在浏览器里打开这个链接，你就可以在页面上看到hello world!!!!</p>
+<p> 讲完了前面的一个小案例，那我们学习点高级点的东西，为这个案例添加路由(可以用于跳转其他的页面)：<br>    首先定义路由：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">express可以响应任何HTTP请求，</span><br><span class="line">//Http request get请求</span><br><span class="line">app.get(url,do something);</span><br><span class="line">//post请求</span><br><span class="line">app.post(url,do something);</span><br><span class="line"></span><br><span class="line">==&gt;请看这：</span><br><span class="line">app.get(&apos;/&apos;,function(req,res)&#123;</span><br><span class="line">     res.send(&apos;just do it&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p> 只要添加更多的路由，在你的想法下，就可能构成了一个应用（比如：你的博客或者你的公司网站）：</p>
+<p> <strong>大家亮起眼光来，重头戏来了：</strong></p>
+<p> 一般的博客开发(express开发)<br>    Express 支持各种模板引擎，express 命令行可以添加对 Jade，EJS，JSHTML 和 Hogan 的支持。<br>    根据 Express 文档，任何模版引擎只要符合特定的签名就可以生效。<br>    开始之前：要先安装ejs模板引擎=&gt; cnpm i ejs  –save<br>    整改app.js:</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var path = require(&apos;path&apos;)</span><br><span class="line">var app = express();</span><br><span class="line">//模板目录</span><br><span class="line">app.set(&apos;views&apos;,path.join(__dirname,&apos;views&apos;));</span><br><span class="line">//模板引擎</span><br><span class="line">app.set(&apos;view engine&apos;, &apos;ejs&apos;);</span><br><span class="line">//响应的一系列的组件 设置静态文件目录</span><br><span class="line">app.use(express.static(path.join(__dirname,&apos;public&apos;)))</span><br><span class="line"></span><br><span class="line">app.get(&apos;/&apos;, function(req, res) &#123;</span><br><span class="line">    res.render(&apos;index&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&apos;/about&apos;, function(req, res) &#123;</span><br><span class="line">    res.render(&apos;about&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&apos;/article&apos;, function(req, res) &#123;</span><br><span class="line">    res.render(&apos;article&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(4040);</span><br></pre></td></tr></table></figure>
+</code></pre><p> 这里我们为了简单点就用了bootstrap框架来搭建简单的博客：<br> 我们将bootstrap文件设置为静态文件</p>
+<blockquote>
+<p>app.use(express.static(path.join(__dirname,’public’)));</p>
+</blockquote>
+<p> 再添加页面文件：index.ejs,article.ejs等</p>
+<p> 最后再运行node服务器：node index.js ，访问localhost:4040</p>
+<hr>
+<p> <strong>你就可以看到下面的页面：</strong></p>
+<p><img src="/images/home.JPG" alt="enter image description here"></p>
+<hr>
+<p><img src="/images/article.JPG" alt="enter image description here"></p>
+<hr>
+<p><strong> 接下来我会继续完善这个demo：</strong></p>
+<p>  我会使其与数据库mysql连接，继续完善这个博客的其他功能：添加文章，修改文章，</p>
+<p><strong>github地址：</strong><a href="https://github.com/jeft224/" target="_blank" rel="noopener">https://github.com/jeft224/</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#新建项目"><span class="toc-number">2.</span> <span class="toc-text">新建项目</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#安装express的脚手架"><span class="toc-number">3.</span> <span class="toc-text">安装express的脚手架</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#express编程之路"><span class="toc-number">4.</span> <span class="toc-text">express编程之路</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

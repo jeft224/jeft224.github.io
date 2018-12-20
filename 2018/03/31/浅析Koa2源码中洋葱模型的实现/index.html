@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abert</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Abert,"> 
+    <meta name="description" content="Vue源码学习在今年的10月份尤大大在多伦多发布了在明年发布Vue3.0的消息，但是我自己对vue的源码不是很了解，虽然在去年看了一下vue的源码，了解到数据双向绑定的原理，但是其他的方面没了解过，,"> 
+    <meta name="author" content="Abert"> 
+    <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
+    <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">浅析Koa2源码中洋葱模型的实现</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">浅析Koa2源码中洋葱模型的实现</h1>
+        <div class="stuff">
+            <span>三月 31, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/es6/">es6</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/koa2/">koa2</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/node-js/">node.js</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/后端/">后端</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>​    最近刷知乎中看到关于koa的问题<a href="https://www.zhihu.com/question/270066081" target="_blank" rel="noopener">koa2框架中的中间件同步还是异步的问题？</a> 由此去探索koa2中间件的源码实现</p>
+<a id="more"></a>
+<p>先来看一个koa的demo看看效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"></span><br><span class="line"> <span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"> app.use(<span class="keyword">async</span> (ctx, next)=&gt;&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">     <span class="keyword">await</span> next();</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'1-1'</span>)</span><br><span class="line"> &#125;);</span><br><span class="line"> </span><br><span class="line"> app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">     <span class="keyword">await</span> next();</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"2-1"</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> app.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"3000"</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<p>我们可以看出输出的结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//端口号3000</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">2</span><span class="number">-1</span> <span class="number">1</span><span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<p>我们从结果上看是不是觉得当遇到await next()是，async异步函数就会停止当前程序，进入到下一个中间件，然后当最后一个中间件执行完时，再回到上一个中间件执行程序，一直回滚上去。我想大家会十分好奇为什么会这样，对其中中间件也有很多疑问吧。<code>那注意咯！我们要开车咯</code></p>
+<h4 id="koa的源码解析"><a href="#koa的源码解析" class="headerlink" title="koa的源码解析"></a>koa的源码解析</h4><p>翻看源码可以看到：</p>
+<p>在源码application.js中koa中定义了一个listen()的监听服务器端的回调函数.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">listen(...args) &#123;</span><br><span class="line">    debug(<span class="string">'listen'</span>);</span><br><span class="line">    <span class="keyword">const</span> server = http.createServer(<span class="keyword">this</span>.callback());</span><br><span class="line">    <span class="keyword">return</span> server.listen(...args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从源码中可以看到<code>app.listen</code>使用了<code>this.callback()</code>来生成node的httpServer的回调函数。</p>
+<p>那让我们看看this.callback()函数到底做了什么事？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">callback() &#123;</span><br><span class="line">    <span class="keyword">const</span> fn = compose(<span class="keyword">this</span>.middleware);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.listeners(<span class="string">'error'</span>).length) <span class="keyword">this</span>.on(<span class="string">'error'</span>, <span class="keyword">this</span>.onerror);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> handleRequest = <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> ctx = <span class="keyword">this</span>.createContext(req, res);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.handleRequest(ctx, fn);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> handleRequest;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>函数里面有一个变量<code>this.middleware</code>，可想而知这个可能是中间件集合;同时函数里面还对请求<code>request</code>和响应<code>response</code>做了封装。这个调用了compose处理了this.middleware。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.middleware = [];<span class="comment">//中间件集合</span></span><br></pre></td></tr></table></figure>
+<p>说到中间件数组，那么我们看看是怎么添加中间件的:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">use(fn) &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'middleware must be a function!'</span>);</span><br><span class="line">   <span class="keyword">if</span> (isGeneratorFunction(fn)) &#123;</span><br><span class="line">     deprecate(<span class="string">'Support for generators will be removed in v3. '</span> +</span><br><span class="line">               <span class="string">'See the documentation for examples of how to convert old middleware '</span> +</span><br><span class="line">               <span class="string">'https://github.com/koajs/koa/blob/master/docs/migration.md'</span>);</span><br><span class="line">     fn = convert(fn);</span><br><span class="line">   &#125;</span><br><span class="line">   debug(<span class="string">'use %s'</span>, fn._name || fn.name || <span class="string">'-'</span>);</span><br><span class="line">  </span><br><span class="line">   <span class="keyword">this</span>.middleware.push(fn);</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>是定义了一个use函数去添加中间件，<code>this.middleware.push(fn)</code></p>
+<p>添加完中间件之后，那中间件之间的单向跳转又是怎么回事呢？？？compose又是什么？？？跟踪源码在koa-compose模块可以看到compose函数的定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span> (<span class="params">middleware</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(middleware)) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Middleware stack must be an array!'</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> fn <span class="keyword">of</span> middleware) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Middleware must be composed of functions!'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @param &#123;Object&#125; context</span></span><br><span class="line"><span class="comment">   * @return &#123;Promise&#125;</span></span><br><span class="line"><span class="comment">   * @api public</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">context, next</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// last called middleware #</span></span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> dispatch(<span class="number">0</span>)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (i &lt;= index) <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'next() called multiple times'</span>))</span><br><span class="line">      index = i</span><br><span class="line">      <span class="keyword">let</span> fn = middleware[i]</span><br><span class="line">      <span class="keyword">if</span> (i === middleware.length) fn = next</span><br><span class="line">      <span class="keyword">if</span> (!fn) <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve()</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(fn(context, <span class="function"><span class="keyword">function</span> <span class="title">next</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> dispatch(i + <span class="number">1</span>)</span><br><span class="line">        &#125;))</span><br><span class="line">      &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在compose中用到了递归，最为关键的是dispatch()函数，它遍历了所有中间件middleware，最后不管中间件返回的对象是不是Promise对象，它都将通过Promise.resolve()包装成Promise。然后将context和next函数作为参数传给中间件<code>middleware</code>中的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(fn(context, <span class="function"><span class="keyword">function</span> <span class="title">next</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> dispatch(i + <span class="number">1</span>)</span><br><span class="line">  &#125;))</span><br></pre></td></tr></table></figure>
+<p>通过这一段代码和递归函数实现了koa中间件的洋葱模型。这段代码它将context一直传递给下一个中间件，将下一个中间件作为next()函数的返回值。</p>
+<p><em>看完了koa中间件的核心，不要马上关掉这个页面，下面会让你更加惊喜。</em>s</p>
+<p>再回到开始，再看看createContext函数和handleRequest函数，前一个是将请求<code>request</code>和响应<code>response</code>做了封装，后一个对一些数据做处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle request in callback.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @api private</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  handleRequest(ctx, fnMiddleware) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = ctx.res;</span><br><span class="line">    res.statusCode = <span class="number">404</span>;</span><br><span class="line">    <span class="keyword">const</span> onerror = <span class="function"><span class="params">err</span> =&gt;</span> ctx.onerror(err);</span><br><span class="line">    <span class="keyword">const</span> handleResponse = <span class="function"><span class="params">()</span> =&gt;</span> respond(ctx);</span><br><span class="line">    onFinished(res, onerror);</span><br><span class="line">    <span class="keyword">return</span> fnMiddleware(ctx).then(handleResponse).catch(onerror);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Initialize a new context.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @api private</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  createContext(req, res) &#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="built_in">Object</span>.create(<span class="keyword">this</span>.context);</span><br><span class="line">    <span class="keyword">const</span> request = context.request = <span class="built_in">Object</span>.create(<span class="keyword">this</span>.request);</span><br><span class="line">    <span class="keyword">const</span> response = context.response = <span class="built_in">Object</span>.create(<span class="keyword">this</span>.response);</span><br><span class="line">    context.app = request.app = response.app = <span class="keyword">this</span>;</span><br><span class="line">    context.req = request.req = response.req = req;</span><br><span class="line">    context.res = request.res = response.res = res;</span><br><span class="line">    request.ctx = response.ctx = context;</span><br><span class="line">    request.response = response;</span><br><span class="line">    response.request = request;</span><br><span class="line">    context.originalUrl = request.originalUrl = req.url;</span><br><span class="line">    context.cookies = <span class="keyword">new</span> Cookies(req, res, &#123;</span><br><span class="line">      keys: <span class="keyword">this</span>.keys,</span><br><span class="line">      secure: request.secure</span><br><span class="line">    &#125;);</span><br><span class="line">    request.ip = request.ips[<span class="number">0</span>] || req.socket.remoteAddress || <span class="string">''</span>;</span><br><span class="line">    context.accept = request.accept = accepts(req);</span><br><span class="line">    context.state = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>最后你可以再思虑一下，就会明白其中的原理。不说了，我先下车咯。你们继续！</p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="https://github.com/koajs/koa/" target="_blank" rel="noopener">koa源码</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#koa的源码解析"><span class="toc-number">2.</span> <span class="toc-text">koa的源码解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-number">3.</span> <span class="toc-text">参考链接</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

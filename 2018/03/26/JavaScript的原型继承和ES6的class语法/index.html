@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abert</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Abert,"> 
+    <meta name="description" content="Vue源码学习在今年的10月份尤大大在多伦多发布了在明年发布Vue3.0的消息，但是我自己对vue的源码不是很了解，虽然在去年看了一下vue的源码，了解到数据双向绑定的原理，但是其他的方面没了解过，,"> 
+    <meta name="author" content="Abert"> 
+    <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
+    <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">JavaScript的原型继承和ES6的class语法</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JavaScript的原型继承和ES6的class语法</h1>
+        <div class="stuff">
+            <span>三月 26, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/es6/">es6</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/javaScript/">javaScript</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>回顾一下JavaScript的原型链和原型继承及ES6的Class语法。<br><a id="more"></a></p>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>JavaScript中的每个对象，都有一个特殊内置的<code>_proto_</code>属性。这个属性是编程不可见的（虽然ES6标准中开放了这个属性，然而浏览器对这个属性的可见性的支持不同），它实际上是对另一个对象或者<code>null</code>的引用。几乎所有的对象在创建时<code>_proto_</code>属性都会被赋予一个非空的值 。</p>
+<p>当一个对象需要引用一个属性时，JavaScript引擎首先会从这个对象自身的属性表中寻找这个属性标识，如果找到则进行相应读写操作，若没有在自身的属性表中找到，则在<code>_proto_</code>属性引用的对象的属性表中查找，如此往复，直到找到这个属性或者<code>_proto_</code>属性指向<code>null</code>为止。最后会找到Object对象上，如果还没有，那么就返回undefined 。</p>
+<p>这个<code>_proto_</code>的引用链，被称作<strong>原型链</strong>。</p>
+<p>注意，此处有一个性能优化的问题：往原型链越深处搜索，耗费的时间越多。</p>
+<h4 id="原型继承实现的几种方式"><a href="#原型继承实现的几种方式" class="headerlink" title="原型继承实现的几种方式"></a>原型继承实现的几种方式</h4><p>在javaScript中，可以说一切皆对象。它并没有‘’类‘’这个概念，它跟Java等语言不同，在ES6标准出炉之前，它是没有类的定义的。对于在javaScript中提出类的概念，只是那些熟悉Java强类型语言的使用者，希望JavaScript中能通过类生成实例，通过子类复用代码。那在ES6中class的语法糖提出前，是怎么做到的？？？</p>
+<h5 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'kevin'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child1.getName()) <span class="comment">// kevin</span></span><br><span class="line"><span class="comment">//1.引用类型的属性被所有实例共享，举个例子：</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.names = [<span class="string">'kevin'</span>, <span class="string">'daisy'</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child();</span><br><span class="line"></span><br><span class="line">child1.names.push(<span class="string">'yayu'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child1.names); <span class="comment">// ["kevin", "daisy", "yayu"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child2 = <span class="keyword">new</span> Child();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child2.names); <span class="comment">// ["kevin", "daisy", "yayu"]</span></span><br></pre></td></tr></table></figure>
+<p>这种继承会产生一些问题：</p>
+<p>​    1.引用类型的属性被所有实例共享</p>
+<p>​    2.在创建 Child 的实例时，不能向Parent传参</p>
+<h5 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125; </span><br><span class="line">Foo.prototype.myName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params">name,label</span>) </span>&#123;</span><br><span class="line">   Foo.call( <span class="keyword">this</span>, name );</span><br><span class="line">   <span class="keyword">this</span>.label = label;</span><br><span class="line">&#125; </span><br><span class="line">Bar.prototype = Foo.prototype;</span><br><span class="line">Bar.prototype.myLabel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.label;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Bar( <span class="string">"a"</span>, <span class="string">"obj a"</span> );</span><br><span class="line"><span class="built_in">console</span>.log(Foo.prototype.hasOwnProperty(<span class="string">'myLabel'</span>))<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(a.myName()); <span class="comment">// "a"</span></span><br><span class="line"><span class="built_in">console</span>.log(a.myLabel()); <span class="comment">// "obj a"</span></span><br></pre></td></tr></table></figure>
+<p>这种继承是有缺点的，由于Bar.prototype引用了Foo.prototype对象，当执行Bar.prototype.myLabel 的赋值语句会直接修改Foo.prototype对象本身，同时导致包含引用类型的属性值始终都会共享相应的值</p>
+<h5 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  	consoel.log(<span class="string">'a'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    Parent.call(<span class="keyword">this</span>, name);</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> Parent();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child(<span class="string">'koa'</span>, <span class="string">'18'</span>);</span><br></pre></td></tr></table></figure>
+<p>缺点：两次调用两次父构造函数。那需要怎么样去让子类调用父类的构造函数一次</p>
+<p>改进：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    Parent.call(<span class="keyword">this</span>, name);</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关键的三步 F相当于一个中介，去向买房者和购房者传递信息</span></span><br><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">F.prototype = Parent.prototype;</span><br><span class="line"></span><br><span class="line">Child.prototype = <span class="keyword">new</span> F();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child(<span class="string">'koa'</span>, <span class="string">'18'</span>);</span><br></pre></td></tr></table></figure>
+<p>但是这次改进还是存在对象的属性共享的问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Parent.prototype.a = &#123; <span class="attr">x</span>: <span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">.......</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child(<span class="string">'kevin'</span>, <span class="string">'18'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Parent.prototype.a ) <span class="comment">//&#123;x:1&#125;</span></span><br><span class="line">child1.a.x = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(Parent.prototype.a ) <span class="comment">//&#123;x:2&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在ES5中，还可通过Object.create()来实现继承：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    Parent.call(<span class="keyword">this</span>, name);</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//我们创建了一个新的Child.prototype对象并关联到Parent.prototype</span></span><br><span class="line">Child.prototype = <span class="built_in">Object</span>.create( Parent.prototype );</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child(<span class="string">'koa'</span>, <span class="string">'18'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="ES6的Class"><a href="#ES6的Class" class="headerlink" title="ES6的Class"></a>ES6的Class</h4><p>到此让我们来迎接ES6吧！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123; <span class="comment">//构造函数</span></span><br><span class="line">          <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    getName() &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Children</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123; <span class="comment">//构造函数</span></span><br><span class="line">        <span class="keyword">super</span>(name);    <span class="comment">//调用父类构造函数</span></span><br><span class="line">         <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child(<span class="string">'koa'</span>, <span class="string">'18'</span>);</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#原型链"><span class="toc-number">1.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原型继承实现的几种方式"><span class="toc-number">2.</span> <span class="toc-text">原型继承实现的几种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#原型链继承"><span class="toc-number">2.1.</span> <span class="toc-text">原型链继承</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#原型式继承"><span class="toc-number">2.2.</span> <span class="toc-text">原型式继承</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#组合继承"><span class="toc-number">2.3.</span> <span class="toc-text">组合继承</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ES6的Class"><span class="toc-number">3.</span> <span class="toc-text">ES6的Class</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

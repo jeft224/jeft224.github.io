@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abert</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Abert,"> 
+    <meta name="description" content="Vue源码学习在今年的10月份尤大大在多伦多发布了在明年发布Vue3.0的消息，但是我自己对vue的源码不是很了解，虽然在去年看了一下vue的源码，了解到数据双向绑定的原理，但是其他的方面没了解过，,"> 
+    <meta name="author" content="Abert"> 
+    <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
+    <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">CSS总结篇(二)</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">CSS总结篇(二)</h1>
+        <div class="stuff">
+            <span>七月 27, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>本篇内容包括CSS盒模型，</p>
+<h4 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h4><p>在一个文档中，每个<strong>元素</strong>都被表示为一个<strong>矩形的盒子</strong>。确定这些盒子的尺寸, 属性 — 像它的颜色，背景，边框方面 — 和位置是渲染引擎的目标。</p>
+<a id="more"></a>
+<p>在CSS中，使用标准<strong>盒模型</strong>描述这些矩形盒子中的每一个。这个模型描述了元素所占空间的内容。每个盒子有四个边：<strong>外边距边（margin）</strong>, <strong>边框边(border)</strong>, <strong>内填充边(padding)</strong> 与 <strong>内容边(content)</strong>。</p>
+<h5 id="CSS-盒模型简解"><a href="#CSS-盒模型简解" class="headerlink" title="CSS 盒模型简解"></a>CSS 盒模型简解</h5><p>通常CSS盒模型中常见的盒模型有块级元素(<code>block Box</code>)和行内元素(<code>line Box</code>)：</p>
+<p>在正常流中：</p>
+<p>块级元素的水平格式化：有七大属性，元素包含块的宽度通常是父元素的width值，当margin和width属性为auto，宽度会自动去适配。</p>
+<p>块级元素的垂直格式化： 设置margin：auto ；设置宽度值为0，垂直方向会出现外边距合并 （bottom-top合并和top-top合并）</p>
+<p>width/height:百分比依赖于父元素的content-box的宽高</p>
+<p>overflow:用于当content中的信息太多，并超出内容区所占的位置时，通过该属性来指定溢出内容的处理方式。</p>
+<p>​    1、visible：溢出的内容不会被修剪，呈现在元素框外。</p>
+<p>​    2、hidden：溢出的内容将隐藏起来，不可见。</p>
+<p>​    3、scroll：溢出的内容会被修剪，但可以通过滚动条查看隐藏的内容。</p>
+<p>​    4、auto：由浏览器决定如何处理溢出部分，如果溢出部分被修剪，则可以通过滚动条查看隐藏的内容。</p>
+<p>​    5、inherit：规定应该从父元素集成overflow属性的值。</p>
+<p>oveflow-x和overflow-y</p>
+<h6 id="视觉格式化模型-visual-formatting-model"><a href="#视觉格式化模型-visual-formatting-model" class="headerlink" title="视觉格式化模型(visual formatting model)"></a>视觉格式化模型(visual formatting model)</h6><blockquote>
+<p>CSS 视觉格式化模型(visual formatting model)是用来处理文档并将它显示在视觉媒体上的机制。</p>
+</blockquote>
+<p>页面(文档树)可以想象成是由一个个的Box组合而成的，而视觉格式化模型(Visual formatting model)是一套规则，将这些框布局成访问者看到的样子。</p>
+<p>视觉格式化模型中，文档树中的每一个元素根据盒模型<code>Box Model</code>产生零个或多个盒。这些盒的布局由以下内容控制：</p>
+<ol>
+<li>盒的尺寸和类型</li>
+<li>定位体系<code>Positioning Scheme</code>（常规流，浮动和绝对定位）</li>
+<li>文档树中元素之间的关系</li>
+<li>外部信息（如：视口大小，图片的固有尺寸等）</li>
+</ol>
+<p>视口(Viewport)</p>
+<ul>
+<li>浏览器的可视区域</li>
+<li>用户通过视口查看网页内容(透过窗户看风景)</li>
+</ul>
+<p>块级元素(Block-level Elements)</p>
+<ul>
+<li>会被格式化成块状的元素</li>
+<li>例如 p div section 等</li>
+<li>将display 设置block list-item table 使元素变为块级</li>
+</ul>
+<p>行级元素(inlime-level Elemnets)</p>
+<ul>
+<li>不会为其内容生成块级元素</li>
+<li>让其内容分布在多行中</li>
+<li>display 设置为 inline inline-block inline-table 是的元素变为行级</li>
+</ul>
+<p>盒子的生成</p>
+<ul>
+<li>每个块级元素生成一个主块级盒(principal block-level box）用来包含子级盒</li>
+<li>每个行级元素生成一个行级盒，行级盒子分布于多行</li>
+<li>同时包含块级和行级的会生成匿名块级盒子</li>
+<li>文字全部被行级盒子包裹会生成匿名行级盒子</li>
+</ul>
+<p>块级盒子中的子盒子的生成</p>
+<ul>
+<li>块级盒子中可以包含多个子块级盒子，也可以包含多个行级盒子</li>
+<li>不在行级元素里面的文字，会生成匿名行级盒比如<code>&lt;p&gt;Some &lt;em&gt; Text&lt;/em&gt;&lt;/p&gt;</code></li>
+<li>块级盒子中不能同时包含块级和行级盒子，遇到这种情况时候，会生成匿名块级盒来包含行级盒。比如<code>&lt;div&gt;&lt;h1&gt;标题&lt;/h1&gt;&lt;span&gt;2016-12-12&lt;/span&gt;&lt;div&gt;</code></li>
+</ul>
+<p>行级盒子内的子盒子的生成</p>
+<ul>
+<li>行级盒子内可以包含行级盒子</li>
+<li>行级盒子包含块级盒子时，会被块级盒子拆成两个行级盒子，这两个盒子有被匿名盒子包含</li>
+</ul>
+<p>display 属性</p>
+<ul>
+<li>block 生成块级盒</li>
+<li>inline 生成行级盒</li>
+<li>inline-block 生成行级盒， 为其内容生成块级盒</li>
+<li>none 在排版时将元素忽略</li>
+</ul>
+<p>visibility</p>
+<ul>
+<li>控制元素展示</li>
+<li>取值 visible | hidden | collapse</li>
+<li>初始值visible</li>
+</ul>
+<p>Generated Content</p>
+<ul>
+<li>控制元素</li>
+<li>::before 和 ::after</li>
+<li>content</li>
+</ul>
+<h5 id="CSS盒模型类别"><a href="#CSS盒模型类别" class="headerlink" title="CSS盒模型类别"></a>CSS盒模型类别</h5><p>大家都知道css盒模型有两种标准，一个标准盒模型，一个是IE盒模型；两种盒模型的宽高的计算方式不一样。</p>
+<p><img src="/images/ie.png" alt="ie"><img src="/images/w3c.png" alt="w3c"></p>
+<p>IE盒模型的宽度或者高度计算方式为：<strong>width/height = content + padding + border</strong>，W3C盒模型的宽度或者高度计算方式为：<strong>width/height = content</strong>。</p>
+<p>例：一个容器的 margin 为 10px，border 为 1px，padding 为 10px，content 的宽为 100px、高为 50px，假如用标准 w3c 盒子模型解释，那么这个容器需要占据的位置为：宽<code>10*2+1*2+10*2+100=142px</code>、高 <code>10*2+1*2+10*2+50=92px</code>，盒子的实际大小为：宽<code>1*2+10*2+100=122px</code>、高<code>1*2+10*2+50=72px</code>；假如用ie 盒子模型，那么容器需要占据的位置为：宽<code>10*2+100=120px</code>,高<code>10*2+50=70px</code>,盒子的实际大小为：宽 100px、高 50px。</p>
+<h5 id="CSS3属性-box-sizing"><a href="#CSS3属性-box-sizing" class="headerlink" title="CSS3属性 box-sizing"></a>CSS3属性 box-sizing</h5><p><code>box-sizing</code>默认为 <code>content-box</code>，即采用W3C标准盒模型，若取值 <code>border-box</code>则采用怪异模式盒模型；</p>
+<p>目前使用此属性需要前缀如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-webkit-box-sizing</span>: <span class="selector-tag">content-box</span>;</span><br><span class="line"><span class="selector-tag">-moz-box-sizing</span>: <span class="selector-tag">content-box</span>;</span><br><span class="line">box-sizing: content-box|border-box|inherit;</span><br></pre></td></tr></table></figure>
+<p>1.盒模型为标准模型（<code>content-box</code>）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.content-box</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid blue;</span><br><span class="line">    <span class="attribute">box-sizing</span>:content-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/w3c-1.png" alt="w3c-1"></p>
+<p><code>.content-box</code>设置为标准模型，它的元素宽度width=100px;</p>
+<p>2.盒模型为IE模型（<code>border-box</code>）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.border-box</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid blue;</span><br><span class="line">    <span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/ie-1.png" alt="ie-1"></p>
+<p><code>.content-box</code>设置为IE模型，它的元素宽度width=content + 2 <em>padding + 2</em> border = 70px + 2 <em>10px + 2</em> 5px = 100px。</p>
+<h5 id="浏览器兼容问题"><a href="#浏览器兼容问题" class="headerlink" title="浏览器兼容问题"></a>浏览器兼容问题</h5><p>一旦为页面设置了恰当的 DTD声明，大多数浏览器都会按照上面的图示来呈现内容。然而 IE 5 和 6 的呈现却是不正确的。根据 W3C 的规范，元素内容占据的空间是由 width 属性设置的，而内容周围的 padding 和 border 值是另外计算的。不幸的是，IE5.X 和 6 在怪异模式中使用自己的非标准模型。这些浏览器的 width 属性不是内容的宽度，而是内容、内边距和边框的宽度的总和。</p>
+<p><strong>&lt;!DOCTYPE&gt;</strong>后面一般有DTD的声明，如果有DTD的声明，浏览器就是处于标准模式；如果没有DTD声明或者HTML4一下的DTD声明，那浏览器按照自己的方式解析代码，处于怪异模式。</p>
+<p>IE8 及更早IE版本不支持设置填充的宽度和边框的宽度属性。</p>
+<p>解决IE8及更早版本不兼容问题可以在HTML页面声明 &lt;!DOCTYPE html&gt;即可。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#盒模型"><span class="toc-number">1.</span> <span class="toc-text">盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#CSS-盒模型简解"><span class="toc-number">1.1.</span> <span class="toc-text">CSS 盒模型简解</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#视觉格式化模型-visual-formatting-model"><span class="toc-number">1.1.1.</span> <span class="toc-text">视觉格式化模型(visual formatting model)</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CSS盒模型类别"><span class="toc-number">1.2.</span> <span class="toc-text">CSS盒模型类别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CSS3属性-box-sizing"><span class="toc-number">1.3.</span> <span class="toc-text">CSS3属性 box-sizing</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#浏览器兼容问题"><span class="toc-number">1.4.</span> <span class="toc-text">浏览器兼容问题</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
