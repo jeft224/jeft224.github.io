@@ -1,0 +1,209 @@
+/*个人简介*/
+@font-face {
+    font-family: 'iconfont';  /* project id 329605 */
+    src: url('//at.alicdn.com/t/font_329605_bcj71w1cco9zr529.eot');
+    src: url('//at.alicdn.com/t/font_329605_bcj71w1cco9zr529.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_329605_bcj71w1cco9zr529.woff') format('woff'),
+    url('//at.alicdn.com/t/font_329605_bcj71w1cco9zr529.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_329605_bcj71w1cco9zr529.svg#iconfont') format('svg');
+}
+.icon{
+    font-family:iconfont!important;
+    font-size:20px;
+    font-style:normal;
+    color:#fff
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    background: #f8f8f8;
+    font-size: 16px;
+    font-family: Microsoft Yahei,Hiragino Sans GB,Helvetica Neue,Helvetica,tahoma,arial,Verdana,sans-serif;
+}
+
+a{
+    list-style: none;
+    /*text-decoration: none;*/
+    color: #000;
+}
+.me .container{
+    width: 900px;
+    height: 100%;
+    margin: 30px auto 10px;
+    position: relative;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    box-shadow: 0 0 22px gray;
+    padding: 0;
+}
+.me .container .info{
+    flex-direction: column;
+    flex: 2;
+    background:linear-gradient(#b4d3c4,rgba(145, 226, 187, 0.5));
+    color: white;
+}
+.me .container .info .msg {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.me .container .info .msg .user{
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 2;
+    margin: 15px auto;
+}
+.me .container .info .msg .user>h2{
+    margin-top:10px;
+    font-size:16px;
+    line-height:20px;
+}
+.me .container .info .msg .user>.avatar{
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 6px !important;
+    box-sizing: border-box;
+    border-style: none;
+    height: 200px;
+}
+.me .container .info .msg .target{
+    flex: 1;
+    margin-bottom: 10px;
+    line-height: 20px;
+    color: #f8f8f8;
+    padding: 0 15px;
+}
+.me .container .info .msg .target>p{
+    display: inline;
+    font-size:15px;
+}
+.me .container .info .msg .target>h3{
+    display: inline;
+    font-size: 18px;
+    color: #e0a39d;
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgb(243, 59, 7)), to(rgb(236, 187, 8)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.me .container .info .msg .background{
+    flex: 2;
+    padding: 0 15px;
+}
+.me .container .info .msg .background>h3,.me .container .info .msg .more>h3,.me .container .info .msg .prize>h3{
+    font-size:18px;
+    margin: 0;
+}
+.me .container .info .msg .background>p>a>span,.me .container .info .msg .background>p>span,
+.me .container .info .msg .more>p>span,.me .container .info .msg .more>p>a>span{
+    padding-left:10px;
+    font-size:16px;
+    color: #333;
+}
+.me .container .info .msg .background>p,.me .container .info .msg .more>p{
+    margin: 10px 0 0 20px;
+    color: #333;
+}
+
+.me .container .info .msg .more{
+    flex: 2;
+    padding: 10px 15px; /*margin-top:15px;*/
+}
+.me .container .info .msg .prize{
+    flex: 2;
+    padding: 0px 15px 10px 15px;
+}
+.me .container .info .msg .prize ul li {
+    padding: 5px 20px 0;
+    font-size: 16px;
+    color: #333;
+    list-style: none;
+}
+
+.me .container .prodoction{
+    flex: 4;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 10px;
+    background: linear-gradient(#f5f5f5,rgba(226, 255, 241, 0.5));
+    padding: 20px;
+}
+.me .container .prodoction .tech{
+    flex: 1;
+    width: 100%;
+}
+.me .container .prodoction .tech>h2,.me .container .prodoction .prod>h2,
+.me .container .prodoction .intro>h2,.me .container .prodoction .experience>h2{
+    font-size: 22px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #b4d3c4;
+    font-weight: bold;
+}
+.me .container .prodoction .tech .bottom,.me .container .prodoction .prod .bottom,
+.me .container .prodoction .experience .bottom{
+    padding: 3px 0 10px 0px;
+}
+.me .container .prodoction .tech .bottom .front{
+    margin: 0;
+    padding: 0;
+}
+.me .container .prodoction .tech .bottom .front>p,.me .container .prodoction .tech .bottom .server>p{
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0;
+}
+.me .container .prodoction .prod,.me .container .prodoction .experience{
+    flex: 1;
+    width: 100%;
+    margin-top: 5px;
+}
+.me .container .prodoction .tech .bottom .front ul, .me .container .prodoction .tech .bottom .server ul,
+.me .container .prodoction .prod .bottom>ul,.me .container .prodoction .experience .bottom>ul{
+    padding-left: 40px;
+}
+.me .container .prodoction .tech .bottom .front ul li,
+.me .container .prodoction .tech .bottom .server ul li{
+    list-style-type: circle;
+    margin: 5px 0px;
+    font-size: 14px;
+}
+.me .container .prodoction .prod .bottom>p,.me .container .prodoction .experience .bottom>p{
+    font-size: 18px;
+    line-height: 30px;
+}
+.me .container .prodoction .prod .bottom>p span,.me .container .prodoction .experience .bottom>p span{
+    font-size: 15px;
+}
+
+.me .container .prodoction .experience .bottom>.intro,.me .container .prodoction .prod .bottom>.intro{
+    font-size: 15px;
+    line-height: 20px;
+    padding: 5px 0px 5px 10px ;
+}
+.me .container .prodoction .prod .bottom>ul li,.me .container .prodoction .experience .bottom>ul li{
+    list-style-type: circle;
+    margin: 10px 0px;
+    font-size: 14px;
+}
+.me .container .prodoction .intro{
+    flex: 1;
+    width: 100%;
+}
+.me .container .prodoction .intro .bottom{
+    padding: 5px 0 4px 4px;
+}
+.me .container .prodoction .intro .bottom>p{
+    font-size: 15px;
+    margin-top: 4px;
+}
