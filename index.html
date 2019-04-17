@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Abert,"> 
-    <meta name="description" content="Vue源码学习之Render根据前两章，讲述了Vue的依赖收集的工作原理以及Vue的数据响应式。今天这块砖我们先从initWatch开始敲起，最后会敲到initRender，从而开始讲解dom渲染。,"> 
+    <meta name="description" content="Vue源码学习之VNode前面三章只是介绍Vue是基于getter/setter依赖收集的机制以及简述了渲染(render)流程;但是对于Vue的虚拟DOM生成和DOM的更新这一个过程还没有探究完成,"> 
     <meta name="author" content="Abert"> 
     <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
     <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
@@ -42,7 +42,7 @@
         
     </ul>
     <p id="copyright">
-        &copy; 2018 Abert.
+        &copy; 2019 Abert.
         Theme  <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> from Fechin
         <!-- Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
         Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a>
@@ -72,15 +72,27 @@
     </div>
     
     <div id="post0">
-        <p>十二月 31, 2018</p>
-        <h2><a href="/2018/12/31/Vue源码学习之VNode/" title="Vue源码学习之VNode" class="posttitle">Vue源码学习之VNode</a></h2>
-        <p class="summary">Vue源码学习之VNode前面三章只是介绍Vue是基于getter/setter依赖收集的机制以及简述了渲染(re...</p>
+        <p>二月 17, 2019</p>
+        <h2><a href="/2019/02/17/Vue源码学习之Patch/" title="Vue源码学习之Patch" class="posttitle">Vue源码学习之Patch</a></h2>
+        <p class="summary"></p>
     </div>
     
 </div>
 
     <div id="primary">
         
+<div class="post">
+    <a href="/2018/12/31/Vue源码学习之VNode/" title="Vue源码学习之VNode">
+        <img src="/img/cover.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>十二月 31, 2018</p>
+        <h3><a href="/2018/12/31/Vue源码学习之VNode/" title="Vue源码学习之VNode" class="posttitle">Vue源码学习之VNode</a></h3>
+        <p>Vue源码学习之VNode前面三章只是介绍Vue是基于getter/setter依赖收集的机制以及简述了渲染(render)流程;但是对于Vue的虚拟DO...</p>
+    </div>
+</div>
+
+
 <div class="post">
     <a href="/2018/12/27/Vue源码学习-Render/" title="Vue源码学习之Render">
         <img src="/images/bicycle-bike.jpg" class="cover" width="680" height="440">
@@ -181,19 +193,6 @@ CSS三大特性：
         <p>三月 31, 2018</p>
         <h3><a href="/2018/03/31/ES6的Promise—async-await/" title="ES6的Promise———async await" class="posttitle">ES6的Promise———async await</a></h3>
         <p>写这篇博客关于async-await的主要原因：在我自己构建的商城中用的后端技术koa2中用到async-await，主要是对async-await理解不...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2018/03/26/JavaScript的原型继承和ES6的class语法/" title="JavaScript的原型继承和ES6的class语法">
-        <img src="/images/js-class.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>三月 26, 2018</p>
-        <h3><a href="/2018/03/26/JavaScript的原型继承和ES6的class语法/" title="JavaScript的原型继承和ES6的class语法" class="posttitle">JavaScript的原型继承和ES6的class语法</a></h3>
-        <p>回顾一下JavaScript的原型链和原型继承及ES6的Class语法。
-原型链JavaScript中的每个对象，都有一个特殊内置的_proto_属性。这...</p>
     </div>
 </div>
 

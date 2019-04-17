@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Abert,"> 
-    <meta name="description" content="Vue源码学习之Render根据前两章，讲述了Vue的依赖收集的工作原理以及Vue的数据响应式。今天这块砖我们先从initWatch开始敲起，最后会敲到initRender，从而开始讲解dom渲染。,"> 
+    <meta name="description" content="Vue源码学习之VNode前面三章只是介绍Vue是基于getter/setter依赖收集的机制以及简述了渲染(render)流程;但是对于Vue的虚拟DOM生成和DOM的更新这一个过程还没有探究完成,"> 
     <meta name="author" content="Abert"> 
     <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
     <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
@@ -174,6 +174,12 @@
 <p>3.表示”没有对象”，即该处不应该有值。</p>
 <p>4.用typeof类型判断时，null是object，undefined是undefined；表示”没有对象”，转化为布尔类型时，都是false</p>
 <p>5.null是一个关键字，而undefined不是一个关键字</p>
+<blockquote>
+<p> typeof null 为什么等于object？</p>
+</blockquote>
+<p>之前只知道typeof null = object,但是却从来不知道是为什么。最新查阅资料的时候，看到了这个原理，记录下来，方便自己以后查看。</p>
+<p>原理是这样的，不同的对象在底层都表示为二进制，在 JavaScript 中二进制前三位都为 0 的话会被判断为 object 类型， null 的二进制表示是全 0，自然前三位也是 0，所以执行 typeof 时会返回“ object ”。</p>
+<p>这个bug是第一版Javascript留下来的。是一个历史遗留的问题，在这个版本，数值是以32字节存储的，由标志位（1~3个字节）和数值组成。标志位存储的是低位的数据。这里有五种标志位：<br>000：对象，数据是对象的应用。<br>1：整型，数据是31位带符号整数。<br>010：双精度类型，数据是双精度数字。<br>100：字符串，数据是字符串。<br>110：布尔类型，数据是布尔值。<br>最低位有一位，那么标志位只有一个1字节长度；或者是零位，标志位有3个字节长度，多出两个了字节，一共多出四种类型。</p>
 <blockquote>
 <p>   有哪些值转化成布尔型后为false？</p>
 </blockquote>

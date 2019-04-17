@@ -129,6 +129,17 @@ a{
     list-style: none;
 }
 
+.me .container .info .msg .intro{
+    flex: 2;
+    padding: 0px 15px 10px 15px;
+}
+.me .container .info .msg .intro ul li {
+    padding: 5px 20px 0;
+    font-size: 16px;
+    color: #333;
+    list-style: none;
+}
+
 .me .container .prodoction{
     flex: 4;
     height: 100%;
