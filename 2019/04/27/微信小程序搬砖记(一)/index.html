@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abert</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Abert,"> 
+    <meta name="description" content="前端性能优化之DNS：前言　　当浏览器请求一个URL的时候，通过firebug我们可以发现大概有以下几个过程：阻挡、域名解析、建立连接、发送请求、等待响应、接收数据。后面四个跟用户的网络情况和你的服,"> 
+    <meta name="author" content="Abert"> 
+    <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
+    <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">微信小程序搬砖记(一)</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">微信小程序搬砖记(一)</h1>
+        <div class="stuff">
+            <span>四月 27, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/前端/">前端</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/微信小程序/">微信小程序</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="微信小程序遇到的坑——两种效果实现"><a href="#微信小程序遇到的坑——两种效果实现" class="headerlink" title="微信小程序遇到的坑——两种效果实现"></a>微信小程序遇到的坑——两种效果实现</h3><h4 id="微信小程序首页吸顶的效果实现"><a href="#微信小程序首页吸顶的效果实现" class="headerlink" title="微信小程序首页吸顶的效果实现"></a>微信小程序首页吸顶的效果实现</h4><p>在实现的过程中，需要把该准备的东西先准备一波，不然老司机开车也开不动呀!🚌</p>
+<p>首先需要wxml的支持:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"recomend-title &#123;&#123; scrollStatus ? 'recomend-fixed':''&#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"recommend"</span>&gt;</span></span><br><span class="line">  &#123;&#123;item.jobTypeName&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再者需要wxss的支持:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.recomend-fixed</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">99</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>准备好了，开始通过<code>js</code>来实现最核心的部分。开车了🚍，小伙伴们，开始上车了。</p>
+<h5 id="方法1-通过scroll-view来实现吸顶的效果"><a href="#方法1-通过scroll-view来实现吸顶的效果" class="headerlink" title="方法1 通过scroll-view来实现吸顶的效果"></a>方法1 通过scroll-view来实现吸顶的效果</h5><p>使用<code>scroll-view</code>组件，上面的wxml的内容需要包裹在<code>&lt;scroll-view scroll-y style=&quot;height: 100%&quot; bindscroll=&quot;scroll&quot;&gt;&lt;/scroll-view&gt;</code>里面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data:&#123;</span><br><span class="line">    scrollStatus: <span class="literal">false</span>,</span><br><span class="line">    fixTop:<span class="string">''</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  onShow()&#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> query = wx.createSelectorQuery();</span><br><span class="line">    <span class="comment">// 设置吸顶元素离顶部的距离</span></span><br><span class="line">    query</span><br><span class="line">      .select(<span class="string">'#recommend'</span>)</span><br><span class="line">      .boundingClientRect(<span class="function"><span class="keyword">function</span>(<span class="params">rect</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 获取元素的top太小,为了实现滚动到适合的位置+280</span></span><br><span class="line">        that.setData(&#123;</span><br><span class="line">          fixTop: rect.top + <span class="number">280</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">      .exec();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 监听滚动函数</span></span><br><span class="line">  scroll(e)&#123;</span><br><span class="line">    <span class="keyword">let</span> top = e.detail.scrollTop;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      scrollStatus: top &gt; <span class="keyword">this</span>.data.fixTop</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="方法2-通过onPageScroll来实现吸顶的效果"><a href="#方法2-通过onPageScroll来实现吸顶的效果" class="headerlink" title="方法2 通过onPageScroll来实现吸顶的效果"></a>方法2 通过onPageScroll来实现吸顶的效果</h5><p>如果不使用<code>scroll-view</code>，利用页面的<code>onPageScroll</code>方法，但是你在使用的过程中会有一些问题：</p>
+<p>1.在page标签的样式会携带一个样式<code>overflow-y：hidden</code>，导致你页面滚动不了，不能触发<code>onPageScroll</code>方法<br>2.在page标签和包含上面的wxml的父标签里面不能同时使用<code>height:100%</code>.</p>
+<p><code>JS</code>实现部分:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data:&#123;</span><br><span class="line">    scrollStatus: <span class="literal">false</span>,</span><br><span class="line">    fixTop:<span class="string">''</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  onShow()&#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> query = wx.createSelectorQuery();</span><br><span class="line">    <span class="comment">// 设置吸顶元素离顶部的距离</span></span><br><span class="line">    query</span><br><span class="line">      .select(<span class="string">'#recommend'</span>)</span><br><span class="line">      .boundingClientRect(<span class="function"><span class="keyword">function</span>(<span class="params">rect</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 获取元素的top太小,为了实现滚动到适合的位置+280</span></span><br><span class="line">        that.setData(&#123;</span><br><span class="line">          fixTop: rect.top + <span class="number">280</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">      .exec();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 监听滚动函数</span></span><br><span class="line">  onPageScroll: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> top = e.scrollTop;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      scrollStatus: top &gt; <span class="keyword">this</span>.data.fixTop</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="微信小微信头部滑动切换效果实现"><a href="#微信小微信头部滑动切换效果实现" class="headerlink" title="微信小微信头部滑动切换效果实现"></a>微信小微信头部滑动切换效果实现</h4><p>头部tab页有很多标签通过点击其中一个进行滑动对应的标签。</p>
+<p>所需的<code>wxml</code>的内容：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">scroll-view</span> <span class="attr">class</span>=<span class="string">"list"</span> <span class="attr">scroll-x</span>=<span class="string">"true"</span>  <span class="attr">scroll-with-animation</span>=<span class="string">"true"</span>  <span class="attr">scroll-left</span>=<span class="string">"&#123;&#123;scrollX&#125;&#125;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123; topicList &#125;&#125;"</span> <span class="attr">wx:key</span>=<span class="string">"&#123;&#123; index &#125;&#125;"</span> <span class="attr">bind:tap</span>=<span class="string">"directTopicPage"</span> <span class="attr">class</span>=<span class="string">"&#123;&#123;topicid === item.id?'active':''&#125;&#125;"</span> <span class="attr">data-index</span>=<span class="string">"&#123;&#123;index&#125;&#125;"</span>&gt;</span>&#123;&#123; item.title &#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scroll-view</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>所需的<code>wxss</code>的内容：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-class">.active</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#34b9b4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最重要的<code>JS</code>部分:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    <span class="comment">// 里面包含的数据，请自行填充</span></span><br><span class="line">    topicList:[],</span><br><span class="line">    scrollX: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  directTopicPage(e) &#123;</span><br><span class="line">    <span class="keyword">let</span> index = e.currentTarget.dataset.index;</span><br><span class="line">    <span class="comment">// 通过约定一标签的宽度来设置滑动活动的距离，同时可以在可视化界面看到</span></span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      scrollX: ~~(index<span class="number">-1</span>) * <span class="number">60</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过上述方法实现的吸顶和tab列表横向滑动效果，在ios上时比较流畅，android上滑动慢一点还算流畅，但是快一点就卡顿，如果大家有更好的方法推荐，请望各位赐教。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#微信小程序遇到的坑——两种效果实现"><span class="toc-number">1.</span> <span class="toc-text">微信小程序遇到的坑——两种效果实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#微信小程序首页吸顶的效果实现"><span class="toc-number">1.1.</span> <span class="toc-text">微信小程序首页吸顶的效果实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法1-通过scroll-view来实现吸顶的效果"><span class="toc-number">1.1.1.</span> <span class="toc-text">方法1 通过scroll-view来实现吸顶的效果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法2-通过onPageScroll来实现吸顶的效果"><span class="toc-number">1.1.2.</span> <span class="toc-text">方法2 通过onPageScroll来实现吸顶的效果</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微信小微信头部滑动切换效果实现"><span class="toc-number">1.2.</span> <span class="toc-text">微信小微信头部滑动切换效果实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
