@@ -11,8 +11,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="Abert,"> 
-    <meta name="description" content="微信小程序遇到的坑——两种效果实现微信小程序首页吸顶的效果实现在实现的过程中，需要把该准备的东西先准备一波，不然老司机开车也开不动呀!🚌
-首先需要wxml的支持:123&amp;lt;view class,"> 
+    <meta name="description" content="微信小程序遇到的坑——两种效果实现据说没有一个小姐姐来镇这篇博客，我的浏览量是上不去的😂。
+微信小程序首页吸顶的效果实现在实现的过程中，需要把该准备的东西先准备一波，不然老司机开车也开不动呀!🚌,"> 
     <meta name="author" content="Abert"> 
     <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
     <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
@@ -53,7 +53,8 @@
 
         </div>
         <div class="content markdown">
-            <h3 id="微信小程序遇到的坑——两种效果实现"><a href="#微信小程序遇到的坑——两种效果实现" class="headerlink" title="微信小程序遇到的坑——两种效果实现"></a>微信小程序遇到的坑——两种效果实现</h3><h4 id="微信小程序首页吸顶的效果实现"><a href="#微信小程序首页吸顶的效果实现" class="headerlink" title="微信小程序首页吸顶的效果实现"></a>微信小程序首页吸顶的效果实现</h4><p>在实现的过程中，需要把该准备的东西先准备一波，不然老司机开车也开不动呀!🚌</p>
+            <h3 id="微信小程序遇到的坑——两种效果实现"><a href="#微信小程序遇到的坑——两种效果实现" class="headerlink" title="微信小程序遇到的坑——两种效果实现"></a>微信小程序遇到的坑——两种效果实现</h3><p>据说没有一个小姐姐来镇这篇博客，我的浏览量是上不去的😂。<br><img src="/images/wx-girl.jpg" alt="程序媛小姐姐"></p>
+<h4 id="微信小程序首页吸顶的效果实现"><a href="#微信小程序首页吸顶的效果实现" class="headerlink" title="微信小程序首页吸顶的效果实现"></a>微信小程序首页吸顶的效果实现</h4><p>在实现的过程中，需要把该准备的东西先准备一波，不然老司机开车也开不动呀!🚌</p>
 <p>首先需要wxml的支持:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"recomend-title &#123;&#123; scrollStatus ? 'recomend-fixed':''&#125;&#125;"</span> <span class="attr">id</span>=<span class="string">"recommend"</span>&gt;</span></span><br><span class="line">  &#123;&#123;item.jobTypeName&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>再者需要wxss的支持:</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.recomend-fixed</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">99</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
