@@ -59,6 +59,7 @@
 <p><code>DNS Prefetching</code>是让具有此属性的域名不需要用户点击链接就在后台解析，而域名解析和内容载入是串行的网络操作，所以这个方式能 减少用户的等待时间，提升用户体验 。<br>浏览器对网站第一次的域名DNS解析查找流程依次为：浏览器缓存——系统缓存——路由器缓存——ISP DNS缓存——递归搜索<br>￼<br>其使用场景：<br>当DNS预解析在某一个页面中包含非常多的域名，比如搜索结果页</p>
 <p>我们可以查看淘宝、网易网站是如何减少dns的域名解析<br>举个栗子：<br>淘宝加载图片，采用了DNS域名预解析方案，我们可以查看淘宝官网可以看到：<br>淘宝：<br>￼</p>
 <p>网易：<br>￼<br>从上图可以看出，淘宝和网易采用了dns预加载的方案，通过在meta标签后面添加<code>&lt;link rel=“dns-prefetch” href=“”&gt;</code>，一般来说，使用该标签之前，首先需要通过meta标签来告知浏览器，当前的页面需要进行DNS解析<code>&lt;meta http-equiv = “x-dns-prefetch-control” content=“on”&gt;</code>。但是<code>Chrome</code>和<code>firefox 3.5+</code>内置了<code>DNS Prefetching</code>技术并对DNS预解析做了相应的优化设置，所以，不设置该属性，他们也可以自动在后台进行DNS预解析。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>前端性能之路还需要自我去积累，还有很长的路要走。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -81,7 +82,7 @@
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端性能优化之DNS："><span class="toc-number">1.</span> <span class="toc-text">前端性能优化之DNS：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#减少dns域名解析："><span class="toc-number">1.2.</span> <span class="toc-text">减少dns域名解析：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#阻挡：解决方案-提高浏览器的并发连接数"><span class="toc-number">1.2.1.</span> <span class="toc-text">阻挡：解决方案-提高浏览器的并发连接数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cookies隔离"><span class="toc-number">1.2.2.</span> <span class="toc-text">cookies隔离</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DNS预解析的方案"><span class="toc-number">1.2.3.</span> <span class="toc-text">DNS预解析的方案</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端性能优化之DNS："><span class="toc-number">1.</span> <span class="toc-text">前端性能优化之DNS：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#减少dns域名解析："><span class="toc-number">1.2.</span> <span class="toc-text">减少dns域名解析：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#阻挡：解决方案-提高浏览器的并发连接数"><span class="toc-number">1.2.1.</span> <span class="toc-text">阻挡：解决方案-提高浏览器的并发连接数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cookies隔离"><span class="toc-number">1.2.2.</span> <span class="toc-text">cookies隔离</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DNS预解析的方案"><span class="toc-number">1.2.3.</span> <span class="toc-text">DNS预解析的方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol>
         </div>
     
 </div>
