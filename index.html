@@ -1,263 +1,818 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN" class="loading">
-<head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Abert</title>
+<html>
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate">
-    <meta name="keywords" content="Abert,"> 
-    <meta name="description" content="前言最近参与了做空宣的H5中，里面遇到了video标签在android和iPhone 手机适配中出现了一些问题，尤其在微信浏览器中使用android默认的播放组件，会导致video标签的层级是最高的,"> 
-    <meta name="author" content="Abert"> 
-    <link rel="alternative" href="atom.xml" title="Abert" type="application/atom+xml"> 
-    <link rel="icon" href="https://avatars0.githubusercontent.com/u/18079246?s=400&v=4"> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <link rel="stylesheet" href="/css/diaspora.css">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Abert</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/component.css" />
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <meta name="generator" content="Abert">
+  <script src="http://static.duoshuo.com/embed.js"></script>
+  
+  
+  
+
+  
+
 </head>
-</html>
-<body class="loading">
-    <div id="loader"></div>
-    <div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/about/" title="Whoami" target="_blank" rel="noopener">Whoami</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/archives/" title="Archive" target="_blank" rel="noopener">Archive</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/resume/" title="Resume" target="_blank" rel="noopener">Resume</a>
-        </li>
-        
-        <li class="  menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="https://github.com/jeft224" title="Github" target="_blank" rel="noopener">Github</a>
-        </li>
-        
-    </ul>
-    <p id="copyright">
-        &copy; 2019 Abert.
-        Theme  <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> from Fechin
-        <!-- Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a>
-        by Fechin -->
-    </p>
-</div>
+<body>
+<div class="container">
+    <div class="mp-pusher" id="mp-pusher">
+        <i id="scroll-up" class="fa fa-angle-up"></i>
+        <nav id="mp-menu" class="mp-menu">
+            <div class="mp-level">
+                <a data-pjax class="back-home" style="font-size: 20px" href="/"><h2 ><i class="fa fa-home"></i>
+                        Home</h2></a>
+                <ul class="first-level">
+                    <li>
+                        <a class="fa fa-archive" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Archive</a>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-archive"></i>
+                                Archive</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-archive" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2019/06/20/h5直播活动的埋坑之旅/">h5直播活动的埋坑之旅</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2019/05/17/原生JS总结/">原生JS总结</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2019/04/27/微信小程序搬砖记(一)/">微信小程序搬砖记(一)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2019/04/17/前端性能优化之DNS/">前端性能优化之DNS</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2019/02/17/Vue源码学习之Patch/">Vue源码学习之Patch</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/12/31/Vue源码学习之VNode/">Vue源码学习之VNode</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/12/27/Vue源码学习-Render/">Vue源码学习之Render</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/12/24/Vue源码学习-Watcher/">Vue源码学习之Watcher</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/12/20/Vue源码学习/">Vue源码学习</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/07/27/CSS总结篇（二）/">CSS总结篇(二)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/07/19/前端面试/">前端面试</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/07/15/CSS总结篇（一）/">CSS总结篇(一)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/31/浅析Koa2源码中洋葱模型的实现/">浅析Koa2源码中洋葱模型的实现</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/31/ES6的Promise—async-await/">ES6的Promise———async await</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/26/JavaScript的原型继承和ES6的class语法/">JavaScript的原型继承和ES6的class语法</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/22/JavaScript数据类型转换/">JavaScript数据类型转换</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2018/03/13/javascript的变量提升和作用域/">javascript的变量提升和作用域</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/09/23/《你不知道的javascript》读书笔记—生成器/">《你不知道的javascript》读书笔记—生成器</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/09/17/《你不知道的javascript 》读书笔记—JS 异步/">《你不知道的javascript 》读书笔记—JS 异步</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/04/25/Vue-login案例学习(二)/">Vue-login 案例的学习(二)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/04/12/Vue-login 案例的学习(一)/">Vue-login 案例的学习(一)</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/03/17/express-first/">express 入门</a>
+                                </li>
+                                
+                                <li class="search-archive-li mp-pjax">
+                                    <a href="/2017/03/15/first-article/">http协议</a>
+                                </li>
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="fa fa-copy" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Categories</a>
 
-<div id="container">
-    
-<div id="screen">
-    <div id="mark">
-        <div class="layer" data-depth="0.4">
-            <img src="/img/welcome-cover.jpg" id="cover" crossorigin="anonymous" width="1920" height="1080">
-        </div>
-    </div>
-    <div id="vibrant">
-        <svg viewbox="0 0 2880 1620" height="100%" preserveaspectratio="xMaxYMax slice">
-            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
-        </svg>
-        <div></div>
-    </div>
-    <div id="header">
-        <div>
-            <!-- <a class="image-logo" href="/"></a> -->
-            <div class="icon-menu switchmenu"></div>
-        </div>
-    </div>
-    
-    <div id="post0">
-        <p>六月 20, 2019</p>
-        <h2><a href="/2019/06/20/h5直播活动的埋坑之旅/" title="h5直播活动的埋坑之旅" class="posttitle">h5直播活动的埋坑之旅</a></h2>
-        <p class="summary">前言最近参与了做空宣的H5中，里面遇到了video标签在android和iPhone 手机适配中出现了一些问题，尤...</p>
-    </div>
-    
-</div>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-copy"></i>
+                                Categories</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-category" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="fa fa-tags" href="#"><i class="fa fa-angle-left">
+                            </i>&nbsp;&nbsp;Tags</a>
+                        <div class="mp-level page-list">
+                            <h2 ><i class="fa fa-tags"></i>
+                                Tags</h2>
+                            <a class="mp-back" href="#">back</a>
+                            <form id="search-form" action="">
+                                <input type="text" class="search search-tag" placeholder="Search.."/>
+                            </form>
+                            <ul>
+                                <div class="mp-scroll">
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/CSS/">&nbsp;&nbsp;&nbsp;CSS</a>
+                                    <small>2</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/DNS/">&nbsp;&nbsp;&nbsp;DNS</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/DOM/">&nbsp;&nbsp;&nbsp;DOM</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/H5/">&nbsp;&nbsp;&nbsp;H5</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/JavaScript/">&nbsp;&nbsp;&nbsp;JavaScript</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/Vue/">&nbsp;&nbsp;&nbsp;Vue</a>
+                                    <small>5</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/async-await/">&nbsp;&nbsp;&nbsp;async-await</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/es6/">&nbsp;&nbsp;&nbsp;es6</a>
+                                    <small>5</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/express/">&nbsp;&nbsp;&nbsp;express</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/generator/">&nbsp;&nbsp;&nbsp;generator</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/javaScript/">&nbsp;&nbsp;&nbsp;javaScript</a>
+                                    <small>2</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/javascript/">&nbsp;&nbsp;&nbsp;javascript</a>
+                                    <small>4</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/koa2/">&nbsp;&nbsp;&nbsp;koa2</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/node-js/">&nbsp;&nbsp;&nbsp;node.js</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/promise/">&nbsp;&nbsp;&nbsp;promise</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/token/">&nbsp;&nbsp;&nbsp;token</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/video/">&nbsp;&nbsp;&nbsp;video</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/vue/">&nbsp;&nbsp;&nbsp;vue</a>
+                                    <small>2</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/vue-router/">&nbsp;&nbsp;&nbsp;vue-router</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/前端/">&nbsp;&nbsp;&nbsp;前端</a>
+                                    <small>10</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/后端/">&nbsp;&nbsp;&nbsp;后端</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/微信小程序/">&nbsp;&nbsp;&nbsp;微信小程序</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                <li class="search-tag-li mp-pjax">
+                                    <a href="/tags/随笔/">&nbsp;&nbsp;&nbsp;随笔</a>
+                                    <small>1</small>
+                                </li>
+                                
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="mp-pjax"><a class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a></li>
+                    <li><a class="fa fa-github" href="#">&nbsp;&nbsp;&nbsp;Github</a></li>
 
-    <div id="primary">
-        
-<div class="post">
-    <a href="/2019/05/17/原生JS总结/" title="原生JS总结">
-        <img src="/img/cover.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>五月 17, 2019</p>
-        <h3><a href="/2019/05/17/原生JS总结/" title="原生JS总结" class="posttitle">原生JS总结</a></h3>
-        <p>前言由于在活动期间，没使用关于js的第三方的库，用原生JS实现活动前端的逻辑，对一些原生函数存在不了解或者忘记的地方进行记录
-原生DOM操作函数和属性事件...</p>
-    </div>
-</div>
+                </ul>
 
-
-<div class="post">
-    <a href="/2019/04/27/微信小程序搬砖记(一)/" title="微信小程序搬砖记(一)">
-        <img src="/img/cover.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>四月 27, 2019</p>
-        <h3><a href="/2019/04/27/微信小程序搬砖记(一)/" title="微信小程序搬砖记(一)" class="posttitle">微信小程序搬砖记(一)</a></h3>
-        <p>微信小程序遇到的坑——两种效果实现据说没有一个小姐姐来镇这篇博客，我的浏览量是上不去的 😂。
-微信小程序首页吸顶的效果实现在实现的过程中，需要把该准备的...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2019/04/17/前端性能优化之DNS/" title="前端性能优化之DNS">
-        <img src="/images/front-dns.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>四月 17, 2019</p>
-        <h3><a href="/2019/04/17/前端性能优化之DNS/" title="前端性能优化之DNS" class="posttitle">前端性能优化之DNS</a></h3>
-        <p>前端性能优化之DNS：前言　　当浏览器请求一个URL的时候，通过firebug我们可以发现大概有以下几个过程：阻挡、域名解析、建立连接、发送请求、等待响应...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2019/02/17/Vue源码学习之Patch/" title="Vue源码学习之Patch">
-        <img src="/img/cover.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>二月 17, 2019</p>
-        <h3><a href="/2019/02/17/Vue源码学习之Patch/" title="Vue源码学习之Patch" class="posttitle">Vue源码学习之Patch</a></h3>
-        <p></p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2018/12/31/Vue源码学习之VNode/" title="Vue源码学习之VNode">
-        <img src="/images/wx-consider.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>十二月 31, 2018</p>
-        <h3><a href="/2018/12/31/Vue源码学习之VNode/" title="Vue源码学习之VNode" class="posttitle">Vue源码学习之VNode</a></h3>
-        <p>Vue源码学习之VNode前面三章只是介绍Vue是基于getter/setter依赖收集的机制以及简述了渲染(render)流程;但是对于Vue的虚拟DO...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2018/12/27/Vue源码学习-Render/" title="Vue源码学习之Render">
-        <img src="/images/bicycle-bike.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>十二月 27, 2018</p>
-        <h3><a href="/2018/12/27/Vue源码学习-Render/" title="Vue源码学习之Render" class="posttitle">Vue源码学习之Render</a></h3>
-        <p>Vue源码学习之Render根据前两章，讲述了Vue的依赖收集的工作原理以及Vue的数据响应式。今天这块砖我们先从initWatch开始敲起，最后会敲到i...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2018/12/24/Vue源码学习-Watcher/" title="Vue源码学习之Watcher">
-        <img src="/images/js-note-1.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>十二月 24, 2018</p>
-        <h3><a href="/2018/12/24/Vue源码学习-Watcher/" title="Vue源码学习之Watcher" class="posttitle">Vue源码学习之Watcher</a></h3>
-        <p>Vue源码学习之Watcher上面一章我们学习到Vue的构造函数的初始化和Vue的响应式的工作原理，但是Vue中数据收集依赖的另外一个重要部分：Watch...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2018/12/20/Vue源码学习/" title="Vue源码学习">
-        <img src="/images/js-class-1.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>十二月 20, 2018</p>
-        <h3><a href="/2018/12/20/Vue源码学习/" title="Vue源码学习" class="posttitle">Vue源码学习</a></h3>
-        <p>Vue源码学习在今年的10月份尤大大在多伦多发布了在明年发布Vue3.0的消息，但是我自己对vue的源码不是很了解，虽然在去年看了一下vue的源码，了解到...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2018/07/27/CSS总结篇（二）/" title="CSS总结篇(二)">
-        <img src="/images/css-two.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>七月 27, 2018</p>
-        <h3><a href="/2018/07/27/CSS总结篇（二）/" title="CSS总结篇(二)" class="posttitle">CSS总结篇(二)</a></h3>
-        <p>本篇内容包括CSS盒模型，
-盒模型在一个文档中，每个元素都被表示为一个矩形的盒子。确定这些盒子的尺寸, 属性 — 像它的颜色，背景，边框方面 — 和位置是...</p>
-    </div>
-</div>
-
-
-    </div>
-    
-    <div id="pager"><a href="/page/2/" class="more">加载更多</a></div>
-    
-</div>
-<div id="preview"></div>
-
-</body>
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/diaspora.js"></script>
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
+            </div>
+        </nav>
+        <div id="pjax">
+            <div class="pjax-hidden" style="display: none">
+                
+                    <a  data-pjax href="/2019/06/20/h5直播活动的埋坑之旅/">h5直播活动的埋坑之旅</a>
+                
+                    <a  data-pjax href="/2019/05/17/原生JS总结/">原生JS总结</a>
+                
+                    <a  data-pjax href="/2019/04/27/微信小程序搬砖记(一)/">微信小程序搬砖记(一)</a>
+                
+                    <a  data-pjax href="/2019/04/17/前端性能优化之DNS/">前端性能优化之DNS</a>
+                
+                    <a  data-pjax href="/2019/02/17/Vue源码学习之Patch/">Vue源码学习之Patch</a>
+                
+                    <a  data-pjax href="/2018/12/31/Vue源码学习之VNode/">Vue源码学习之VNode</a>
+                
+                    <a  data-pjax href="/2018/12/27/Vue源码学习-Render/">Vue源码学习之Render</a>
+                
+                    <a  data-pjax href="/2018/12/24/Vue源码学习-Watcher/">Vue源码学习之Watcher</a>
+                
+                    <a  data-pjax href="/2018/12/20/Vue源码学习/">Vue源码学习</a>
+                
+                    <a  data-pjax href="/2018/07/27/CSS总结篇（二）/">CSS总结篇(二)</a>
+                
+                    <a  data-pjax href="/2018/07/19/前端面试/">前端面试</a>
+                
+                    <a  data-pjax href="/2018/07/15/CSS总结篇（一）/">CSS总结篇(一)</a>
+                
+                    <a  data-pjax href="/2018/03/31/浅析Koa2源码中洋葱模型的实现/">浅析Koa2源码中洋葱模型的实现</a>
+                
+                    <a  data-pjax href="/2018/03/31/ES6的Promise—async-await/">ES6的Promise———async await</a>
+                
+                    <a  data-pjax href="/2018/03/26/JavaScript的原型继承和ES6的class语法/">JavaScript的原型继承和ES6的class语法</a>
+                
+                    <a  data-pjax href="/2018/03/22/JavaScript数据类型转换/">JavaScript数据类型转换</a>
+                
+                    <a  data-pjax href="/2018/03/13/javascript的变量提升和作用域/">javascript的变量提升和作用域</a>
+                
+                    <a  data-pjax href="/2017/09/23/《你不知道的javascript》读书笔记—生成器/">《你不知道的javascript》读书笔记—生成器</a>
+                
+                    <a  data-pjax href="/2017/09/17/《你不知道的javascript 》读书笔记—JS 异步/">《你不知道的javascript 》读书笔记—JS 异步</a>
+                
+                    <a  data-pjax href="/2017/04/25/Vue-login案例学习(二)/">Vue-login 案例的学习(二)</a>
+                
+                    <a  data-pjax href="/2017/04/12/Vue-login 案例的学习(一)/">Vue-login 案例的学习(一)</a>
+                
+                    <a  data-pjax href="/2017/03/17/express-first/">express 入门</a>
+                
+                    <a  data-pjax href="/2017/03/15/first-article/">http协议</a>
+                
+                
+                
+                    <a data-pjax href="/tags/CSS/">&nbsp;&nbsp;CSS</a>
+                
+                    <a data-pjax href="/tags/DNS/">&nbsp;&nbsp;DNS</a>
+                
+                    <a data-pjax href="/tags/DOM/">&nbsp;&nbsp;DOM</a>
+                
+                    <a data-pjax href="/tags/H5/">&nbsp;&nbsp;H5</a>
+                
+                    <a data-pjax href="/tags/JavaScript/">&nbsp;&nbsp;JavaScript</a>
+                
+                    <a data-pjax href="/tags/Vue/">&nbsp;&nbsp;Vue</a>
+                
+                    <a data-pjax href="/tags/async-await/">&nbsp;&nbsp;async-await</a>
+                
+                    <a data-pjax href="/tags/es6/">&nbsp;&nbsp;es6</a>
+                
+                    <a data-pjax href="/tags/express/">&nbsp;&nbsp;express</a>
+                
+                    <a data-pjax href="/tags/generator/">&nbsp;&nbsp;generator</a>
+                
+                    <a data-pjax href="/tags/javaScript/">&nbsp;&nbsp;javaScript</a>
+                
+                    <a data-pjax href="/tags/javascript/">&nbsp;&nbsp;javascript</a>
+                
+                    <a data-pjax href="/tags/koa2/">&nbsp;&nbsp;koa2</a>
+                
+                    <a data-pjax href="/tags/node-js/">&nbsp;&nbsp;node.js</a>
+                
+                    <a data-pjax href="/tags/promise/">&nbsp;&nbsp;promise</a>
+                
+                    <a data-pjax href="/tags/token/">&nbsp;&nbsp;token</a>
+                
+                    <a data-pjax href="/tags/video/">&nbsp;&nbsp;video</a>
+                
+                    <a data-pjax href="/tags/vue/">&nbsp;&nbsp;vue</a>
+                
+                    <a data-pjax href="/tags/vue-router/">&nbsp;&nbsp;vue-router</a>
+                
+                    <a data-pjax href="/tags/前端/">&nbsp;&nbsp;前端</a>
+                
+                    <a data-pjax href="/tags/后端/">&nbsp;&nbsp;后端</a>
+                
+                    <a data-pjax href="/tags/微信小程序/">&nbsp;&nbsp;微信小程序</a>
+                
+                    <a data-pjax href="/tags/随笔/">&nbsp;&nbsp;随笔</a>
+                
+                <a data-pjax class="fa fa-user" href="/about">&nbsp;&nbsp;&nbsp;About me</a>
+            </div>
+            <nav class="nexus">
+                <li  style="border-left: 1px solid #c6d0da;">
+                    <a id="trigger" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+                <li ><a id="nexus-back" data-pjax href="/">Abert</a></li>
+                
+                <div id="nav-container">
+                    <div class="post-navbar" style="line-height: 63px;display:none">
+                        <li id="navbar-title"><a href="#"></a></li>
+                        <li id="navbar-toc" style="border-left: none">
+                            <a style="padding-right: 15px">
+                                <span id="toc-content" >Introduction</span><i class="fa fa-chevron-down" ></i>
+                            </a>
+                            <div class="hidden-box">
+                                <ul id="toc"></ul>
+                            </div>
+                        </li>
                     </div>
                 </div>
+                
+            </nav>
+
+            <div class="scroller">
+            <div class="scroller-inner">
+
+
+<!-- -->
+<!--<body class="home-template">-->
+<!---->
+  
+<main class="content" role="main">
+
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/H5/">H5</a>
+                
+                <a data-pjax="" href="/tags/video/">video</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
             </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
+            <h1 class="post-title"><a data-pjax="" href="/2019/06/20/h5直播活动的埋坑之旅/">h5直播活动的埋坑之旅</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2019-06-20T10:08:30.000Z" itemprop="datePublished">2019-06-20</time>
             </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                前言最近参与了做空宣的H5中，里面遇到了video标签在android和iPhone 手机适配中出现了一些问题，在微信浏览器中使用android默认的播放组件，会导致video标签的层级是最高的，直播的过程中导致弹幕就不能浮现在上面了(这个是微信浏览器使用的播放内核导致的)。
+
+出现问题的原因IOS的微信浏览器是Chrome内核, Android的微信浏览器是X5内核;由于在安卓中的微信浏览器中的层级是最高的，从而导致通过z-index
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/JavaScript/">JavaScript</a>
+                
+                <a data-pjax="" href="/tags/DOM/">DOM</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
             </div>
+            <h1 class="post-title"><a data-pjax="" href="/2019/05/17/原生JS总结/">原生JS总结</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2019-05-17T06:40:33.000Z" itemprop="datePublished">2019-05-17</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                前言由于在活动期间，没使用关于js的第三方的库，用原生JS实现活动前端的逻辑，对一些原生函数存在不了解或者忘记的地方进行记录
+原生DOM操作函数和属性事件
+ addEventListener()
+
+addEventListener()将指定的事件监听器注册到目标对象上，当目标对象触发制定的事件时，指定的回调函数就会触发。目标对象可以是 文档上的元素、 document、 window 或者XMLHttpRequest(比如onready
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/微信小程序/">微信小程序</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2019/04/27/微信小程序搬砖记(一)/">微信小程序搬砖记(一)</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2019-04-27T03:34:56.000Z" itemprop="datePublished">2019-04-27</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                微信小程序遇到的坑——两种效果实现据说没有一个小姐姐来镇这篇博客，我的浏览量是上不去的 😂。
+微信小程序首页吸顶的效果实现在实现的过程中，需要把该准备的东西先准备一波，不然老司机开车也开不动呀!🚌
+首先需要 wxml 的支持:
+123456&lt;view  class="recomend-title &#123;&#123; scrollStatus ? 'recomend-fixed':''&#125;&#125;"  id="
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/DNS/">DNS</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2019/04/17/前端性能优化之DNS/">前端性能优化之DNS</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2019-04-17T02:41:30.000Z" itemprop="datePublished">2019-04-17</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                前端性能优化之DNS：前言　　当浏览器请求一个URL的时候，通过firebug我们可以发现大概有以下几个过程：阻挡、域名解析、建立连接、发送请求、等待响应、接收数据。后面四个跟用户的网络情况和你的服务器处理速度有关，本文重点说说前两个。
+减少dns域名解析：阻挡：解决方案-提高浏览器的并发连接数由于不同的浏览器对于单个域名的最大的并发连接数有一定的限制，一般来说，浏览器的限制是4-8个，ie6在http/1.0，并发数为4个，在http
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/Vue/">Vue</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2019/02/17/Vue源码学习之Patch/">Vue源码学习之Patch</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2019-02-17T02:22:43.000Z" itemprop="datePublished">2019-02-17</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/Vue/">Vue</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2018/12/31/Vue源码学习之VNode/">Vue源码学习之VNode</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2018-12-31T13:14:28.000Z" itemprop="datePublished">2018-12-31</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                Vue源码学习之VNode前面三章只是介绍Vue是基于getter/setter依赖收集的机制以及简述了渲染(render)流程;但是对于Vue的虚拟DOM生成和DOM的更新这一个过程还没有探究完成，接下来继续学习探究。
+模板tempalte编译在看Vue的面试题的时候，都会讲述Vue中是怎么实现template编译的？我现在的回答还不是很完善的。
+
+Vue中template通过compile编译成AST，会经过generate函数生成
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/Vue/">Vue</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2018/12/27/Vue源码学习-Render/">Vue源码学习之Render</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2018-12-27T02:59:57.000Z" itemprop="datePublished">2018-12-27</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                Vue源码学习之Render根据前两章，讲述了Vue的依赖收集的工作原理以及Vue的数据响应式。今天这块砖我们先从initWatch开始敲起，最后会敲到initRender，从而开始讲解dom渲染。
+initwatcher 初始化为了了解watch监听函数是什么工作原理？我们先从initWatch的代码说起：123456789101112function initWatch (vm, watch) &#123;    for (var 
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/Vue/">Vue</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2018/12/24/Vue源码学习-Watcher/">Vue源码学习之Watcher</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2018-12-24T09:48:18.000Z" itemprop="datePublished">2018-12-24</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                Vue源码学习之Watcher上面一章我们学习到Vue的构造函数的初始化和Vue的响应式的工作原理，但是Vue中数据收集依赖的另外一个重要部分：Watcher。为了解析Watcher我们先来了解一下computed函数:12345678data: &#123;  name: "Ming"&#125;,computed: &#123;  message() &#123;      return `RNG $&#123;this.name&
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/前端/">前端</a>
+                
+                <a data-pjax="" href="/tags/Vue/">Vue</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2018/12/20/Vue源码学习/">Vue源码学习</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2018-12-20T13:30:57.000Z" itemprop="datePublished">2018-12-20</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                Vue源码学习在今年的10月份尤大大在多伦多发布了在明年发布Vue3.0的消息，但是我自己对vue的源码不是很了解，虽然在去年看了一下vue的源码，了解到数据双向绑定的原理，但是其他的方面没了解过，后面有段时间想去继续了解，但是没有坚持，所以打算在vue3.0来之前弥补自己的过错。将从这几个方面来学习vue的源码
+
+数据响应之Observer
+数据响应之Watcher
+模板渲染之render
+模板渲染之解析vnode
+模板渲染之patc
+                
+            </p>
+            
+        </section>
+    </article>
+    
+    <article class="post">
+
+        <header class="post-header">
+            <div class="tag-tile">
+                
+                
+                <a data-pjax="" href="/tags/CSS/">CSS</a>
+                
+                
+                <span class="fa fa-bookmark" style="float:right;color:#f39c12"></span>
+            </div>
+            <h1 class="post-title"><a data-pjax="" href="/2018/07/27/CSS总结篇（二）/">CSS总结篇(二)</a>
+            </h1>
+
+            <div class="post-meta">
+                Post on<span class="fa fa-clock-o"></span>
+                <time datetime="2018-07-26T16:13:12.000Z" itemprop="datePublished">2018-07-27</time>
+            </div>
+        </header>
+        <section class="post-excerpt">
+            <p>
+                
+                </p><p>本篇内容包括CSS盒模型，</p>
+<h4 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h4><p>在一个文档中，每个<strong>元素</strong>都被表示为一个<strong>矩形的盒子</strong>。确定这些盒子的尺寸, 属性 — 像它的颜色，背景，边框方面 — 和位置是渲染引擎的目标。</p>
+                
+            <p></p>
+            
+        </section>
+    </article>
+    
+    <nav class="pagination" role="pagination">
+        
+        <span class="page-number">Page 1 of 3</span>
+        
+        <a data-pjax="" class="older-posts" href="/page/2/">Older Posts →</a>
+        
+    </nav>
+</main>
+
+
+  
+<footer class="site-footer">
+    
+    <div class="inner">
+        <section class="copyright"><a href="/"></a> &copy; Abert 2019</section>
+    </div>
+</footer>
+
+<!-- /scroller -->
+
+<!-- /pusher -->
+<!-- /container -->
+
+
+<!-- Easter eggs -->
+
+<div class="egg animated">
+    <a id="close-button" href="#">X</a>
+    <div class="block">
+        <div class="loading">
+            <span class="ball1"></span>
+            <span class="ball2"></span>
         </div>
     </div>
 </div>
+  
+<script src="//cdn.staticfile.org/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    if (!window.jQuery) {
+        var script = document.createElement('script');
+        script.src = "/js/jquery.min.js";
+        document.body.appendChild(script);
+    }
+</script>
+<script type="text/javascript" src="/js/lib.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
 
 
 
 
+
+
+
+</body>
 </html>
