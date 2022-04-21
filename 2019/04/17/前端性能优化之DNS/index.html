@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>前端性能优化之DNS | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2019-04-17T02:41:30.000Z">
+    Apr 17, 2019
+  </time>
+</h3>
+  <h1>前端性能优化之DNS</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2019/04/17/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8BDNS/#waline" class="post-info-item comment-count waline-comment-count" id="/2019/04/17/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8BDNS/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2019/04/17/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8BDNS/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/" rel="tag">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+  
+  <img src="images/front-dns.jpg" alt="前端性能优化之DNS">
+  
+  <article>
+    <h3 id="前端性能优化之DNS："><a href="#前端性能优化之DNS：" class="headerlink" title="前端性能优化之DNS："></a>前端性能优化之DNS：</h3><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>　　当浏览器请求一个URL的时候，通过firebug我们可以发现大概有以下几个过程：阻挡、域名解析、建立连接、发送请求、等待响应、接收数据。后面四个跟用户的网络情况和你的服务器处理速度有关，本文重点说说前两个。</p>
+<h4 id="减少dns域名解析："><a href="#减少dns域名解析：" class="headerlink" title="减少dns域名解析："></a>减少dns域名解析：</h4><h5 id="阻挡：解决方案-提高浏览器的并发连接数"><a href="#阻挡：解决方案-提高浏览器的并发连接数" class="headerlink" title="阻挡：解决方案-提高浏览器的并发连接数"></a>阻挡：解决方案-提高浏览器的并发连接数</h5><p>由于不同的浏览器对于单个域名的最大的并发连接数有一定的限制，一般来说，浏览器的限制是4-8个，ie6在<code>http/1.0</code>，并发数为4个，在<code>http/1.1</code>，并发数是2个。如果浏览器对一个域名发送太多请求，超过了最大限制就会出现等待。<br>解决方案：我们可以对某些URL的域名分散处理，比如将当前页面所需的图片分散到不同的域名上去，网页的打开速度会得到明显的提升。类似css和js也可以采用该方式。</p>
+<h5 id="cookies隔离"><a href="#cookies隔离" class="headerlink" title="cookies隔离"></a>cookies隔离</h5><p>对于淘宝网站你会看到一个现象，淘宝请求图片会有 <code>img.alicdn.com</code> 这样的域名，明显的可以看到这个地址用了cdn加速，但是这次的关注点不在与cdn加速。而是在于为什么淘宝不用<code>img.taobao.com</code>来加载图片的静态资源呢？<br>这个原因点在于cookies，由于淘宝的cookie已经非常大了，据说曾接近1K，如果用后面的域名，那每次请求图片都会带上长长的cookie，后果可想而知，不仅使得网络请求变慢，而且还浪费了带宽，而淘宝图片服务器并不需要这些cookie。这就是所说的cookie污染，为了解决这一问题，单独的域名是很有必要的。</p>
+<h5 id="DNS预解析的方案"><a href="#DNS预解析的方案" class="headerlink" title="DNS预解析的方案"></a>DNS预解析的方案</h5><p>首先我们先普及一下DNS解析的基本知识：<br>dns预解析是浏览器试图在用户访问链接之前解析域名，这个是计算机的正常DNS解析机制。域名解析后，如果用户确实访问该域名，那么DNS解析就不会延迟。典型的一次DNS解析会耗费20-120毫秒，所以减少DNS解析时间和次数是个很好的优化方式。<br>DNS预获取，一般来说，在前端DNS优化中的两种方式：一是减少DNS的请求次数(别意是减少http请求)，二是进行DNS预获取。</p>
+<p><code>DNS Prefetching </code>是让具有此属性的域名不需要用户点击链接就在后台解析，而域名解析和内容载入是串行的网络操作，所以这个方式能 减少用户的等待时间，提升用户体验 。<br>浏览器对网站第一次的域名DNS解析查找流程依次为：浏览器缓存——系统缓存——路由器缓存——ISP DNS缓存——递归搜索<br>￼<br>其使用场景：<br>当DNS预解析在某一个页面中包含非常多的域名，比如搜索结果页</p>
+<p>我们可以查看淘宝、网易网站是如何减少dns的域名解析<br>举个栗子：<br>淘宝加载图片，采用了DNS域名预解析方案，我们可以查看淘宝官网可以看到：<br>淘宝：<br>￼</p>
+<p>网易：<br>￼<br>从上图可以看出，淘宝和网易采用了dns预加载的方案，通过在meta标签后面添加<code>&lt;link rel=“dns-prefetch” href=“”&gt;</code>，一般来说，使用该标签之前，首先需要通过meta标签来告知浏览器，当前的页面需要进行DNS解析<code>&lt;meta http-equiv = “x-dns-prefetch-control” content=“on”&gt;</code>。但是<code>Chrome</code>和<code>firefox 3.5+</code>内置了<code>DNS Prefetching</code>技术并对DNS预解析做了相应的优化设置，所以，不设置该属性，他们也可以自动在后台进行DNS预解析。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>前端性能之路还需要自我去积累，还有很长的路要走。</p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

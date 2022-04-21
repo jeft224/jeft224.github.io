@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>Vue-login 案例的学习(二) | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2017-04-25T04:54:25.000Z">
+    Apr 25, 2017
+  </time>
+</h3>
+  <h1>Vue-login 案例的学习(二)</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2017/04/25/Vue-login%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/#waline" class="post-info-item comment-count waline-comment-count" id="/2017/04/25/Vue-login%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2017/04/25/Vue-login%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-router/" rel="tag">vue-router</a></li></ul>
+
+  
+  <img src="images/vue-login2.jpg" alt="Vue-login 案例的学习(二)">
+  
+  <article>
+    <ul>
+<li><p><strong>vue-router的基础知识学习</strong></p>
+<blockquote>
+<p>动态路由配置：</p>
+</blockquote>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">template</span>:<span class="string">&#x27;&lt;div&gt;&#123;&#123;$route.params.id&#125;&#125;&lt;/div&gt;&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> <span class="title class_">Router</span>(&#123;</span><br><span class="line">  <span class="attr">routes</span>:[</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">&#x27;/user/:id&#x27;</span>,<span class="attr">component</span>:<span class="title class_">User</span>&#125; <span class="comment">//动态传递参数</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<span id="more"></span>
+<p>  路径传递参数是由**:**来标记的，其中当跳转到另一个路由且带有参数，参数值会被设置到$route.params里。</p>
+<p>  ​</p>
+<p>  监听路由变化：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = &#123;</span><br><span class="line">  <span class="attr">template</span>:<span class="string">&#x27;&lt;div&gt;&#123;&#123;$route.params.id&#125;&#125;&lt;/div&gt;&#x27;</span>,</span><br><span class="line">  <span class="attr">watch</span>:&#123;</span><br><span class="line">    <span class="string">&#x27;$route&#x27;</span>(to,<span class="keyword">from</span>)&#123;</span><br><span class="line">      <span class="comment">//监听路由变化</span></span><br><span class="line">      ...</span><br><span class="line">      dosomething</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  ​</p>
+<blockquote>
+<p>编程式导航：</p>
+</blockquote>
+<p>   我们除了可以通过<router-link>来定义跳转链接，其实还可以通过router.push(location)实现路由跳转。使用router.push()方法，这个方法会向history栈中添加一个新的记录。</p>
+<p>  其实当你点击<router-link>，其内部就会调用router.push()方法。最终结果一样，只是表示方式不一致而已。</p>
+<p>  该方法传递进的参数，可以是字符串，或者是对象。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router.<span class="title function_">push</span>(<span class="string">&#x27;index&#x27;</span>);<span class="comment">//跳转到index组件</span></span><br><span class="line"></span><br><span class="line">router.<span class="title function_">push</span>(&#123;<span class="attr">path</span>:<span class="string">&#x27;index&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">push</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;user&#x27;</span>,<span class="attr">params</span>:&#123;<span class="attr">userid</span>:<span class="number">123456</span>&#125;&#125;) <span class="comment">//&lt;router-link to=&quot;/user/:userid&quot;&gt;</span></span><br><span class="line"><span class="comment">//带查询参数，变成 /register?plan=private</span></span><br><span class="line">router.<span class="title function_">push</span>(&#123;<span class="attr">path</span>:<span class="string">&#x27;register&#x27;</span>,<span class="attr">query</span>:&#123;<span class="attr">plan</span>:<span class="string">&#x27;private&#x27;</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>  router.go(n)</p>
+<p>  在 history 记录中向前或者后退多少步：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在浏览器记录中前进一步，等同于 history.forward()</span></span><br><span class="line">router.<span class="title function_">go</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后退一步记录，等同于 history.back()</span></span><br><span class="line">router.<span class="title function_">go</span>(-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前进 3 步记录</span></span><br><span class="line">router.<span class="title function_">go</span>(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  ​</p>
+<blockquote>
+<p>重定向</p>
+</blockquote>
+<p>  ​	重定向是由route配置的，配置的方式四种：路径字符串，带名称的路由，带参数的路径字符串，方法(动态返回重定向目标)。</p>
+<p>  <strong>带参数的路径字符串：</strong></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;<span class="attr">path</span>:<span class="string">&#x27;/user/:id&#x27;</span>,<span class="attr">redirect</span>:<span class="string">&#x27;/user-two/:id&#x27;</span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>  <strong>方法：</strong></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;<span class="attr">path</span>:<span class="string">&#x27;/user&#x27;</span>,<span class="attr">redirect</span>: <span class="function"><span class="params">to</span> =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    dosomething</span><br><span class="line">    ....</span><br><span class="line">  &#125;&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>  ​</p>
+<blockquote>
+<p>钩子函数</p>
+</blockquote>
+<p>  ​     router.beforeEach()函数用于路由跳转，比如登录时权限的判定，再跳转登录页面进行登录。首先注册一个全局的钩子：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> <span class="title class_">VueRouter</span>(&#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>  钩子函数的三个参数：</p>
+<p>  ​	to：目标路由，</p>
+<p>  ​	from：即将要离开的路由</p>
+<p>  ​	next：Function；一定要调用该方法来 <strong>resolve</strong> 这个钩子。</p>
+<p>  ​		<strong>next()</strong>: 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 <strong>confirmed</strong> （确认的）。</p>
+<p>  ​		<strong>next(false)</strong>: 中断当前的导航。如果浏览器的 URL 改变了（可能是用户手动或者浏览器后退按钮），那么 URL 		地址会重置到 <code>from</code> 路由对应的地址。</p>
+<p>  ​		<strong>next(‘&#x2F;‘) 或者 next({ path: ‘&#x2F;‘ })</strong>: 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。</p>
+<p>  <strong>确保要调用 next 方法，否则钩子就不会被 resolved。</strong>	</p>
+<p>  ​</p>
+<blockquote>
+<p>路由的meta字段	</p>
+</blockquote>
+<p>  定义路由时可配置meta字段：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> <span class="title class_">VueRouter</span>(&#123;</span><br><span class="line">  <span class="attr">routes</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/foo&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: <span class="title class_">Foo</span>,</span><br><span class="line">      <span class="attr">meta</span>: &#123; <span class="attr">requiresAuth</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>  meta字段出现的场景：用户登录登出	(这个案例里面用到的meta字段)</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to,<span class="keyword">from</span>,next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(to.<span class="property">meta</span>.<span class="property">requireAuth</span>)&#123;</span><br><span class="line">      <span class="keyword">if</span>(store.<span class="property">state</span>.<span class="property">token</span>)&#123;</span><br><span class="line">        <span class="title function_">next</span>();</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_">next</span>(&#123;</span><br><span class="line">          <span class="attr">path</span>: <span class="string">&#x27;/login&#x27;</span>,</span><br><span class="line">          <span class="attr">query</span>: &#123;<span class="attr">redirect</span>: to.<span class="property">fullPath</span>&#125;  <span class="comment">// 将跳转的路由path作为参数，登录成功后跳转到该路由</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="title function_">next</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>  ​</p>
+<p>  ​</p>
+<ul>
+<li><p><strong>vue-router的进阶知识</strong></p>
+<blockquote>
+<p>数据获取</p>
+</blockquote>
+<p>​	1. 导航完成之后获取数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">list</span>:[]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">created</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//组件创建完后获取数据</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getData</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">watch</span>:&#123;</span><br><span class="line">    <span class="comment">//监听路由变化，变化，执行该方法</span></span><br><span class="line">    <span class="string">&#x27;$route&#x27;</span>: <span class="string">&#x27;getData&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>:&#123;</span><br><span class="line">    <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">      ...</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">list</span> = data</span><br><span class="line">      ...</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	2.  导航完成之前获取数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">list</span>:[]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteEnter (to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="title function_">getData</span>(to.<span class="property">params</span>.<span class="property">id</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> </span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="title function_">next</span>(<span class="literal">false</span>)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">next</span>(<span class="function"><span class="params">vm</span> =&gt;</span> &#123;</span><br><span class="line">          vm.<span class="property">list</span> = data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">watch</span>:&#123;</span><br><span class="line">    <span class="comment">//监听路由变化，变化，执行该方法</span></span><br><span class="line">   $route()&#123;</span><br><span class="line">     <span class="title function_">getData</span>(<span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">params</span>.<span class="property">id</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="title function_">next</span>(<span class="literal">false</span>)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">next</span>(<span class="function"><span class="params">vm</span> =&gt;</span> &#123;</span><br><span class="line">          vm.<span class="property">list</span> = data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>路由信息对象</p>
+</blockquote>
+<p>​    路由信息对象是不可变的，每次导航成功后就会产生一个新的对象，</p>
+<p>​    路由信息对象出现的场景：</p>
+<ul>
+<li>组件内的 <code>this.$route</code> 和 <code>$route</code> watcher 回调（监测变化处理）;</li>
+<li>beforeEach()函数的参数 <code>to</code>和<code>from</code></li>
+</ul>
+</li>
+</ul>
+<p>​          路由信息对象的常用属性：</p>
+<pre><code>      1. **$route.path：**
+</code></pre>
+<p>​        		字符串，对应当前路由的路径，总是解析为绝对路径，如 <code>&quot;/foo/bar&quot;</code>。</p>
+<p>​                2.<strong>$route.params</strong></p>
+<p>​			一个 key&#x2F;value 对象，包含了 动态片段 和 全匹配片段，如果没有路由参数，就是			 一个空对象。</p>
+<p>​		3.<strong>$route.query</strong></p>
+<p>​	    		一个 key&#x2F;value 对象，表示 URL 查询参数。例如，对于路径 <code>/foo?user=1</code>，则有 <code>$route.query.user == 1</code>，如果没有查询参数，则是个空对象。</p>
+<p>​		4.<strong>$route.fullPath</strong></p>
+<p>​			String类型 完成解析后的 URL，包含查询参数和 hash 的完整路径。</p>
+<p>​        </p>
+<blockquote>
+<p>demo地址：</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/hilongjw/vue-vueRouter-webpack-example">vue-router简单案例</a></p>
+<blockquote>
+<p>参考</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/vuejs/vue-router">源码</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/f8699194ce26">vue-router 实现分析</a></p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

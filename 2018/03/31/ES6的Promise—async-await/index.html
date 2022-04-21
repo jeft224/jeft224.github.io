@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>ES6的Promise———async await | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2018-03-31T00:15:42.000Z">
+    Mar 31, 2018
+  </time>
+</h3>
+  <h1>ES6的Promise———async await</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2018/03/31/ES6%E7%9A%84Promise%E2%80%94async-await/#waline" class="post-info-item comment-count waline-comment-count" id="/2018/03/31/ES6%E7%9A%84Promise%E2%80%94async-await/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2018/03/31/ES6%E7%9A%84Promise%E2%80%94async-await/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/async-await/" rel="tag">async-await</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li></ul>
+
+  
+  <img src="images/js-promise.jpg" alt="ES6的Promise———async await">
+  
+  <article>
+    <p>写这篇博客关于async-await的主要原因：在我自己构建的商城中用的后端技术koa2中用到async-await，主要是对async-await理解不深导致代码bug.</p>
+<span id="more"></span>
+
+<h4 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h4><p>​	async&#x2F;await可以说是co模块和生成器函数的语法糖。用更加清晰的语义解决js异步代码。为了让我们用同步的方式去写异步的代码。</p>
+<p>​	熟悉co模块的同学应该都知道，co模块是TJ大神写的一个使用生成器函数来解决异步流程的模块，可以看做是生成器函数的执行器。而async&#x2F;await则是对co模块的升级，内置生成器函数的执行器，不再依赖co模块。同时，async返回的是Promise。</p>
+<h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><p>用来声明该函数有异步操作，它会将函数的返回值通过Promise.resolve()包装成promise，所以<strong>async总会返回一个Promise对象</strong>。</p>
+<h4 id="await"><a href="#await" class="headerlink" title="await"></a>await</h4><p>理解为<code>async wait</code>，只能用在<code>async</code>函数里面。await 后面可以跟任何的JS 表达式。虽然说 await 可以等很多类型的东西，<strong>但是它最主要的意图是用来等待 Promise 对象的状态被 resolved</strong>。如果await的是 promise对象会<strong>造成异步函数停止执行并且等待 promise 的解决</strong>(里面涉及到async-await的执行顺序的问题),如果等的是正常的表达式则立即执行。若 <code>Promise</code> 处理异常(<code>rejected</code>)，<code>await</code> 会把 <code>Promise</code> 的异常原因抛出。</p>
+<h4 id="作个比较"><a href="#作个比较" class="headerlink" title="作个比较"></a>作个比较</h4><p>在ES6中的Promise将我们从ES5中的回调地狱中解救出来，但是当你处理相互依赖的异步任务，就会出现一连串的then链</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params">second, param</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(param);</span><br><span class="line">        &#125;, second);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">doSomething</span>(<span class="number">100</span>, <span class="string">&#x27;res1&#x27;</span>).<span class="title function_">then</span>((res1)=&#123;</span><br><span class="line">  <span class="title function_">doSomething</span>(<span class="number">200</span>,<span class="string">&#x27;res2&#x27;</span>+res1)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">res2</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="title function_">doSomething</span>(<span class="number">300</span>,<span class="string">&#x27;res3&#x27;</span>+res2)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><em>async-await</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> res1 = <span class="keyword">await</span> <span class="title function_">doSomething1</span>()</span><br><span class="line">  <span class="keyword">let</span> res2 = <span class="keyword">await</span> <span class="title function_">doSomething2</span>(res1)</span><br><span class="line">  <span class="keyword">let</span> res3 = <span class="keyword">await</span> <span class="title function_">doSomething3</span>(res2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function">async</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/await">await</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007535316">理解 JavaScript 的 async&#x2F;await</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@peterchang_82818/javascript-es7-async-await-%E6%95%99%E5%AD%B8-703473854f29-tutorial-example-703473854f29"> ES7 Async Await 聖經</a></p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>JavaScript数据类型转换 | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2018-03-22T12:35:49.000Z">
+    Mar 22, 2018
+  </time>
+</h3>
+  <h1>JavaScript数据类型转换</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2018/03/22/JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/#waline" class="post-info-item comment-count waline-comment-count" id="/2018/03/22/JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2018/03/22/JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+  
+  <img src="images/js-type.jpg" alt="JavaScript数据类型转换">
+  
+  <article>
+    <p>在知乎上刷面试题看到有关JavaScript的数据类型的题目，对这个方面的知识再次回顾。写这篇博客源于一道十分简单的面试题：</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params">person</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (person == &#123; <span class="attr">name</span>: <span class="string">&#x27;amy&#x27;</span> &#125;) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hey amy&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hey arnold&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">greet</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;amy&#x27;</span> &#125;)<span class="comment">//&#x27;hey arnold&#x27;=&gt;为什么没输出&#x27;hey amy&#x27;(你们应该知道原因的)</span></span><br></pre></td></tr></table></figure>
+
+<p>但还是插一句：原因是当两个操作数均为对象时，对象是引用类型，它们作为对象进行比较，仅当它们引用相同对象时返回true。</p>
+<h3 id="数据类型的定义"><a href="#数据类型的定义" class="headerlink" title="数据类型的定义"></a>数据类型的定义</h3><h4 id="数据类型的分类："><a href="#数据类型的分类：" class="headerlink" title="数据类型的分类："></a>数据类型的分类：</h4><p>​	<strong>基本数据类型：</strong> string,boolean,number,symbol(es6新增),undefined,null</p>
+<p>​	<strong>内置函数(内置对象)：</strong> String,Number,Boolean,Function,Symbol,Array,Date,RegExp…..</p>
+<p>​	<strong>引用数据类型：</strong> Object</p>
+<h4 id="数据类型的转换："><a href="#数据类型的转换：" class="headerlink" title="数据类型的转换："></a>数据类型的转换：</h4><h5 id="隐式转换："><a href="#隐式转换：" class="headerlink" title="隐式转换："></a>隐式转换：</h5><p><strong>隐式转换在ECMAScript中有所规范：</strong></p>
+<p>​	对象（包括数组） 会首先被转换为相应的基本类型值， 如果返回的是非数字的基本类型值， 则再遵循以上规则将其强制转换为数字。<br>为了将值转换为相应的基本类型值， 抽象操作 ToPrimitive  会首先（通过内部操作DefaultValue ） 检查该值是否有 valueOf() 方法。 如果有并且返回基本类型值， 就使用该值进行强制类型转换。 如果没有就使用 toString() 的返回值（如果存在） 来进行强制类型转换。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出？请解析原理</span></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> b = [<span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a + b);  <span class="comment">//&quot;1,23,4&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><em>原理：</em>当a+b运算操作时，由于a和b是用“+”连接，导致a和b都要先进行隐式强制类型转换，再做“+”运算。但是由于a和b是数组类型，需要进行取原始值操作，解析器会先对数组先调用valueOf函数，如果有该方法并且返回值是原始类型的话就是这个返回值；否则继续调用toString()方法，如果返回的是原始值，则利用这个返回值进行“加”运算；否则会抛出异常。最后数组a和b最终调用toString()函数输出“1,2”和“3,4”，再通过“+”运算得到结果.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span>;  <span class="comment">// true   </span></span><br><span class="line"><span class="number">1</span> == <span class="literal">true</span>;  <span class="comment">// true  </span></span><br><span class="line"><span class="number">2</span> == <span class="literal">true</span>;  <span class="comment">// false  </span></span><br><span class="line"><span class="title class_">NaN</span> == <span class="title class_">NaN</span>;  <span class="comment">// false  NaN不等于任何值</span></span><br><span class="line"><span class="number">6</span>+<span class="string">&#x27;1&#x27;</span>; <span class="comment">//61</span></span><br><span class="line"><span class="number">6</span>-<span class="string">&#x27;3&#x27;</span>; <span class="comment">//3</span></span><br><span class="line">[] == <span class="literal">false</span>;  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>1.undefined与null相等，但不恒等（&#x3D;&#x3D;&#x3D;）<br>2.一个是number一个是string时，会尝试将string转换为number<br>3.隐式转换将boolean转换为number，0或1<br>4.对于0、空字符串的判断，建议使用 “&#x3D;&#x3D;&#x3D;” 。<br>5.“&#x3D;&#x3D;”会对不同类型值进行类型转换再判断，“&#x3D;&#x3D;&#x3D;”则不会。它会先判断两边的值类型，类型不匹配时直接为false。</p>
+<p><strong>宽松相等和严格相等 ：</strong></p>
+<p><em>宽松相等规范：</em> 比较x&#x3D;&#x3D;y时，且x和y都有值，会产生true和false的情况，以下比较的情况有</p>
+<ol>
+<li>如果x和y的数据类型相同时，就相当于x&#x3D;&#x3D;&#x3D;y</li>
+<li>当x是null和y是undefined，返回true</li>
+<li>如果x的数据类型是Number和y的数据类型是String，返回的比较是x&#x3D;&#x3D;ToNumber(y)</li>
+<li>如果x的数据类型是Boolean,那么的比较是ToNumber(x)&#x3D;&#x3D;y</li>
+<li>如果x的数据类型是String, Number, or Symbol 和y的数据类型是Object 那么返回的是 x &#x3D;&#x3D; ToPrimitive(y).</li>
+</ol>
+<p><em>严格相等规范：</em> 比较x&#x3D;&#x3D;&#x3D;y时，且x和y都有值，会产生true和false的情况，以下比较的情况有</p>
+<ol>
+<li>如果x和y的类型不同，返回false</li>
+<li>如果x的数据类型是Number：</li>
+</ol>
+<p>​	2.1  如果x是NaN，返回false</p>
+<p>​	2.2  如果y是NaN，返回false</p>
+<p>​	2.3  如果x是-0和y是+0，返回true</p>
+<p>​	2.4  如果x是+0和y是-0，返回true</p>
+<p>​	2.5  如果x和y都是Number且值相等，返回true</p>
+<h5 id="显式转换："><a href="#显式转换：" class="headerlink" title="显式转换："></a>显式转换：</h5><p>一般来说，显式转换是指Number，String，Boolean构造函数，手动将各种类型的值，转换成数字、字符串或者布尔值。	</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Boolean</span>( <span class="string">&quot;0&quot;</span> ); <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>( [] ); <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>(&#123;&#125;); <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>( <span class="string">&quot;&quot;</span>); <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>( <span class="number">0</span> ); <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>( <span class="literal">null</span> ); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;1234&#x27;</span>) <span class="comment">// 1234</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;1234abcd&#x27;</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;&#x27;</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">String</span>(<span class="number">123</span>)<span class="comment">//&quot;123&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="string">&quot;abc&quot;</span>) <span class="comment">//&quot;abc&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">null</span>)<span class="comment">//&quot;null&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>对象通过toString或valueOf方法转换为原始值，JS语言核心的内置类首先尝试使用valueOf()，再尝试使用toString()。</p>
+<p>对象类型的转换稍微复杂些，对象参与基本类型数据运算时，首先是要将对象转换为基本类型。转换方法如下：</p>
+<ol>
+<li>调用toString()方法，如果返回基本类型的值，则用String()构造方法转换该值。</li>
+<li>如果toString()方法返回的不是基本类型，则再调用valueOf()方法，如果返回基本类型的值，则用String()构造方法转换该值。</li>
+<li>如果valueOf()方法返回的也不是基本类型，就抛出错误，如谷歌抛出：Uncaught TypeError: Cannot convert object to primitive value</li>
+</ol>
+<h6 id="String转换对象"><a href="#String转换对象" class="headerlink" title="String转换对象"></a>String转换对象</h6><ol>
+<li>先调用toString()方法去获得原始类型的值，返回的是原始类型的值，那么调用String()构造函数去返回值</li>
+<li>如果toString()返回的是对象，那么就要继续调用valueOf()去获得原始类型的值，返回的是原始类型的值，那么调用String()构造函数去返回值</li>
+<li>倘若valueOf()返回的也不是基本类型，那么抛出错误异常</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  i :<span class="number">10</span>,</span><br><span class="line">  <span class="attr">toString</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;tostring&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">i</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">valueOf</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;valueof&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">i</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="title class_">String</span>(a)<span class="comment">//先调用toString，再调用String()构造函数</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="Number转换对象"><a href="#Number转换对象" class="headerlink" title="Number转换对象"></a>Number转换对象</h6><ol>
+<li>先调用valueOf()方法去获得原始类型的值，返回的是原始类型的值，那么调用Number()构造函数去返回值</li>
+<li>如果valueOf()返回的是对象，那么就要继续调用toString()去获得原始类型的值，返回的是原始类型的值，那么调用Number()构造函数去返回值</li>
+<li>倘若toString()返回的也不是基本类型，那么抛出错误异常</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  i :<span class="number">10</span>,</span><br><span class="line">  <span class="attr">toString</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;tostring&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">i</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">valueOf</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;valueof&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">i</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="title class_">Number</span>(a)<span class="comment">//先调用valueOf，再调用Number()构造函数</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="Boolean转换对象"><a href="#Boolean转换对象" class="headerlink" title="Boolean转换对象"></a>Boolean转换对象</h6><p>Boolean对象有六个值转换十分特殊，其他的转换为true</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span>  <span class="literal">null</span>  <span class="literal">false</span>  <span class="number">0</span>(包括+<span class="number">0</span>和-<span class="number">0</span>)  <span class="title class_">NaN</span>  空字符串(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="title class_">Boolean</span>(<span class="literal">undefined</span>)   <span class="comment">//false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="literal">null</span>)        <span class="comment">//false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="literal">false</span>)       <span class="comment">//false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="number">0</span>)           <span class="comment">//false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="title class_">NaN</span>)         <span class="comment">//false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="string">&#x27;&#x27;</span>)          <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Boolean</span>([])          <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><ol>
+<li>[温故js][<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000005863067#articleHeader9]">https://segmentfault.com/a/1190000005863067#articleHeader9]</a></li>
+<li>[ECMAScript规范][<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-abstract-equality-comparison]">https://tc39.github.io/ecma262/#sec-abstract-equality-comparison]</a></li>
+<li>[MDN比较操作符][<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Comparison_Operators]">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Comparison_Operators]</a></li>
+</ol>
+<p>​	</p>
+<p>​	</p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

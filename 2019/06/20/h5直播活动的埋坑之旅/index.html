@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>h5直播活动的埋坑之旅 | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2019-06-20T10:08:30.000Z">
+    Jun 20, 2019
+  </time>
+</h3>
+  <h1>h5直播活动的埋坑之旅</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2019/06/20/h5%E7%9B%B4%E6%92%AD%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%9F%8B%E5%9D%91%E4%B9%8B%E6%97%85/#waline" class="post-info-item comment-count waline-comment-count" id="/2019/06/20/h5%E7%9B%B4%E6%92%AD%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%9F%8B%E5%9D%91%E4%B9%8B%E6%97%85/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2019/06/20/h5%E7%9B%B4%E6%92%AD%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%9F%8B%E5%9D%91%E4%B9%8B%E6%97%85/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5/" rel="tag">H5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/video/" rel="tag">video</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+  
+  <article>
+    <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近参与了做空宣的H5中，里面遇到了<code>video</code>标签在<code>android</code>和<code>iPhone</code> 手机适配中出现了一些问题，在微信浏览器中使用<code>android</code>默认的播放组件，会导致video标签的层级是最高的，直播的过程中导致弹幕就不能浮现在上面了(这个是微信浏览器使用的播放内核导致的)。</p>
+<p><img src="/images/video.jpg" alt="HTML5-video"></p>
+<h3 id="出现问题的原因"><a href="#出现问题的原因" class="headerlink" title="出现问题的原因"></a>出现问题的原因</h3><p><code>IOS</code>的微信浏览器是<code>Chrome内核</code>, <code>Android</code>的微信浏览器是<code>X5内核</code>;由于在安卓中的微信浏览器中的层级是最高的，从而导致通过z-index层级高低的方案不能解决同时解决<code>android</code>和<code>ios</code>的弹幕展现的问题。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>在解决这个问题的时候，首先在<code>iPhone</code>手机端通过层级的高低是可以实现弹幕在video标签上展现，但是针对<code>android</code>手机却是不行的，对于<code>android</code>手机当时讨论了三个方案：</p>
+<ul>
+<li>通过对展现弹幕的<code>div</code>框给予绝对定位，同时采用<code>z-index</code>的最大值进行覆盖（同时保证在同一块级格式上下文中，在<code>android</code>的微信浏览器中会将video标签层级展现最高）</li>
+<li>通过<code>canvas</code>去实现video标签的播放(但是不能转换直播过程中的链接)</li>
+<li>通过TBS（腾讯浏览器服务）中的同层浏览器来实现弹幕展现</li>
+</ul>
+<blockquote>
+<p>接下来我们可以只针对android的微信浏览器来探讨和实现这个三个方案：</p>
+</blockquote>
+<h4 id="通过z-index来实现弹幕的层级覆盖"><a href="#通过z-index来实现弹幕的层级覆盖" class="headerlink" title="通过z-index来实现弹幕的层级覆盖"></a>通过z-index来实现弹幕的层级覆盖</h4><p>在这三个方案中，这个方案是最简单和最容易实现的：<br><strong>HTML文件：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span> = <span class="string">&quot;h5-player&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">video</span> <span class="attr">playsinline</span> <span class="attr">webkit-playsinline</span> <span class="attr">x5-playsinline</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 弹幕 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;barrage&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>CSS文件：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 弹幕样式 */</span></span><br><span class="line"><span class="selector-class">.barrage</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>:absolute;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attribute">z-index</span>:<span class="number">999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先要保证<code>video</code>和弹幕框在同一块级格式化上下文(<strong>BFC</strong>)上，然后需要弹幕框的<code>z-index</code>的层级高于<code>video</code>标签，那么就可以在<code>ios</code>上可以实现发送弹幕在直播中展现弹幕了，但是在<code>android</code>中就不能通过该方法去实现弹幕的功能，因为<code>video</code>在<code>android</code>中默认的层级是最高的。</p>
+<h4 id="通过canvas来实现弹幕的展现"><a href="#通过canvas来实现弹幕的展现" class="headerlink" title="通过canvas来实现弹幕的展现"></a>通过canvas来实现弹幕的展现</h4><p>首先这个方案只适用于观看回放和观看视频，不适用于视频直播。由于<code>canvas</code>中的<code>drawImage</code>方法不能转换直播过程中的视频流。以下为实现方案：</p>
+<p><strong>HTML文件：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span> = <span class="string">&quot;h5-player&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">video</span> <span class="attr">playsinline</span> <span class="attr">webkit-playsinline</span> <span class="attr">x5-playsinline</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 弹幕 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;barrage&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CSS文件：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">video</span>&#123;</span><br><span class="line">    <span class="attribute">display</span> : none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 弹幕样式 */</span></span><br><span class="line"><span class="selector-class">.barrage</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>:absolute;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attribute">z-index</span>:<span class="number">999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>主要的JS部分：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>).<span class="title function_">drawImage</span>(video,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">&#125;,<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<p>该方法依旧需要通过<code>z-index</code>来实现弹幕覆盖<code>video</code>。通过canvas来转换目的是为了让video的层级低于弹幕层级</p>
+<h4 id="通过TBS中的H5同层播放器的video播放模式来实现弹幕的播放"><a href="#通过TBS中的H5同层播放器的video播放模式来实现弹幕的播放" class="headerlink" title="通过TBS中的H5同层播放器的video播放模式来实现弹幕的播放"></a>通过TBS中的H5同层播放器的video播放模式来实现弹幕的播放</h4><p>说到用TBS的H5同层播放器来实现弹幕的播放，大家可能不是很清楚TBS是啥（腾讯浏览服务）</p>
+<p><strong>需要了解的话,链接地址：</strong> <a target="_blank" rel="noopener" href="https://x5.tencent.com/tbs/guide/video.html">TBS的H5同层播放器接入规范</a></p>
+<p>首先我们需要了解H5同层浏览器中的一些属性：</p>
+<ul>
+<li><p>启用H5同层浏览器(<em>x5-video-player-type</em>)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">&quot;http://xxx.mp4&quot;</span> <span class="attr">x5-video-player-type</span>=<span class="string">&quot;h5&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 这个属性需要在播放前设置好，播放之后设置无效，下面的<em>x5-video-player-fullscreen</em>也是一样</p>
+</li>
+<li><p>H5同层浏览器全屏模式（<em>x5-video-player-fullscreen</em>）</p>
+<p>视频播放时，进入到全屏模式：</p>
+<p><strong>注意：</strong> 声明此属性，需要页面自己重新适配新的视口大小变化。可以通过监听resize 事件来实现</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">&quot;h5_video&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxx&quot;</span> <span class="attr">x5-video-player-type</span>=<span class="string">&quot;h5&quot;</span> <span class="attr">x5-video-player-fullscreen</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>需要监听窗口大小变化(resize)实现全屏</p>
+<p><strong>JS部分：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onresize</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  h5_video.<span class="property">style</span>.<span class="property">width</span> = <span class="variable language_">window</span>.<span class="property">innerWidth</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">  h5_video.<span class="property">style</span>.<span class="property">height</span> = <span class="variable language_">window</span>.<span class="property">innerHeight</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>控制横竖屏 (<em>x5-video-orientation</em>)</p>
+<p>声明播放器支持的方向, landscape 横屏, portraint竖屏</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 竖屏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">...</span> <span class="attr">x5-video-player-type</span>=<span class="string">&quot;h5&quot;</span> <span class="attr">x5-video-orientation</span>=<span class="string">&quot;portrait&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 跟随手机自动旋转 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">x5-video-player-type</span>=<span class="string">&quot;h5&quot;</span> <span class="attr">x5-video-orientation</span>=<span class="string">&quot;landscape|portrait&quot;</span>/&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>视频显示位置控制（<em>object-position</em>）</p>
+<p>默认视频在指定区域的居中显示，可以通过css object-position 属性控制视频(左上角) 显示位置</p>
+</li>
+<li><p>进入全屏通知和退出全屏通知（<em>x5videoenterfullscreen和x5videoexitfullscreen</em>）</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">“myVideo</span>&quot;<span class="attr">...</span>/&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>JS部分：</strong> 通过<code>JS</code>监听事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myVideo.<span class="title function_">addEventListener</span>(<span class="string">&quot;x5videoenterfullscreen|x5videoexitfullscreen&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>前面了解到H5同层浏览器中的属性，接下来就可以实现该方案了：</p>
+<p>要实现该方案，同样是基于第一个方案的前提下实现的，需要利用z-index的层级来实现弹幕的显示。</p>
+<p><strong>HTML部分：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;h5-player&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 点击观看时，会创建一个直播组件,类名叫bjy-video --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>CSS部分同样需要将对弹幕部分进行绝对定位，还要对其进行层级设置（<code>z-index</code>）,让其高于video的层级。</p>
+<p><strong>js实现部分：</strong></p>
+<p>在android手机中点击观看直播按钮，会开启H5同层浏览器，进入全屏模式，页面会显示video，弹幕会浮现在video上面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 观看直播</span></span><br><span class="line">playButton.<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 初始化直播组件</span></span><br><span class="line">  <span class="title function_">initH5Player</span>();</span><br><span class="line">  <span class="comment">// 开启H5同层浏览器</span></span><br><span class="line">  $(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">attr</span>(&#123;<span class="string">&#x27;x5-video-player-type&#x27;</span>:<span class="string">&#x27;h5&#x27;</span>,<span class="string">&#x27;x5-video-player-fullscreen&#x27;</span>:<span class="literal">true</span>,<span class="string">&#x27;x5-video-orientation&#x27;</span>: <span class="string">&#x27;portrait&#x27;</span>&#125;);</span><br><span class="line">  <span class="comment">// 设置video显示的位置， 显示在顶部</span></span><br><span class="line">  $(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;object-position&#x27;</span>,<span class="string">&#x27;0px 0px&#x27;</span>);</span><br><span class="line">  $(<span class="string">&#x27;#barrage&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;block&#x27;</span>);</span><br><span class="line">  playButton.<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;none&#x27;</span>);</span><br><span class="line">  <span class="comment">// 判断手机是android还是ios来做处理</span></span><br><span class="line">  <span class="keyword">if</span>(judgeDevice.<span class="property">isIOS</span>)&#123;</span><br><span class="line">    $(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">attr</span>(<span class="string">&#x27;controls&#x27;</span>,<span class="literal">true</span>)</span><br><span class="line">    $(<span class="string">&#x27;.controls&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;none&#x27;</span>);</span><br><span class="line">    $(<span class="string">&#x27;.ios-controls&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;flex&#x27;</span>);</span><br><span class="line">    $(<span class="string">&#x27;.play-box&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>,<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(judgeDevice.<span class="property">isAndroid</span>) &#123;</span><br><span class="line">    $(<span class="string">&#x27;.controls&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>, <span class="string">&#x27;none&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//显示全屏</span></span><br><span class="line">$(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">on</span>(<span class="string">&#x27;x5videoenterfullscreen&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 显示弹幕</span></span><br><span class="line">  $(<span class="string">&#x27;.barrage-box&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>,<span class="string">&#x27;block&#x27;</span>);</span><br><span class="line">  <span class="comment">// 显示自定义的播放组件（全屏和弹幕的关闭和打开）</span></span><br><span class="line">  $(<span class="string">&#x27;.controls&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>,<span class="string">&#x27;flex&#x27;</span>);</span><br><span class="line">  <span class="comment">// 设置video标签的宽高</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    $(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">css</span>(&#123;</span><br><span class="line">      <span class="attr">width</span>: <span class="variable language_">window</span>.<span class="property">innerWidth</span>,</span><br><span class="line">      <span class="attr">height</span>: <span class="variable language_">window</span>.<span class="property">innerHeight</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,<span class="number">200</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 退出全屏状态</span></span><br><span class="line">$(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">on</span>(<span class="string">&#x27;x5videoexitfullscreen&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  $(<span class="string">&#x27;#keeping-play&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>,<span class="string">&#x27;block&#x27;</span>);</span><br><span class="line">  $(<span class="string">&#x27;.barrage-box&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>,<span class="string">&#x27;none&#x27;</span>);</span><br><span class="line">  $(<span class="string">&#x27;.controls&#x27;</span>).<span class="title function_">css</span>(<span class="string">&#x27;display&#x27;</span>,<span class="string">&#x27;none&#x27;</span>);</span><br><span class="line">  <span class="comment">// 销毁直播流</span></span><br><span class="line">  teacherH5Player.<span class="title function_">dispose</span>();</span><br><span class="line">  <span class="comment">//清除</span></span><br><span class="line">  $(<span class="string">&#x27;.bjy-video&#x27;</span>).<span class="title function_">css</span>(&#123;</span><br><span class="line">    <span class="attr">width</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>如果你直接使用video标签，会出现播放video时出现自动全屏问题，video内联播放，使用以下元素都可以实现内联播放视频，<br>可以通过添加playsinline webkit-playsinline以及x5私有的x5-playsinline避免全屏。<br>ios10以上需加上playsinline属性，ios10以下需加上webkit-playsinline来实现内联播放。<br>按照上述属性设置之后，大多数情况都可以满足，唯独android的微信。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">&quot;video/xxx.mp4&quot;</span> <span class="attr">controls</span> <span class="attr">playsinline</span> <span class="attr">webkit-playsinline</span> <span class="attr">x5-playsinline</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

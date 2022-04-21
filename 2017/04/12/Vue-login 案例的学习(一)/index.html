@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>Vue-login 案例的学习(一) | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2017-04-12T04:54:25.000Z">
+    Apr 12, 2017
+  </time>
+</h3>
+  <h1>Vue-login 案例的学习(一)</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2017/04/12/Vue-login%20%E6%A1%88%E4%BE%8B%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%B8%80)/#waline" class="post-info-item comment-count waline-comment-count" id="/2017/04/12/Vue-login%20%E6%A1%88%E4%BE%8B%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%B8%80)/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2017/04/12/Vue-login%20%E6%A1%88%E4%BE%8B%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%B8%80)/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token/" rel="tag">token</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+  
+  <article>
+    <ol>
+<li><strong>Token认证机制的原理</strong></li>
+</ol>
+<p>   ​	如今对于网站的登录后都要做个验证，保护网站的安全；Token 是包含用户名、有效期和某些专有信息并通过<a target="_blank" rel="noopener" href="http://support.supermap.com.cn/DataWarehouse/WebDocHelp/6.1.3/iserverOnlineHelp/Subject_introduce/Security/serviceSecurity/config/token/TonkenConfig.htm#%E9%85%8D%E7%BD%AEToken%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5">共享密钥</a>加密的信息字符串。</p>
+<span id="more"></span>
+<p>   ​	1.1. 	Token的生成和存储问题</p>
+<p>   ​		Token的生成一般采用uuid保证唯一性，当用户登录时为其生成一个唯一的Token，存储一般在数据库当中。</p>
+<p>   ​	1.2. 	Token过期时间的问题</p>
+<p>   ​		采用把Token二次保存在cookie和session中，根据cookie和session的过期时间来维护Token。</p>
+<p>   ​	1.3.	怎么保证用户使用状态下token持续时间的一直有效</p>
+<p>   ​		从cookie取出Token，获取用户信息；如果用户有操作权限，那么就会用当前的时间来更新cookies的过期时		  间，从而维护Token的使用时间</p>
+<hr>
+<p>   ​</p>
+<ol start="2">
+<li><strong>基于Token的身份验证方法</strong></li>
+</ol>
+<p>   使用基于 Token 的身份验证方法，在服务端不需要存储用户的登录记录。大概的流程是这样的：</p>
+<ol>
+<li><p>客户端使用用户名跟密码请求登录</p>
+</li>
+<li><p>服务端收到请求，去验证用户名与密码</p>
+</li>
+<li><p>验证成功后，服务端会签发一个 Token，再把这个 Token 发送给客户端</p>
+</li>
+<li><p>客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage 里</p>
+</li>
+<li><p>客户端每次向服务端请求资源的时候需要带着服务端签发的 Token</p>
+</li>
+<li><p>服务端收到请求，然后去验证客户端请求里面带着的 Token，如果验证成功，就向客户端返回请求的数据</p>
+<hr>
+<p>​</p>
+</li>
+<li><p>**实现Token验证的标准办法: **  <em>JWT</em></p>
+</li>
+</ol>
+<p>   ​	JWT表示：JSON Web Tokens</p>
+<p>   ​	</p>
+<pre><code>   &gt;JWT的结构：
+   &gt;
+   &gt;​	header部分
+   &gt;
+   &gt;​	payload部分
+   &gt;
+   &gt;​        signature部分
+   &gt;
+   &gt;​
+</code></pre>
+<blockquote>
+<p>JWT格式： </p>
+</blockquote>
+<pre><code> 中间用**.** 分隔开，并且使用Base64编码。类似：
+</code></pre>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxxxx.<span class="property">yyyyy</span>.<span class="property">zzzzz</span>；</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>header部分：</p>
+</blockquote>
+<p>   ​	header部分通常包含两个部分：Token类型和采用的加密算法(JWT类型和HS256算法)</p>
+   <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;typ&quot;</span><span class="punctuation">:</span> <span class="string">&quot;JWT&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;alg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span>  </span><br></pre></td></tr></table></figure>
+
+<pre><code>使用Base64编码，header部分就变成了：
+</code></pre>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span><br></pre></td></tr></table></figure>
+
+<p>   ​</p>
+<p>   ​</p>
+<blockquote>
+<p>payload部分：</p>
+</blockquote>
+<p>   ​	payload部分是Token的主要内容，包含了claim,claim有三种类型：<em>reserved（这些claim字段是JWT自带的，可选择使用）</em> , <em>public（</em>根据需要定义自己的字段<em>）</em> 和 <em>private（</em>这些是自定义的字段，可以用来在双方之间交换信息<em>）</em> .	</p>
+<p>   例子：</p>
+<pre><code>      <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;sub&quot;</span><span class="punctuation">:</span><span class="string">&quot;js&quot;</span><span class="punctuation">,</span><span class="comment">//JWT定义的claim字段，意思：主题</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;lizi&quot;</span><span class="punctuation">,</span><span class="comment">//自定义的claim字段</span></span><br><span class="line">  <span class="attr">&quot;exp&quot;</span><span class="punctuation">:</span><span class="string">&quot;1438955445&quot;</span><span class="punctuation">,</span><span class="comment">//JWT定义的claim字段，意思：过期时间</span></span><br><span class="line">  <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span><span class="number">11</span><span class="comment">//自定义的claim字段</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>   ​	</p>
+<blockquote>
+<p>signature部分：</p>
+</blockquote>
+<p>   ​	完成最后一个部分需要使用Base64编码后的header和payload部分以及一个密钥，生成Token步骤：</p>
+<p>   ​		    先使用Base64编码header和payload。</p>
+<p>   ​		    在使用加密算法（HS256算法）加密，在加密时，加入一个密钥。</p>
+<p>   ​		    最后生成了signature部分。</p>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> encodedString = <span class="title function_">base64UrlEncode</span>(header) + <span class="string">&quot;.&quot;</span> + <span class="title function_">base64UrlEncode</span>(payload); </span><br><span class="line"><span class="title class_">HMACSHA256</span>(encodedString, <span class="string">&#x27;secret&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>   ​</p>
+<blockquote>
+<p>最后生成的Token类似如下：	</p>
+</blockquote>
+<p>   ​</p>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.<span class="property">eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ</span>.<span class="property">SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc</span></span><br></pre></td></tr></table></figure>
+
+<p>   ​	</p>
+<p>   ​	</p>
+<p>   ​</p>
+<p>   ​</p>
+<p>   ​</p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

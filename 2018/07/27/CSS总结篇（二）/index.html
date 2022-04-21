@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>CSS总结篇(二) | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2018-07-26T16:13:12.000Z">
+    Jul 27, 2018
+  </time>
+</h3>
+  <h1>CSS总结篇(二)</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2018/07/27/CSS%E6%80%BB%E7%BB%93%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89/#waline" class="post-info-item comment-count waline-comment-count" id="/2018/07/27/CSS%E6%80%BB%E7%BB%93%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2018/07/27/CSS%E6%80%BB%E7%BB%93%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+  
+  <img src="images/css-two.jpg" alt="CSS总结篇(二)">
+  
+  <article>
+    <p>本篇内容包括CSS盒模型，</p>
+<h4 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h4><p>在一个文档中，每个<strong>元素</strong>都被表示为一个<strong>矩形的盒子</strong>。确定这些盒子的尺寸, 属性 — 像它的颜色，背景，边框方面 — 和位置是渲染引擎的目标。</p>
+<span id="more"></span>
+
+<p>在CSS中，使用标准<strong>盒模型</strong>描述这些矩形盒子中的每一个。这个模型描述了元素所占空间的内容。每个盒子有四个边：<strong>外边距边（margin）</strong>, <strong>边框边(border)</strong>, <strong>内填充边(padding)</strong> 与 **内容边(content)**。</p>
+<h5 id="CSS-盒模型简解"><a href="#CSS-盒模型简解" class="headerlink" title="CSS 盒模型简解"></a>CSS 盒模型简解</h5><p>通常CSS盒模型中常见的盒模型有块级元素(<code>block Box</code>)和行内元素(<code>line Box</code>)：</p>
+<p>在正常流中：</p>
+<p>块级元素的水平格式化：有七大属性，元素包含块的宽度通常是父元素的width值，当margin和width属性为auto，宽度会自动去适配。</p>
+<p>块级元素的垂直格式化： 设置margin：auto ；设置宽度值为0，垂直方向会出现外边距合并 （bottom-top合并和top-top合并）</p>
+<p>width&#x2F;height:百分比依赖于父元素的content-box的宽高</p>
+<p>overflow:用于当content中的信息太多，并超出内容区所占的位置时，通过该属性来指定溢出内容的处理方式。</p>
+<p>​	1、visible：溢出的内容不会被修剪，呈现在元素框外。</p>
+<p>​	2、hidden：溢出的内容将隐藏起来，不可见。</p>
+<p>​	3、scroll：溢出的内容会被修剪，但可以通过滚动条查看隐藏的内容。</p>
+<p>​	4、auto：由浏览器决定如何处理溢出部分，如果溢出部分被修剪，则可以通过滚动条查看隐藏的内容。</p>
+<p>​	5、inherit：规定应该从父元素集成overflow属性的值。</p>
+<p>oveflow-x和overflow-y</p>
+<h6 id="视觉格式化模型-visual-formatting-model"><a href="#视觉格式化模型-visual-formatting-model" class="headerlink" title="视觉格式化模型(visual formatting model)"></a>视觉格式化模型(visual formatting model)</h6><blockquote>
+<p>CSS 视觉格式化模型(visual formatting model)是用来处理文档并将它显示在视觉媒体上的机制。</p>
+</blockquote>
+<p>页面(文档树)可以想象成是由一个个的Box组合而成的，而视觉格式化模型(Visual formatting model)是一套规则，将这些框布局成访问者看到的样子。</p>
+<p>视觉格式化模型中，文档树中的每一个元素根据盒模型<code>Box Model</code>产生零个或多个盒。这些盒的布局由以下内容控制：</p>
+<ol>
+<li>盒的尺寸和类型</li>
+<li>定位体系<code>Positioning Scheme</code>（常规流，浮动和绝对定位）</li>
+<li>文档树中元素之间的关系</li>
+<li>外部信息（如：视口大小，图片的固有尺寸等）</li>
+</ol>
+<p>视口(Viewport)</p>
+<ul>
+<li>浏览器的可视区域</li>
+<li>用户通过视口查看网页内容(透过窗户看风景)</li>
+</ul>
+<p>块级元素(Block-level Elements)</p>
+<ul>
+<li>会被格式化成块状的元素</li>
+<li>例如 p div section 等</li>
+<li>将display 设置block list-item table 使元素变为块级</li>
+</ul>
+<p>行级元素(inlime-level Elemnets)</p>
+<ul>
+<li>不会为其内容生成块级元素</li>
+<li>让其内容分布在多行中</li>
+<li>display 设置为 inline inline-block inline-table 是的元素变为行级</li>
+</ul>
+<p>盒子的生成</p>
+<ul>
+<li>每个块级元素生成一个主块级盒(principal block-level box）用来包含子级盒</li>
+<li>每个行级元素生成一个行级盒，行级盒子分布于多行</li>
+<li>同时包含块级和行级的会生成匿名块级盒子</li>
+<li>文字全部被行级盒子包裹会生成匿名行级盒子</li>
+</ul>
+<p>块级盒子中的子盒子的生成</p>
+<ul>
+<li>块级盒子中可以包含多个子块级盒子，也可以包含多个行级盒子</li>
+<li>不在行级元素里面的文字，会生成匿名行级盒比如<code>&lt;p&gt;Some &lt;em&gt; Text&lt;/em&gt;&lt;/p&gt;</code></li>
+<li>块级盒子中不能同时包含块级和行级盒子，遇到这种情况时候，会生成匿名块级盒来包含行级盒。比如<code>&lt;div&gt;&lt;h1&gt;标题&lt;/h1&gt;&lt;span&gt;2016-12-12&lt;/span&gt;&lt;div&gt;</code></li>
+</ul>
+<p>行级盒子内的子盒子的生成</p>
+<ul>
+<li>行级盒子内可以包含行级盒子</li>
+<li>行级盒子包含块级盒子时，会被块级盒子拆成两个行级盒子，这两个盒子有被匿名盒子包含</li>
+</ul>
+<p>display 属性</p>
+<ul>
+<li>block 生成块级盒</li>
+<li>inline 生成行级盒</li>
+<li>inline-block 生成行级盒， 为其内容生成块级盒</li>
+<li>none 在排版时将元素忽略</li>
+</ul>
+<p>visibility</p>
+<ul>
+<li>控制元素展示</li>
+<li>取值 visible | hidden | collapse</li>
+<li>初始值visible</li>
+</ul>
+<p>Generated Content</p>
+<ul>
+<li>控制元素</li>
+<li>::before 和 ::after</li>
+<li>content</li>
+</ul>
+<h5 id="CSS盒模型类别"><a href="#CSS盒模型类别" class="headerlink" title="CSS盒模型类别"></a>CSS盒模型类别</h5><p>大家都知道css盒模型有两种标准，一个标准盒模型，一个是IE盒模型；两种盒模型的宽高的计算方式不一样。</p>
+<p><img src="/images/ie.png" alt="ie"><img src="/images/w3c.png" alt="w3c"></p>
+<p>IE盒模型的宽度或者高度计算方式为：<strong>width&#x2F;height &#x3D; content + padding + border</strong>，W3C盒模型的宽度或者高度计算方式为：<strong>width&#x2F;height &#x3D; content</strong>。</p>
+<p>例：一个容器的 margin 为 10px，border 为 1px，padding 为 10px，content 的宽为 100px、高为 50px，假如用标准 w3c 盒子模型解释，那么这个容器需要占据的位置为：宽<code>10*2+1*2+10*2+100=142px</code>、高 <code>10*2+1*2+10*2+50=92px</code>，盒子的实际大小为：宽<code>1*2+10*2+100=122px</code>、高<code>1*2+10*2+50=72px</code>；假如用ie 盒子模型，那么容器需要占据的位置为：宽<code>10*2+100=120px</code>,高<code>10*2+50=70px</code>,盒子的实际大小为：宽 100px、高 50px。</p>
+<h5 id="CSS3属性-box-sizing"><a href="#CSS3属性-box-sizing" class="headerlink" title="CSS3属性 box-sizing"></a>CSS3属性 box-sizing</h5><p><code>box-sizing </code>默认为 <code>content-box </code>，即采用W3C标准盒模型，若取值 <code>border-box </code>则采用怪异模式盒模型；</p>
+<p>目前使用此属性需要前缀如下:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-webkit-<span class="attribute">box-sizing</span>: content-box;</span><br><span class="line">-moz-<span class="attribute">box-sizing</span>: content-box;</span><br><span class="line"><span class="attribute">box-sizing</span>: content-box|border-box|inherit;</span><br></pre></td></tr></table></figure>
+
+<p>1.盒模型为标准模型（<code>content-box</code>）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.content-box</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid blue;</span><br><span class="line">    <span class="attribute">box-sizing</span>:content-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/w3c-1.png" alt="w3c-1"></p>
+<p><code>.content-box</code>设置为标准模型，它的元素宽度width&#x3D;100px;</p>
+<p>2.盒模型为IE模型（<code>border-box</code>）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.border-box</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid blue;</span><br><span class="line">    <span class="attribute">box-sizing</span>:border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/ie-1.png" alt="ie-1"></p>
+<p><code>.content-box</code>设置为IE模型，它的元素宽度width&#x3D;content + 2 <em>padding + 2</em> border &#x3D; 70px + 2 <em>10px + 2</em> 5px &#x3D; 100px。</p>
+<h5 id="浏览器兼容问题"><a href="#浏览器兼容问题" class="headerlink" title="浏览器兼容问题"></a>浏览器兼容问题</h5><p>一旦为页面设置了恰当的 DTD声明，大多数浏览器都会按照上面的图示来呈现内容。然而 IE 5 和 6 的呈现却是不正确的。根据 W3C 的规范，元素内容占据的空间是由 width 属性设置的，而内容周围的 padding 和 border 值是另外计算的。不幸的是，IE5.X 和 6 在怪异模式中使用自己的非标准模型。这些浏览器的 width 属性不是内容的宽度，而是内容、内边距和边框的宽度的总和。</p>
+<p>**&lt;!DOCTYPE&gt;**后面一般有DTD的声明，如果有DTD的声明，浏览器就是处于标准模式；如果没有DTD声明或者HTML4一下的DTD声明，那浏览器按照自己的方式解析代码，处于怪异模式。</p>
+<p>IE8 及更早IE版本不支持设置填充的宽度和边框的宽度属性。</p>
+<p>解决IE8及更早版本不兼容问题可以在HTML页面声明 <!DOCTYPE html>即可。</p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

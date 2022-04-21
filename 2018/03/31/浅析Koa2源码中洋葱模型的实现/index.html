@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>浅析Koa2源码中洋葱模型的实现 | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2018-03-31T14:35:10.000Z">
+    Mar 31, 2018
+  </time>
+</h3>
+  <h1>浅析Koa2源码中洋葱模型的实现</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2018/03/31/%E6%B5%85%E6%9E%90Koa2%E6%BA%90%E7%A0%81%E4%B8%AD%E6%B4%8B%E8%91%B1%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/#waline" class="post-info-item comment-count waline-comment-count" id="/2018/03/31/%E6%B5%85%E6%9E%90Koa2%E6%BA%90%E7%A0%81%E4%B8%AD%E6%B4%8B%E8%91%B1%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2018/03/31/%E6%B5%85%E6%9E%90Koa2%E6%BA%90%E7%A0%81%E4%B8%AD%E6%B4%8B%E8%91%B1%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa2/" rel="tag">koa2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/" rel="tag">node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li></ul>
+
+  
+  <img src="images/koa.jpg" alt="浅析Koa2源码中洋葱模型的实现">
+  
+  <article>
+    <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>​	最近刷知乎中看到关于koa的问题<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/270066081">koa2框架中的中间件同步还是异步的问题？</a> 由此去探索koa2中间件的源码实现</p>
+<span id="more"></span>
+
+<p>先来看一个koa的demo看看效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Koa</span> = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"></span><br><span class="line"> <span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Koa</span>();</span><br><span class="line"></span><br><span class="line"> app.<span class="title function_">use</span>(<span class="keyword">async</span> (ctx, next)=&gt;&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">     <span class="keyword">await</span> <span class="title function_">next</span>();</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;1-1&#x27;</span>)</span><br><span class="line"> &#125;);</span><br><span class="line"> </span><br><span class="line"> app.<span class="title function_">use</span>(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">     <span class="keyword">await</span> <span class="title function_">next</span>();</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;2-1&quot;</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> app.<span class="title function_">use</span>(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> app.<span class="title function_">listen</span>(<span class="number">3000</span>,<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;3000&quot;</span>)</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看出输出的结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//端口号3000</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">2</span>-<span class="number">1</span> <span class="number">1</span>-<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>我们从结果上看是不是觉得当遇到await next()是，async异步函数就会停止当前程序，进入到下一个中间件，然后当最后一个中间件执行完时，再回到上一个中间件执行程序，一直回滚上去。我想大家会十分好奇为什么会这样，对其中中间件也有很多疑问吧。<code>那注意咯！我们要开车咯</code></p>
+<h4 id="koa的源码解析"><a href="#koa的源码解析" class="headerlink" title="koa的源码解析"></a>koa的源码解析</h4><p>翻看源码可以看到：</p>
+<p>在源码application.js中koa中定义了一个listen()的监听服务器端的回调函数.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">listen</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">    <span class="title function_">debug</span>(<span class="string">&#x27;listen&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> server = http.<span class="title function_">createServer</span>(<span class="variable language_">this</span>.<span class="title function_">callback</span>());</span><br><span class="line">    <span class="keyword">return</span> server.<span class="title function_">listen</span>(...args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从源码中可以看到<code>app.listen</code>使用了<code>this.callback()</code>来生成node的httpServer的回调函数。</p>
+<p>那让我们看看this.callback()函数到底做了什么事？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">callback</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> fn = <span class="title function_">compose</span>(<span class="variable language_">this</span>.<span class="property">middleware</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="title function_">listeners</span>(<span class="string">&#x27;error&#x27;</span>).<span class="property">length</span>) <span class="variable language_">this</span>.<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="variable language_">this</span>.<span class="property">onerror</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">handleRequest</span> = (<span class="params">req, res</span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> ctx = <span class="variable language_">this</span>.<span class="title function_">createContext</span>(req, res);</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">handleRequest</span>(ctx, fn);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> handleRequest;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数里面有一个变量<code>this.middleware</code>，可想而知这个可能是中间件集合;同时函数里面还对请求<code>request</code>和响应<code>response</code>做了封装。这个调用了compose处理了this.middleware。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">middleware</span> = [];<span class="comment">//中间件集合</span></span><br></pre></td></tr></table></figure>
+
+<p>说到中间件数组，那么我们看看是怎么添加中间件的:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">use</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">&#x27;function&#x27;</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;middleware must be a function!&#x27;</span>);</span><br><span class="line">   <span class="keyword">if</span> (<span class="title function_">isGeneratorFunction</span>(fn)) &#123;</span><br><span class="line">     <span class="title function_">deprecate</span>(<span class="string">&#x27;Support for generators will be removed in v3. &#x27;</span> +</span><br><span class="line">               <span class="string">&#x27;See the documentation for examples of how to convert old middleware &#x27;</span> +</span><br><span class="line">               <span class="string">&#x27;https://github.com/koajs/koa/blob/master/docs/migration.md&#x27;</span>);</span><br><span class="line">     fn = <span class="title function_">convert</span>(fn);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="title function_">debug</span>(<span class="string">&#x27;use %s&#x27;</span>, fn.<span class="property">_name</span> || fn.<span class="property">name</span> || <span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">   <span class="variable language_">this</span>.<span class="property">middleware</span>.<span class="title function_">push</span>(fn);</span><br><span class="line">   <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>是定义了一个use函数去添加中间件，<code>this.middleware.push(fn)</code></p>
+<p>添加完中间件之后，那中间件之间的单向跳转又是怎么回事呢？？？compose又是什么？？？跟踪源码在koa-compose模块可以看到compose函数的定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compose</span> (middleware) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(middleware)) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;Middleware stack must be an array!&#x27;</span>)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> fn <span class="keyword">of</span> middleware) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">&#x27;function&#x27;</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&#x27;Middleware must be composed of functions!&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; <span class="variable">context</span></span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> &#123;<span class="type">Promise</span>&#125;</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@api</span> <span class="variable">public</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">context, next</span>) &#123;</span><br><span class="line">    <span class="comment">// last called middleware #</span></span><br><span class="line">    <span class="keyword">let</span> index = -<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">dispatch</span>(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">dispatch</span> (i) &#123;</span><br><span class="line">      <span class="keyword">if</span> (i &lt;= index) <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;next() called multiple times&#x27;</span>))</span><br><span class="line">      index = i</span><br><span class="line">      <span class="keyword">let</span> fn = middleware[i]</span><br><span class="line">      <span class="keyword">if</span> (i === middleware.<span class="property">length</span>) fn = next</span><br><span class="line">      <span class="keyword">if</span> (!fn) <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="title function_">fn</span>(context, <span class="keyword">function</span> <span class="title function_">next</span> () &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="title function_">dispatch</span>(i + <span class="number">1</span>)</span><br><span class="line">        &#125;))</span><br><span class="line">      &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(err)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在compose中用到了递归，最为关键的是dispatch()函数，它遍历了所有中间件middleware，最后不管中间件返回的对象是不是Promise对象，它都将通过Promise.resolve()包装成Promise。然后将context和next函数作为参数传给中间件<code>middleware</code>中的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="title function_">fn</span>(context, <span class="keyword">function</span> <span class="title function_">next</span> () &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="title function_">dispatch</span>(i + <span class="number">1</span>)</span><br><span class="line">  &#125;))</span><br></pre></td></tr></table></figure>
+
+<p>通过这一段代码和递归函数实现了koa中间件的洋葱模型。这段代码它将context一直传递给下一个中间件，将下一个中间件作为next()函数的返回值。</p>
+<p><em>看完了koa中间件的核心，不要马上关掉这个页面，下面会让你更加惊喜。</em>s</p>
+<p>再回到开始，再看看createContext函数和handleRequest函数，前一个是将请求<code>request</code>和响应<code>response</code>做了封装，后一个对一些数据做处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle request in callback.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@api</span> <span class="variable">private</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">handleRequest</span>(<span class="params">ctx, fnMiddleware</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = ctx.<span class="property">res</span>;</span><br><span class="line">    res.<span class="property">statusCode</span> = <span class="number">404</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onerror</span> = err =&gt; ctx.<span class="title function_">onerror</span>(err);</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">handleResponse</span> = (<span class="params"></span>) =&gt; <span class="title function_">respond</span>(ctx);</span><br><span class="line">    <span class="title function_">onFinished</span>(res, onerror);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">fnMiddleware</span>(ctx).<span class="title function_">then</span>(handleResponse).<span class="title function_">catch</span>(onerror);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Initialize a new context.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@api</span> <span class="variable">private</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">createContext</span>(<span class="params">req, res</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>.<span class="property">context</span>);</span><br><span class="line">    <span class="keyword">const</span> request = context.<span class="property">request</span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>.<span class="property">request</span>);</span><br><span class="line">    <span class="keyword">const</span> response = context.<span class="property">response</span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="variable language_">this</span>.<span class="property">response</span>);</span><br><span class="line">    context.<span class="property">app</span> = request.<span class="property">app</span> = response.<span class="property">app</span> = <span class="variable language_">this</span>;</span><br><span class="line">    context.<span class="property">req</span> = request.<span class="property">req</span> = response.<span class="property">req</span> = req;</span><br><span class="line">    context.<span class="property">res</span> = request.<span class="property">res</span> = response.<span class="property">res</span> = res;</span><br><span class="line">    request.<span class="property">ctx</span> = response.<span class="property">ctx</span> = context;</span><br><span class="line">    request.<span class="property">response</span> = response;</span><br><span class="line">    response.<span class="property">request</span> = request;</span><br><span class="line">    context.<span class="property">originalUrl</span> = request.<span class="property">originalUrl</span> = req.<span class="property">url</span>;</span><br><span class="line">    context.<span class="property">cookies</span> = <span class="keyword">new</span> <span class="title class_">Cookies</span>(req, res, &#123;</span><br><span class="line">      <span class="attr">keys</span>: <span class="variable language_">this</span>.<span class="property">keys</span>,</span><br><span class="line">      <span class="attr">secure</span>: request.<span class="property">secure</span></span><br><span class="line">    &#125;);</span><br><span class="line">    request.<span class="property">ip</span> = request.<span class="property">ips</span>[<span class="number">0</span>] || req.<span class="property">socket</span>.<span class="property">remoteAddress</span> || <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    context.<span class="property">accept</span> = request.<span class="property">accept</span> = <span class="title function_">accepts</span>(req);</span><br><span class="line">    context.<span class="property">state</span> = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最后你可以再思虑一下，就会明白其中的原理。不说了，我先下车咯。你们继续！</p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/koajs/koa/">koa源码</a></p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>原生JS总结 | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2019-05-17T06:40:33.000Z">
+    May 17, 2019
+  </time>
+</h3>
+  <h1>原生JS总结</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2019/05/17/%E5%8E%9F%E7%94%9FJS%E6%80%BB%E7%BB%93/#waline" class="post-info-item comment-count waline-comment-count" id="/2019/05/17/%E5%8E%9F%E7%94%9FJS%E6%80%BB%E7%BB%93/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2019/05/17/%E5%8E%9F%E7%94%9FJS%E6%80%BB%E7%BB%93/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+  
+  <article>
+    <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>由于在活动期间，没使用关于js的第三方的库，用原生JS实现活动前端的逻辑，对一些原生函数存在不了解或者忘记的地方进行记录</p>
+<h4 id="原生DOM操作函数和属性"><a href="#原生DOM操作函数和属性" class="headerlink" title="原生DOM操作函数和属性"></a>原生DOM操作函数和属性</h4><h5 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h5><blockquote>
+<p> addEventListener()</p>
+</blockquote>
+<p>addEventListener()将指定的事件监听器注册到目标对象上，当目标对象触发制定的事件时，指定的回调函数就会触发。目标对象可以是 文档上的元素、 document、 window 或者XMLHttpRequest(比如onreadystatechange事件)。</p>
+<p>IE8及以下不支持此方法且只有事件冒泡没有事件捕获。IE9开始支持此方法，也就有了事件捕获。</p>
+<p>该方法需要传递三个参数：<code>第一个参数</code>是事件名，<code>第二个参数</code>是回调函数，<code>第三个参数</code>为true表示捕获，false表示冒泡。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#div&#x27;</span>);</span><br><span class="line">div.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line">&#125;,<span class="literal">true</span>/<span class="literal">false</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> removeEventListener()</p>
+</blockquote>
+<p>这个事件是用来移除已绑定的事件，与addEventListener()绑定事件对应的就是移除已绑定的事件。第三个参数的布尔值代表解绑的是捕获事件还是冒泡事件。两个事件互不相关。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#div&quot;</span>); </span><br><span class="line">div.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, listener, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">listener</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">div.<span class="title function_">removeEventListener</span>(<span class="string">&quot;click&quot;</span>, listener, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<p>注意：只能通过removeEventListener()解绑有名字的函数，对于绑定的匿名函数无法解除绑定。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#div&quot;</span>); </span><br><span class="line">div.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>) <span class="comment">// 注意：这里this指向触发事件的元素自身。</span></span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line">div.<span class="title function_">removeEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;remove hello world&#x27;</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">div.<span class="property">onclick</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 点击div依然打印出hello world</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> attachEvent()、detachEvent()</p>
+</blockquote>
+<p>IE8及以下使用这两个方法绑定和解绑事件，当然，IE9+也支持这个事件。但这个方法绑定的事件默认为冒泡也只有冒泡。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#div&quot;</span>); </span><br><span class="line">div.<span class="title function_">attachEvent</span>(<span class="string">&quot;onclick&quot;</span>,listener);<span class="comment">// 注意事件名需加上on</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">listener</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// 注意：这里this指向window。</span></span><br><span class="line">&#125;</span><br><span class="line">div.<span class="title function_">detachEvent</span>(<span class="string">&quot;onclick&quot;</span>,listener)</span><br></pre></td></tr></table></figure>
+<p><code>同时只能通过detachEvent()解绑有名字的函数，对于绑定的匿名函数无法解除绑定。</code></p>
+<blockquote>
+<p>阻止默认事件和冒泡</p>
+</blockquote>
+<p>标准事件和IE事件中的阻止默认事件和冒泡事件也有很大区别。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#div&quot;</span>); </span><br><span class="line"><span class="keyword">if</span>(div.<span class="property">addEventListener</span>) &#123;</span><br><span class="line">  <span class="comment">// 用于标准事件</span></span><br><span class="line">  div.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件</span></span><br><span class="line">    e.<span class="title function_">stopPropagation</span>(); <span class="comment">// 阻止冒泡</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">innerHTML</span>);</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="comment">// 用于IE事件</span></span><br><span class="line">  div.<span class="title function_">attachEvent</span>(<span class="string">&quot;onclick&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> e = <span class="variable language_">window</span>.<span class="property">event</span>;</span><br><span class="line">    e.<span class="property">returnValue</span> = <span class="literal">false</span>; <span class="comment">// 阻止默认事件</span></span><br><span class="line">    e.<span class="property">cancelBubble</span> = <span class="literal">true</span>; <span class="comment">// 阻止冒泡</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">srcElement</span>.<span class="property">innerHTML</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>IE8</code>及以下的<code>event</code>是绑定在<code>window</code>上的。</p>
+<h5 id="创建元素"><a href="#创建元素" class="headerlink" title="创建元素"></a>创建元素</h5><blockquote>
+<p>创建元素：document.createElement()</p>
+</blockquote>
+<p>使用<code>document.createElement()</code>可以创建新的元素，这个方法接收一个标签名。这个标签名在HTML文档中不区分大小写，在XHTML中区分大小写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>同时可以对元素添加自身的属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">id</span> = <span class="string">&quot;myDiv&quot;</span>;</span><br><span class="line">div.<span class="property">className</span> = <span class="string">&quot;div_bg&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>虽说创建了元素，但是此元素还没添加到文档里面去，我们可以使用<code>appendChild()</code>、<code>insertBefore()</code>等</p>
+<blockquote>
+<p>创建文本元素：document.createTextNode()</p>
+</blockquote>
+<p>使用document.createTextNode()来创建文本节点，这个方法接受一个参数：要插入节点的文本。与设置已有文本节点的值一样，作为参数的文本将按照HTML或XML的格式进行编码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(<span class="string">&#x27;helloWorld&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="DOM节点操作"><a href="#DOM节点操作" class="headerlink" title="DOM节点操作"></a>DOM节点操作</h5><blockquote>
+<p>appendChild()</p>
+</blockquote>
+<p>appendChild()用于向childNodes列表的末尾添加一个节点，并且返回这个新增的节点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> child = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(child);</span><br></pre></td></tr></table></figure>
+<p><code>注意：</code>child 既是参数又是返回值</p>
+<blockquote>
+<p>insetBefore()</p>
+</blockquote>
+<p>insetBefore()可以将插入到指定的位置。该方法有两个参数：一个是将要插入的节点，另一个是作为参照的节点。插入节点后，被插入的节点变成参照节点的前一个同胞节点，同时被方法返回。 如果参照节点是null，则与appendChild()执行相同的操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> insertedNode = parentNode.<span class="title function_">insertBefore</span>(newNode, referenceNode);</span><br><span class="line"><span class="comment">// insertedNode 已经经过插入newNode的新的节点</span></span><br><span class="line"><span class="comment">// parentNode 新插入节点的父节点</span></span><br><span class="line"><span class="comment">// referenceNode 参照节点</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>替换节点： replaceChild()</p>
+</blockquote>
+<p>replaceChild()可以用于节点替换，该方法有两个参数：要插入的节点和被替换的节点，被替换的节点将会在文档中删除掉，同时返回被替换的节点，插入的节点占据被替换节点的原来的位置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oldNode = parentNode.<span class="title function_">replaceChild</span>(newNode, oldNode);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>删除节点：removeChild()</p>
+</blockquote>
+<p>removeChild()可以用于删除节点，该方法只有一个参数：需要删除的节点，从DOM中删除一个子节点，返回删除的节点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> oldChild = node.<span class="title function_">removeChild</span>(child);</span><br><span class="line"><span class="comment">// node 是child的父节点</span></span><br><span class="line"><span class="comment">// oldChild === child</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>克隆节点：cloneNode(true&#x2F;false)</p>
+</blockquote>
+<p>removeChild()用于复制节点，该方法只有一个参数：是否需要深度克隆的状态，返回调用该方法的节点的一个副本.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dupNode = node.<span class="title function_">cloneNode</span>(deep);</span><br><span class="line"><span class="comment">// node 将要被克隆的节点</span></span><br><span class="line"><span class="comment">// deep 是否采用深度克隆,如果为true,则该节点的所有后代节点也都会被克隆,如果为false,则只克隆该节点本身.</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="元素选择操作"><a href="#元素选择操作" class="headerlink" title="元素选择操作"></a>元素选择操作</h5><blockquote>
+<p>querySelector、querySelectorAll(IE8及以上)</p>
+</blockquote>
+<blockquote>
+<p>getElementById()</p>
+</blockquote>
+<p>通过元素的ID来获取元素本身，由于id在html文档中是唯一的。同时该元素返回一个匹配特定ID的元素，id不存在，返回<code>null</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;div&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>getElementsByTagName()</p>
+</blockquote>
+<p>通过元素的标签名来获取元素节点，同时该元素返回含有同一个元素标签名的节点集合（HTMLCollection）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> live = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;p&quot;</span>); <span class="comment">// 返回的元素是一个类数组</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>getElementsByName()</p>
+</blockquote>
+<p>通过所有name属性匹配来获取元素节点，同时该方法返回含有同一个name属性名的元素节点集合（HTMLCollection）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> live = <span class="variable language_">document</span>.<span class="title function_">getElementsByName</span>(<span class="string">&quot;div&quot;</span>); <span class="comment">// 返回的元素是一个类数组</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>getElementsByClassName()</p>
+</blockquote>
+<p>该方法返回一个即时更新的（live） HTMLCollection，包含了所有拥有指定 class 的子元素。当在 document 对象上调用此方法时，会检索整个文档，包括根元素。(IE9以下不支持)</p>
+<p>要匹配多个class，则className用空格分开。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> live = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;class1 class2&quot;</span>); <span class="comment">// 返回的元素是一个类数组</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h5><blockquote>
+<p>setAttribute()</p>
+</blockquote>
+<p>用于在元素上添加一个新的属性，或者改变已存在属性的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">div.<span class="title function_">setAttribute</span>(<span class="string">&quot;class&quot;</span>, <span class="string">&quot;new_class&quot;</span>);</span><br><span class="line">div.<span class="title function_">setAttribute</span>(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;new_id&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>getAttribute()</p>
+</blockquote>
+<p>用于获取元素上的指定属性，该方法只有一个参数，指定的属性名；如果指定的属性不存在，则返回 null 或 “” （空字符串）（IE5+都返回null）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> attr = div.<span class="title function_">getAttribute</span>(<span class="string">&quot;class&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(attr);</span><br></pre></td></tr></table></figure>
+<p><code>注意:</code>IE7下不能正确返回class，返回的是null，其他正常。</p>
+<blockquote>
+<p>removeAttribute()</p>
+</blockquote>
+<p>该方法用于移除元素的属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#div&#x27;</span>);</span><br><span class="line">div.<span class="title function_">removeAttribute</span>(<span class="string">&#x27;class&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>注意:</code>IE7下无法移除 class 属性</p>
+<blockquote>
+<p>hasAttribute()</p>
+</blockquote>
+<p>用于判断该元素是否含有该属性，返回一个boolean值。</p>
+<p><code>注意:</code>IE7不支持该方法。</p>
+<blockquote>
+<p>自定义属性data-*</p>
+</blockquote>
+<p>这个是H5上包含data-*的自定义属性，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#div&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> id = div.<span class="property">dataset</span>.<span class="property">id</span>  <span class="comment">// 获取元素上的data-*的data-id的值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="文章外补充"><a href="#文章外补充" class="headerlink" title="文章外补充"></a>文章外补充</h4><blockquote>
+<p>getComputedStyle()、currentStyle()</p>
+</blockquote>
+<p>当我们想获取元素计算后实际呈现在页面上的各个值，就用这两个方法。IE8及以下用currentStyle(),IE9+及其他标准浏览器用getComputedStyle()。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">getComputedStyle</span>) &#123;</span><br><span class="line">  result = (<span class="variable language_">window</span> || <span class="variable language_">document</span>.<span class="property">defaultView</span>).<span class="title function_">getComputedStyle</span>(div, <span class="literal">null</span>)[<span class="string">&#x27;cssFloat&#x27;</span>];</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  result = div.<span class="property">currentStyle</span>[<span class="string">&quot;styleFloat&quot;</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>getBoundingClientRect()、getClientRects()</p>
+</blockquote>
+<p>getBoundingClientRect()该方法获得页面中某个元素的上、右、下、左分别相对浏览器视窗的位置。getBoundingClientRect是DOM元素到浏览器可视范围的距离（到浏览器顶部而不是文档顶部）。该函数返回一个Object对象，该对象有6个属性：top,lef,right,bottom,width,height；这里的top、left和css中的理解很相似，width、height是元素自身的宽高，但是right，bottom和css中的理解有点不一样。right是指元素右边界距窗口最左边的距离，bottom是指元素下边界距窗口最上面的距离。</p>
+<p>getClientRects()是返回一个ClientRectList集合。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div1 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;div1&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> rect1 = div1.<span class="title function_">getClientRects</span>();</span><br><span class="line"><span class="keyword">var</span> rect2 = div1.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rect1[<span class="number">0</span>].<span class="property">top</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rect2.<span class="property">top</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>CSS总结篇(一) | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2018-07-15T03:59:54.000Z">
+    Jul 15, 2018
+  </time>
+</h3>
+  <h1>CSS总结篇(一)</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2018/07/15/CSS%E6%80%BB%E7%BB%93%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89/#waline" class="post-info-item comment-count waline-comment-count" id="/2018/07/15/CSS%E6%80%BB%E7%BB%93%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2018/07/15/CSS%E6%80%BB%E7%BB%93%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+  
+  <img src="images/css-one.jpg" alt="CSS总结篇(一)">
+  
+  <article>
+    <p>本篇主要总结<code>CSS</code>的优先级，权重计算策略及层叠</p>
+<p>CSS三大特性：</p>
+<ul>
+<li>继承：即子类元素继承父类元素</li>
+<li>优先级：是指不同类别样式的权重比较</li>
+<li>层叠：是指当css样式的权重值相同时，后者覆盖前者的样式</li>
+</ul>
+<p><code>css</code>规则由选择器（html标签元素）和声明块（一组属性集合）组成，写在选择器后面大括号里的就叫声明。</p>
+<span id="more"></span>
+
+<h4 id="CSS优先级："><a href="#CSS优先级：" class="headerlink" title="CSS优先级："></a>CSS优先级：</h4><p>优先级就是分配给指定的CSS声明的一个权重，它由 匹配的选择器中的 每一种选择器类型的 数值 决定。</p>
+<p>对于html元素应用到两个或者多个<code>css</code>声明，css有一套优先级的规则，根据CSS优先级的规则，选择一个符合CSS规则的CSS样式。</p>
+<p>CSS选择器优先级（级别是逐级递增）：</p>
+<ol>
+<li>浏览器自定义或继承</li>
+<li>通配符选择器</li>
+<li>标签选择器</li>
+<li>类选择器</li>
+<li>id选择器</li>
+<li>内联样式</li>
+<li>在某一元素的css属性后面使用 !important 会覆盖页面内任何位置定义的元素样式。</li>
+</ol>
+<p><strong>排序规则：</strong> !important &gt; 内联样式 &gt; id选择器 &gt; 类选择器（属性选择器，伪类） &gt; 标签选择器（伪元素） &gt; 通配符选择器 &gt; 继承 &gt; 浏览器默认的属性</p>
+<h5 id="CSS优先级计算规则："><a href="#CSS优先级计算规则：" class="headerlink" title="CSS优先级计算规则："></a>CSS优先级计算规则：</h5><ol>
+<li><p>计算CSS样式权值规则：</p>
+<p>内联样式的权值最高为1000；id选择器的权值为100；类选择器的权值为10；html标签选择器的权值为1。</p>
+</li>
+<li><p>由CSS选择器的次数来决定CSS样式层叠：</p>
+<p>每个CSS规则初始化对应一个“四位数”:  0 、0、0、0；</p>
+<p>若是内联样式，则加1、0、0、0；</p>
+<p>若是 ID选择符，则加0、1、0、0</p>
+<p>若是 类选择符&#x2F;属性选择符&#x2F;伪类选择符，则分别加0、0、1、0</p>
+<p>若是 元素选择符&#x2F;伪元素选择符，则分别加0、0、0、1</p>
+<p>算法：将每条规则中，选择符对应的数相加后得到的”四位数“，从左到右进行比较，大的优先级越高。</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--css样式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-id">#parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:<span class="number">#888</span>;<span class="comment">/* 权值100  */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:red;<span class="comment">/* 权值10 */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-tag">div</span><span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:<span class="number">#999</span>;<span class="comment">/* 权值11 */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:<span class="number">#333</span>;<span class="comment">/* 权值10 */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:blue;<span class="comment">/* 权值11 */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:gold;<span class="comment">/* 权值20 */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-id">#parent</span> <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:green;<span class="comment">/* 权值110 */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--主体元素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;parent&quot;</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    CSS层级</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span></span><br><span class="line">        CSS层级1</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="CSS层叠："><a href="#CSS层叠：" class="headerlink" title="CSS层叠："></a>CSS层叠：</h4><p><strong>多重样式（<code>Multiple Styles</code>）</strong></p>
+<p>如果外部样式、内部样式和内联样式同时应用于同一个元素，就是使多重样式的情况。</p>
+<p>一般情况下，优先级为：（外部样式）<code>External style sheet</code> **&lt;**（内部样式）<code>Internal style sheet</code> **&lt;**（内联样式）<code>Inline style</code></p>
+<p>有个例外的情况，就是如果<strong>外部样式</strong>放在<strong>内部样式</strong>的<strong>后面</strong>，则外部样式将覆盖内部样式。</p>
+<p>外部样式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style.css&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>内部样式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-id">#parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:<span class="number">#888</span>;<span class="comment">/* 权值100  */</span></span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>内联样式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;parent&quot;</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>同一个元素应用到多个样式</strong></p>
+<p>css先判断规则是否含有！important，有则优先级是最高的；当没有，就比较规则的权值，根据CSS优先级的计算规则决定哪个规则起作用；当权值也一样的时候，css规则会按顺序排序，后声明的规则优先级高。</p>
+<h5 id="Css计算规则策略："><a href="#Css计算规则策略：" class="headerlink" title="Css计算规则策略："></a>Css计算规则策略：</h5><h6 id="指定值（specified-value）："><a href="#指定值（specified-value）：" class="headerlink" title="指定值（specified value）："></a>指定值（specified value）：</h6><p>通过下面3种途径取得：</p>
+<ol>
+<li>如果给这个属性赋值了，会被优先使用。</li>
+<li>如果没有给这个属性赋值，那么就会从父元素那继承一个值。</li>
+<li>如果上面的两种途径都不可行，则把CSS规范中针对这个元素的这个属性的初始值作为指定值。</li>
+</ol>
+<h6 id="计算值（computed-value）："><a href="#计算值（computed-value）：" class="headerlink" title="计算值（computed value）："></a>计算值（computed value）：</h6><p>该值是以指定值根据规范定义的行为进行计算，通常将相对值计算为绝对值，例如em根据font-size进行计算。主要是作用于继承，用于计算特殊的值 <code>inherit</code>和 <code>initial</code>。</p>
+<h6 id="应用值（used-value）："><a href="#应用值（used-value）：" class="headerlink" title="应用值（used value）："></a>应用值（used value）：</h6><p>CSS 属性的应用值（used value）是完成所有计算后最终使用的值，可以由 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/DOM/window.getComputedStyle">window.getComputedStyle</a> 获取。</p>
+<p>计算出CSS属性的最终值有三个步骤。首先，指定值（specified value） 取自样式层叠 (选取样式表里权重最高的规则), 继承(如果属性可以继承则取父元素的值)，或者默认值。然后，按规范算出计算值（computed value）(例如， <code>span</code> 指定 <code>position: absolute</code> 后<code>display</code> 变为 <code>block</code>)。最后，计算布局(尺寸比如 <code>auto</code> 或 百分数 换算为像素值 )， 结果即 <strong>应用值used value</strong>。这些步骤是在内部完成的，脚本只能使用window.getComputedStyle 获得最终的应用值。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">MDN CSS层叠样式</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangmeijian/p/4207433.html">CSS优先级计算规则</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/suspiderweb/p/5277540.html">主流浏览器css兼容问题的总结</a></p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>

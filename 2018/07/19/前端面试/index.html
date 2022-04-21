@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>前端面试 | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a href="">
+      <img src="/images/links/" alt="">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2018-07-19T02:30:43.000Z">
+    Jul 19, 2018
+  </time>
+</h3>
+  <h1>前端面试</h1>
+  <p class="post-info">
+  
+  
+  <a href="/2018/07/19/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/#waline" class="post-info-item comment-count waline-comment-count" id="/2018/07/19/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">获取中...</a>
+  <span class="post-info-item view-count waline-visitor-count" id="/2018/07/19/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">获取中...</span>
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+  
+  <img src="images/book.jpg" alt="前端面试">
+  
+  <article>
+    <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>以下是整理一些面试中经常会遇到的经典面试题以及自己面试过程中有一些未解决的问题，通过对知识的整理以及经验的总结，重新巩固自身的前端基础知识（有些还没补全，会补全的）。</p>
+<span id="more"></span>
+
+<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><blockquote>
+<p>   position属性值</p>
+</blockquote>
+<ul>
+<li>static，默认值，没有定位，元素出现在正常的流中</li>
+<li>relative，相对定位，相对于其在正常流中的位置进行定位,不会脱离文档流</li>
+<li>absolute，绝对定位，相对于最近的一级 定位不是 static 的父元素来进行定位，会脱离文档流。</li>
+<li>fixed，生成绝对定位的元素，相对于浏览器窗口进行定位。（老IE不支持）</li>
+</ul>
+<blockquote>
+<p>   清除浮动的方法和清除浮动理由</p>
+</blockquote>
+<p>1.由于使用了浮动，导致在页面排版上面出现了问题：</p>
+<ul>
+<li>会导致父元素高度塌陷为零</li>
+<li>浮动元素甚至影响到了其父元素的兄弟元素排版</li>
+</ul>
+<p>2.清除浮动的方法</p>
+<ul>
+<li><p>空标签清除浮动：</p>
+<p>​	是在所有浮动标签后面添加一个空标签 定义css clear:both. 弊端就是增加了无意义标签空标签必须是一个块级元素</p>
+</li>
+<li><p>利用overflow：auto清除浮动</p>
+<p>​	设置overflow为hidden或者auto，给包含浮动元素的父标签添加css属性 overflow:auto; zoom:1; zoom:1用于兼容IE6。</p>
+</li>
+<li><p>利用伪类：after清除浮动</p>
+<p>​	该方法只适用于非IE浏览器。该方法中必须为需要清除浮动元素的伪对象中设置 height:0，否则该元素会比实际高出若干像素。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>   position:absolute和float的区别</p>
+</blockquote>
+<ul>
+<li>共同点：对内联元素设置<code>float</code>和<code>absolute</code>属性，可以让元素脱离文档流，并且可以设置其宽高。</li>
+<li>不同点：float仍会占据位置，position会覆盖文档流中的其他元素。</li>
+</ul>
+<blockquote>
+<p>   z-index属性</p>
+</blockquote>
+<p>​	z-index只能在position属性值为relative或absolute或fixed的元素上有效</p>
+<p>​	原理说明：z-index的值可以控制定位元素在垂直于显示屏幕方向（z轴）上的堆叠顺序(stack order),值大的元素发生重叠时会在值小的元素上面。</p>
+<blockquote>
+<p>   CSS 盒子模型</p>
+</blockquote>
+<ul>
+<li><p>标准盒模型</p>
+<p>​	元素的宽度&#x2F;高度由border + padding + content的宽度&#x2F;高度决定，设置元素的width&#x2F;height属性指的是content部分的宽&#x2F;高，盒子的宽高为border + padding + content(宽高)+margin</p>
+</li>
+<li><p>IE盒模型</p>
+<p>​	设置width&#x2F;height属性指的是border + padding + content，盒子的宽高为width&#x2F;height+margin</p>
+</li>
+</ul>
+<blockquote>
+<p>   三栏布局</p>
+</blockquote>
+<ul>
+<li><p>float+margin：</p>
+<p>​	<strong>原理说明</strong>：设置两个侧栏分别向左向右浮动，中间列通过外边距给两个侧栏腾出空间，中间列的宽度根据浏览器窗口自适应。</p>
+</li>
+<li><p>position+margin：</p>
+<p>​	<strong>原理说明</strong>：通过绝对定位将两个侧栏固定，同样通过外边距给两个侧栏腾出空间，中间列自适应。</p>
+</li>
+<li><p>双飞翼布局(float + 负margin + margin)：</p>
+<p>​	<strong>原理说明</strong>：对三者设置左浮动，再设置负边距，左侧设置负左边距为100%，右侧设置负左边距为负的自身宽度；再对中间面板进行外边距设置，留出对应的空间给左右面板</p>
+</li>
+<li><p>圣杯布局(float + 负margin + padding + position)：</p>
+<p>​	<strong>原理说明</strong>：三者都设置向左浮动。设置主面板宽度为100%，设置两侧栏的宽度。设置 负边距，左侧设置负左边距为100%，右侧栏设置负左边距为负的自身宽度。设置主面板的padding值给左右两个子面板留出空间。设置两个子面板为相对定位，左侧栏的left值为负的左侧栏宽度，右侧栏的right值为负的右侧栏宽度。</p>
+<p>​</p>
+</li>
+</ul>
+<p>	</p>
+<blockquote>
+<p>   垂直水平居中的方法</p>
+</blockquote>
+<ul>
+<li>绝对定位+margin反向偏移</li>
+<li>绝对定位+margin：auto</li>
+<li>绝对定位+transform反向偏移</li>
+<li>flex垂直水平居中</li>
+</ul>
+<blockquote>
+<p>   display:none和visibility:hidden的区别</p>
+</blockquote>
+<p>display:none 隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，就当他从来不存在。</p>
+<p>visibility:hidden 隐藏对应的元素，但是在文档布局中仍保留原来的空间。</p>
+<blockquote>
+<p>   display属性：block、inline-block和inline的区别</p>
+</blockquote>
+<ul>
+<li>block：形成会级元素，而且前后都有换行符，可以定义元素宽高</li>
+<li>inline：形成内联元素，不换行，内联元素的宽度高度由元素内部的结构撑开。定义元素宽高不生效。</li>
+<li>inline-block：将对象呈递为内联对象，但是对象的内容作为块对象呈递，可以定义宽高。</li>
+</ul>
+<blockquote>
+<p>   link 和 @import 的区别</p>
+</blockquote>
+<ol>
+<li>link 是 XHTML 标签，除了加载 CSS 外，还可以定义 RSS 等其他事务； @import 属于 CSS 范畴，只能加载 CSS</li>
+<li>link 引用 CSS 时，在页面载入时同时加载； @import 需要页面网页完全载入以后加载</li>
+<li>link 是 XHTML 标签，无兼容问题； @import 是在 CSS2.1 提出的，低版本的浏览器不支持link 支持使用</li>
+<li>Javascript 控制 DOM 去改变样式；而 @import 不支持</li>
+</ol>
+<blockquote>
+<p>   媒体查询</p>
+</blockquote>
+<blockquote>
+<p>   解释浏览器是如何判断元素是否匹配某个CSS选择器</p>
+</blockquote>
+<h4 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h4><blockquote>
+<p>   闭包</p>
+</blockquote>
+<p>在JavaScript中，函数中的变量的作用域属于函数作用域，当函数执行完毕，作用域会自动清理而且内存也会被回收。但是闭包是建立在函数内部的一个子函数，由于子函数保持对上级函数的访问，即使当函数执行完毕，作用域也不会随之销毁，这个子函数就是闭包。</p>
+<blockquote>
+<p>null和undefined的区别</p>
+</blockquote>
+<p>1.null表示为“无”的对象，转为数字为0;undefined是一个表示”无”的原始值，转为数值时为NaN。</p>
+<p>2.undefined表示该变量声明了，但是没有定义；</p>
+<p>3.表示”没有对象”，即该处不应该有值。</p>
+<p>4.用typeof类型判断时，null是object，undefined是undefined；表示”没有对象”，转化为布尔类型时，都是false</p>
+<p>5.null是一个关键字，而undefined不是一个关键字</p>
+<blockquote>
+<p> typeof null 为什么等于object？</p>
+</blockquote>
+<p>之前只知道typeof null &#x3D; object,但是却从来不知道是为什么。最新查阅资料的时候，看到了这个原理，记录下来，方便自己以后查看。</p>
+<p>原理是这样的，不同的对象在底层都表示为二进制，在 JavaScript 中二进制前三位都为 0 的话会被判断为 object 类型， null 的二进制表示是全 0，自然前三位也是 0，所以执行 typeof 时会返回“ object ”。</p>
+<p>这个bug是第一版Javascript留下来的。是一个历史遗留的问题，在这个版本，数值是以32字节存储的，由标志位（1~3个字节）和数值组成。标志位存储的是低位的数据。这里有五种标志位：<br>000：对象，数据是对象的应用。<br>1：整型，数据是31位带符号整数。<br>010：双精度类型，数据是双精度数字。<br>100：字符串，数据是字符串。<br>110：布尔类型，数据是布尔值。<br>最低位有一位，那么标志位只有一个1字节长度；或者是零位，标志位有3个字节长度，多出两个了字节，一共多出四种类型。</p>
+<blockquote>
+<p>   有哪些值转化成布尔型后为false？</p>
+</blockquote>
+<p>0、-0、undefined、null、空字符串、NaN</p>
+<blockquote>
+<p> 显式和隐式强制类型转换</p>
+</blockquote>
+<blockquote>
+<p> 置换元素&#x3D;&gt;bfc																																			</p>
+</blockquote>
+<blockquote>
+<p>   判断数据类型的方法</p>
+</blockquote>
+<ul>
+<li>typeof（一般用于判断基本数据类型的类型）</li>
+<li>instanceof（一般用于判断实例化的对象的类型）</li>
+<li>Object.prototype.toString.call()</li>
+</ul>
+<blockquote>
+<p>   jQuery的链式调用原理</p>
+</blockquote>
+<p>通过调用jQuery的api调用返回对象本身</p>
+<blockquote>
+<p>   $.ajax([setting])的参数详解</p>
+</blockquote>
+<p>url，dataType(预期服务器返回的数据类型)，cache,async(是否异步还是同步)，type(请求方式：get or post)，timeout(请求超时时间),回调函数(success,error),</p>
+<blockquote>
+<p>   数组和对象遍历</p>
+</blockquote>
+<ul>
+<li><p>数组遍历	</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.普通的for循环迭代遍历</span></span><br><span class="line"><span class="comment">//2.for...of遍历</span></span><br><span class="line"><span class="comment">//3.forEach,map,filter，reduce遍历</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象遍历</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Object.keys(Object) =&gt;该方法返回一个对象 o 自身包含（不包括原型中）的所有属性的名称的数组。</span></span><br><span class="line"><span class="comment">//for(item in Object) =&gt;该方法返回一个数组，它包含了对象 o 所有拥有的属性（无论是否可枚举）的名称。</span></span><br><span class="line"><span class="comment">//object.getOwnPropertyNames(o)=&gt;该方法返回一个数组，它包含了对象 o 所有拥有的属性（无论是否可枚举）的名称</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<blockquote>
+<p>   Ajax</p>
+</blockquote>
+<p>原理说明：</p>
+<ul>
+<li>新建XMLHttpRequest对象；var xhr &#x3D; new  XMLHttpRequest()；</li>
+<li>同时调用xhr.open()函数创建一个请求，xhr.send()函数发送请求，设置一个回调函数xhr.onreadystatechange &#x3D; callback，当xhr.readyState &#x3D;&#x3D;&#x3D; 4时，xhr.responseText就是完整的接收到的数据。</li>
+</ul>
+<blockquote>
+<p>   绑定事件的方法</p>
+</blockquote>
+<ul>
+<li>嵌入dom</li>
+<li>直接绑定（例如：onclick事件）</li>
+<li>事件监听：addEventListener</li>
+</ul>
+<blockquote>
+<p>   跨域问题</p>
+</blockquote>
+<p>跨域就是浏览器的同源策略（域名，协议，端口均相同）造成的，是浏览器施加的安全限制。</p>
+<ul>
+<li><p>jsonp的跨域</p>
+<p>原理：利用<code>script</code>标签可以跨域请求资源的性质，向网页中动态插入<code>script</code>标签，来向服务端请求数据。服务端会解析请求的<code>url</code>,至少拿到一个回调函数(比如<code>callback=myCallback</code>)参数,之后将数据放入其中返回给客户端。</p>
+</li>
+<li><p>Cors(跨域资源共享)</p>
+</li>
+<li><p>代理服务器转发</p>
+</li>
+<li><p>websocket</p>
+</li>
+</ul>
+<blockquote>
+<p>   this</p>
+</blockquote>
+<p>this是JavaScript的一个关键字，this是函数运行时内部创建的一个内部对象，只能在函数内部使用。this总是会指向一个对象，随着函数使用场合的不同，this的值会发生变化。this是指向调用函数那个对象。</p>
+<p><strong>this指向：</strong></p>
+<p>1、作为普通函数调用（this指向全局对象window对象）<br>2、作为对象的方法调用（this指向该对象）<br>3、构造器调用（this指向用new返回的这个对象）<br>4、call、apply、bind的调用（this指向第一个参数对象）</p>
+<blockquote>
+<p>   new 操作符 做了什么事</p>
+</blockquote>
+<p>1、 创建一个新对象；<br>2、 将构造函数的作用域赋给新对象（因此 this 就指向了这个新对象）；<br>3、 执行构造函数中的代码（为这个新对象添加属性）；<br>4、 返回新对象。 </p>
+<blockquote>
+<p>   ES6</p>
+</blockquote>
+<p>es6是一个新的标准，它包含了许多新的语言特性和库，是JS最实质性的一次升级。比如’箭头函数’、’字符串模板’、’generators(生成器)’、’async&#x2F;await’、’解构赋值’、’class’等等，还有就是引入module模块的概念。</p>
+<blockquote>
+<p>   箭头函数的特性</p>
+</blockquote>
+<p>可以让this指向固定化，这种特性很有利于封装回调函数<br>（1）函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。<br>（2）不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。<br>（3）不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用Rest参数代替。<br>（4）不可以使用yield命令，因此箭头函数不能用作Generator函数。</p>
+<blockquote>
+<p>   说说你对Promise的理解</p>
+</blockquote>
+<p>所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。</p>
+<p>Promise对象有以下两个特点:</p>
+<ul>
+<li>对象的状态不受外界影响，Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称 Fulfilled）和Rejected（已失败）</li>
+<li>一旦状态改变，就不会再变，任何时候都可以得到这个结果。</li>
+</ul>
+<h4 id="计算机网路"><a href="#计算机网路" class="headerlink" title="计算机网路"></a>计算机网路</h4><blockquote>
+<p>   说一下页面加载过程，就是输入url到加载出页面</p>
+</blockquote>
+<p>​	1、输入地址</p>
+<p>​	2、浏览器根据请求的url进行DNS域名解析，查找到真实的IP地址，再向服务器发送请求（TCP三次握手）；</p>
+<p>​	3、服务器接收到请求交给后台处理再返回数据，客户端接收文件（HTML、JS、CSS、图象等）；</p>
+<p>​	4、浏览器对加载的资源文件进行语法解析，建立相应的内部数据结构（如HTML的DOM）；</p>
+<p>​	5、载入解析到的资源文件，渲染页面，完成。</p>
+<blockquote>
+<p>   TCP&#x2F;IP连接过程</p>
+</blockquote>
+<p>三次握手</p>
+<p>​	1.客户端先发送一个带SYN的数据包给服务器，想要连接。</p>
+<p>​	2.服务器端发送一个带SYN和ACK的数据包给客户端，表示接受了你的请求，同意连接</p>
+<p>​	3.客户端发送一个带ACK标志的数据包给服务端，表示收到并且连接</p>
+<p>四次挥手</p>
+<p>​	1.客户端发送一个请求给服务端，表示我要断开连接（客户端到服务端）。</p>
+<p>​	2.服务端回复一个请求给客户端，表示我收到了。</p>
+<p>​	3.服务端回复给客户端，表示我要断开连接咯（服务端到客户端）。</p>
+<p>​	4.客户端收到回复，断开连接并且发送反馈信息（嗯，可以断开）给服务器，服务器收到并且断开连接</p>
+<blockquote>
+<p>   HTTP状态码</p>
+</blockquote>
+<p>关于HTTP状态码应该有下面的基本认识：</p>
+<ul>
+<li>1xx ：1开头的状态码表示临时的响应</li>
+<li>2xx ：请求成功</li>
+<li>3xx ：请求被重定向</li>
+<li>4xx ：请求错误，表明客户端发送的请求有问题</li>
+<li>5xx ：服务器错误，表明服务端在处理请求时发生了错误</li>
+</ul>
+<p>再说几个常用的http状态码:</p>
+<ul>
+<li>301 ： Moved Permanently 客户端请求的文档在其他地方，新的URL在location头中给出</li>
+<li>304 ： Not Modified 客户端发出了一个条件性的请求已被允许（一般是提供If-Modified-Since头表示客户端只想到指定日期后再更新文档）而文档的内容（自上次访问以来或者根据请求的条件）并没有改变。服务器告诉客户，原来缓存的文档还可以继续使用。</li>
+<li>400 ： Bad Request 请求出现语法错误</li>
+<li>401 ： Unauthorized 访问被拒绝，客户端试图胃镜授权访问受密码保护的页面</li>
+<li>403 ： Forbidden 资源不可用。服务器理解客户的请求，但拒绝处理它。通常由于服务器文件或目录的权限设置导致。</li>
+<li>404 ： Not Found 无法找到指定位置的资源。</li>
+<li>405 ： Method Not Allowed 请求方法（GET、POST、PUT等）对指定的资源不适用，用来访问本资源的HTTP方法不被允许。</li>
+<li>500 ： Internal Server Error 服务器遇到了意料之外的情况，不能完成客户端的请求。</li>
+<li>502 ： Bad Gateway 服务器作为网管或者代理时收到了无效的响应。</li>
+<li>503 ： Service Unavailable 服务不可用，服务器由于维护或者负载过中未能应答。</li>
+<li>504 ： Gateway Timeout 网关超时， 作为代理或网关的服务器不能及时的应答。</li>
+</ul>
+<blockquote>
+<p>   get和post方法的区别</p>
+</blockquote>
+<p>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，一般在1024字节，Get是通过地址栏来传值。</p>
+<p>POST：一般用于修改服务器上的资源，对所发送的信息没有限制。（常用于发送表单数据，新建、修改等），Post是通过提交表单来传值。</p>
+<blockquote>
+<p> 进程和线程的区别</p>
+</blockquote>
+<blockquote>
+<p>   cookie,localStorage和SessionStorage的区别</p>
+</blockquote>
+<p>存储时效来说：</p>
+<ul>
+<li>cookie可以手动设置失效期，默认为会话级</li>
+<li>sessionStorage的存储时长是会话级</li>
+<li>localStorage的存储时长是永久，除非用户手动利用浏览器的工具删除</li>
+</ul>
+<p>访问的局限性：</p>
+<ul>
+<li>cookie可以设置路径path，所有他要比另外两个多了一层访问限制</li>
+<li>localStorage和sessionStorage的访问限制是文档源级别，即协议、主机名和端口</li>
+<li>还要注意的是，cookie可以通过设置domain属性值，可以不同二级域名下共享cookie，而Storage不可以，比如<a href="https://link.zhihu.com/?target=http://image.baidu.com">http://image.baidu.com</a>的cookie <a href="https://link.zhihu.com/?target=http://map.baidu.com">http://map.baidu.com</a>是可以访问的，前提是Cookie的domain设置为”.<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a>“，而Storage是不可以的（这个很容易实验，就不细说了）</li>
+</ul>
+<p>存储大小限制：</p>
+<ul>
+<li>cookie适合存储少量数据，他的大小限制是个数进行限制，每个浏览器的限制数量不同</li>
+<li>Storage的可以存储数据的量较大，此外他是通过占用空间大小来做限制的，每个浏览器的实现也是不同的，大家可以看这篇文章来进一进步了解<a href="https://link.zhihu.com/?target=http://dev-test.nemikor.com/web-storage/support-test/">Web Storage Support Test</a></li>
+</ul>
+<p>操作方法：</p>
+<ul>
+<li>cookie是作为document的属性存在，并没有提供标准的方法来直接操作cookie</li>
+<li>Storage提供了setItem()和getItem()还有removeItem()方法，操作方便不易出错</li>
+</ul>
+<blockquote>
+<p>   websocket</p>
+</blockquote>
+<p>webSocket和http一样，同属于应用层协议。它最重要的用途是实现了客户端与服务端之间的全双工通信，当服务端数据变化时，可以第一时间通知到客户端。</p>
+<p>除此之外，它与http协议不同的地方还有：</p>
+<ul>
+<li>http只能由客户端发起，而webSocket是双向的。</li>
+<li>webSocket传输的数据包相对于http而言很小，很适合移动端使用</li>
+<li>没有同源限制，可以跨域共享资源</li>
+</ul>
+<blockquote>
+<p>   <strong>前端性能优化</strong></p>
+</blockquote>
+<ul>
+<li><p>网页内容</p>
+<ul>
+<li>减少 http请求次数</li>
+<li>减少 DNS查询次数</li>
+<li>避免页面跳转</li>
+<li>缓存 Ajax</li>
+<li>延迟加载</li>
+<li>提前加载</li>
+<li>减少 DOM元素数量</li>
+<li>避免 404</li>
+</ul>
+</li>
+<li><p>服务器</p>
+<ul>
+<li>使用CDN(内容分发网络)</li>
+<li>添加Expires或Cache-Control报文头</li>
+<li>Gzip压缩传输文件</li>
+</ul>
+</li>
+<li><p>CSS</p>
+<ul>
+<li>将样式表置顶</li>
+<li>JavaScript</li>
+</ul>
+</li>
+<li><p>把脚本置于页面底部</p>
+</li>
+<li><p>使用外部JavaScript和CSS</p>
+</li>
+<li><p>精简JavaScript和CSS</p>
+</li>
+<li><p>去除重复脚本</p>
+</li>
+<li><p>减少DOM访问</p>
+</li>
+<li><p>图片</p>
+<ul>
+<li>优化图像</li>
+<li>优化CSS Spirite</li>
+<li>不要在HTML中缩放图片</li>
+<li>favicon.ico要小而且可缓存</li>
+<li>降低图片大小</li>
+<li>采用适当的图片宽度尺寸（响应式图片）</li>
+<li>采用雪碧图（CSS Spirite）</li>
+<li>采用字体图库代替图标（比如iconfont）</li>
+<li>图片素材太多，可以使用图片懒加载</li>
+<li>图片转化成base64位</li>
+</ul>
+</li>
+</ul>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><blockquote>
+<p>   <strong>数组去重</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//es5</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">uinque</span>(<span class="params">arr</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;,newArr = [];</span><br><span class="line">    arr.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!obj[item])&#123;</span><br><span class="line">            obj[item] = <span class="literal">true</span>;</span><br><span class="line">            newArr.<span class="title function_">push</span>(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> newArr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//es6 </span></span><br><span class="line">[...<span class="keyword">new</span> <span class="title class_">Set</span>(arr)]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>   <strong>获取[n,m]的随机数</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getRandom</span>(<span class="params">min,max</span>)&#123;</span><br><span class="line">    <span class="comment">//parseInt(Math.random()*(max-min+1)+min,10)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*(max-min+<span class="number">1</span>)+min);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Math.random()是返回一个[0,1)之间的数字，返回的整数只有一个为0</span></span><br><span class="line"><span class="comment">//Math.floor()对数进行向下取整</span></span><br><span class="line"><span class="comment">//Math.round()对数进行四舍五入</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h4 id="框架类"><a href="#框架类" class="headerlink" title="框架类"></a>框架类</h4><blockquote>
+<p>   vue</p>
+</blockquote>
+<ul>
+<li><p><strong>vue的特性</strong></p>
+<p>​</p>
+</li>
+<li><p><strong>vue的函数</strong></p>
+<p>​</p>
+</li>
+<li><p><strong>vue的生命周期</strong></p>
+<p>总共分为8个阶段创建前&#x2F;后，载入前&#x2F;后，更新前&#x2F;后，销毁前&#x2F;后。</p>
+<p>创建前&#x2F;后： 在beforeCreated阶段，vue实例的挂载元素$el和数据对象data都为undefined，还未初始化。在created阶段，vue实例的数据对象data有了，$el还没有。</p>
+<p>载入前&#x2F;后：在beforeMount阶段，vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，data.message还未替换。在mounted阶段，vue实例挂载完成，data.message成功渲染。</p>
+<p>更新前&#x2F;后：当data变化时，会触发beforeUpdate和updated方法。</p>
+<p>销毁前&#x2F;后：在执行destroy方法后，对data的改变不会再触发周期函数，说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在</p>
+</li>
+<li><p><strong>vue的数据双向绑定的原理</strong></p>
+<p>vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。</p>
+<p>具体步骤：</p>
+<p>第一步：需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上 setter和getter这样的话，给这个对象的某个值赋值，就会触发setter，那么就能监听到了数据变化</p>
+<p>第二步：compile解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图</p>
+<p>第三步：Watcher订阅者是Observer和Compile之间通信的桥梁，主要做的事情是:</p>
+<p>1、在自身实例化时往属性订阅器(dep)里面添加自己</p>
+<p>2、自身必须有一个update()方法</p>
+<p>3、待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调，则功成身退。</p>
+<p>第四步：MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 -&gt; 视图更新；视图交互变化(input) -&gt; 数据model变更的双向绑定效果。</p>
+</li>
+</ul>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+<div id="waline"></div>
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <p id="busuanzi_container_site_pv">
+    本站访问量 <span id="busuanzi_value_site_pv">获取中...</span>
+  </p>
+  
+  <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p>
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>
