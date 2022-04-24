@@ -67,8 +67,6 @@
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
 
   
-  <img src="images/bicycle-bike.jpg" alt="Vue源码学习之Render">
-  
   <article>
     <h4 id="Vue源码学习之Render"><a href="#Vue源码学习之Render" class="headerlink" title="Vue源码学习之Render"></a>Vue源码学习之Render</h4><p>根据前两章，讲述了Vue的依赖收集的工作原理以及Vue的数据响应式。今天这块砖我们先从initWatch开始敲起，最后会敲到initRender，从而开始讲解dom渲染。</p>
 <h5 id="initwatcher-初始化"><a href="#initwatcher-初始化" class="headerlink" title="initwatcher 初始化"></a>initwatcher 初始化</h5><p>为了了解watch监听函数是什么工作原理？我们先从initWatch的代码说起：</p>
