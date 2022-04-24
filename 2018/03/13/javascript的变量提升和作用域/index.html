@@ -67,8 +67,6 @@
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
 
   
-  <img src="images/js-var.jpg" alt="javascript的变量提升和作用域">
-  
   <article>
     <h4 id="先来一个例子来洗洗脑："><a href="#先来一个例子来洗洗脑：" class="headerlink" title="先来一个例子来洗洗脑："></a>先来一个例子来洗洗脑：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(!a)&#123;</span><br><span class="line">		<span class="keyword">var</span> a=<span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">alert</span>(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
