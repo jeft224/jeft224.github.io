@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <title>记webpack3到webpack4的升级之路 | Abert</title>
+  <meta name="google-site-verification" content="" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta itemprop="name" content="Abert" />
+  <meta itemprop="description" content="" />
+  <meta itemprop="image" content="" />
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <!-- keywords and description -->
+  
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div id="container">
+    <header>
+  <div class="site-title">
+    <a href="/">
+      Abert
+    </a>
+  </div>
+  
+  
+  <p class="links">
+    
+    <a target="_blank" rel="noopener" href="https://github.com/jeft224">
+      <img src="/images/links/github.png" alt="github">
+    </a>
+    
+  </p>
+  
+</header>
+    <div id="main">
+      <article class="post">
+  <h3 class="date">
+  <time datetime="2022-01-22T02:13:12.000Z">
+    01-22,2022
+  </time>
+</h3>
+  <h1>记webpack3到webpack4的升级之路</h1>
+  <p class="post-info">
+  
+  
+</p>
+  
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+  
+  <article>
+    <h3 id="记webpack3-0到webpack4-0的升级过程"><a href="#记webpack3-0到webpack4-0的升级过程" class="headerlink" title="记webpack3.0到webpack4.0的升级过程"></a>记webpack3.0到webpack4.0的升级过程</h3><p>前言：</p>
+<p>由于管理后台webpack3.0每次打包需要切换到8.x.x版本的Node；这样切换来切换过去，实在忍受不了，趁着某个功能迭代的时机把webpack版本升级到4.0，同时记录升级过程中遇到的问题。</p>
+<p>主要升级的俩个部分是：babel和webpack</p>
+<h4 id="babel（升级到babel7）"><a href="#babel（升级到babel7）" class="headerlink" title="babel（升级到babel7）"></a>babel（升级到babel7）</h4><p>升级babel7的过程中，需要将babel的基本的包更新，原来babel6的依赖的包基本上都要舍弃掉</p>
+<p>在升级babel7的过程中，有一些相关包名的变化；比如：</p>
+<ul>
+<li><code>babel-core</code> &#x3D;&gt; <code>@babel/core</code>; <code>babel-preset-react</code> &#x3D;&gt; <code>@babel/preset-react </code></li>
+<li><code>preset-es20xx</code>弃用，改为 <code>@babel/preset-env</code></li>
+<li><code>babel-preset-stage-0</code> &#x3D;&gt; <code>@babel/preset-stage-0</code></li>
+</ul>
+<p><strong>babel配置迁移：</strong></p>
+<ul>
+<li><p>将babel的配置从package.json移入到babel.config.js文件中；</p>
+</li>
+<li><p>同时对可选链和空值的支持</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">	<span class="string">&#x27;@babel/plugin-proposal-optional-chaining&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;@babel/plugin-proposal-nullish-coalescing-operator&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="webpack（升级到webpack4）"><a href="#webpack（升级到webpack4）" class="headerlink" title="webpack（升级到webpack4）"></a>webpack（升级到webpack4）</h4><p>webpack升级主要是先将webpack版本升级，将对应的依赖的插件升级到webpack4的需要的版本和一些方法和属性的变化和新增。</p>
+<p>webpack相关依赖版本升级</p>
+<ul>
+<li>webpack <code>v3.11.0</code> &#x3D;&gt; webpack <code>v4.46.0</code> ；引入依赖webpack-cli <code>v3.3.12</code></li>
+<li>webpack-dev-server:  <code>v2.5.0 </code>  &#x3D;&gt; <code>v3.11.0</code></li>
+<li>html-webpack-plugin: <code>v2.29.0</code>  &#x3D;&gt; <code>v4.3.0</code></li>
+<li>移除 <code>CommonsChunkPlugin</code>，默认使用 <code>SplitChunksPlugin</code> 分割代码</li>
+<li>配置 <code>mode</code>属性</li>
+<li>移除 <code>extract-text-webpack-plugin</code>，引入 <code>mini-css-extract-plugin</code> 并配置 <code>css-loader</code></li>
+<li>移除<code>happypack</code>，引入<code> thread-loader</code></li>
+<li>移除<code>uglifyjs-webpack-plugin</code>，引入<code>terser-webpack-plugin</code> 压缩js</li>
+<li>react-dev-utils : <code>v3.0.2</code> &#x3D;&gt; <code>v10.2.1</code> , createCompiler方法传参发生改变（传参变更为object）</li>
+<li>webpackDevServer的<code>setup</code>方法被替换为<code>before</code>和<code>after</code></li>
+<li>主题色配置采用<code>less-loader</code>的<code> modifyVars</code>变量配置</li>
+<li>支持svg图标的使用, 引入<code>@svgr/webpack</code></li>
+<li>配置<code>optimization</code>字段<ul>
+<li>引入<code>terser-webpack-plugin</code> 压缩js</li>
+<li>引入<code>optimize-css-assets-webpack-plugin</code> 压缩css</li>
+<li>splitChunks 配置 将chunk的方式由<code>all</code>更改为 <code>async</code>,同时将多个css chunk合并成一个css文件，减少请求</li>
+</ul>
+</li>
+</ul>
+<h4 id="webpack4升级中的问题"><a href="#webpack4升级中的问题" class="headerlink" title="webpack4升级中的问题"></a>webpack4升级中的问题</h4><p><strong>问题1：</strong>  当升级依赖html-webpack-plugin版本的时候，遇到的问题：this.htmlWebpackPlugin.getHooks is not a function</p>
+<p><strong>解决方案：</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">webpack3 =&gt; <span class="keyword">new</span> <span class="title class_">InterpolateHtmlPlugin</span>(env.<span class="property">raw</span>),</span><br><span class="line"><span class="function"><span class="params">webpack4</span> =&gt;</span> <span class="keyword">new</span> <span class="title class_">InterpolateHtmlPlugin</span>(<span class="title class_">HtmlWebpackPlugin</span>, env.<span class="property">raw</span>),</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>问题2：</strong>Cannot read property ‘tapPromise’ of undefined</p>
+<p><strong>解决方案：</strong> </p>
+<p>升级<code>add-asset-html-webpack-plugin</code>版本: <code>v2.1.2</code>  &#x3D;&gt;  <code>v3.1.3</code></p>
+<hr>
+<p><strong>问题3：</strong> Plugin could not be registered at ‘html-webpack-plugin-before-html-processing’. Hook was not found.</p>
+<p><strong>解决方案：</strong> </p>
+<ul>
+<li><p>升级webpack</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">webpack <span class="string">`v3.11.0`</span> =&gt; webpack <span class="string">`v4.46.0`</span> </span><br><span class="line">引入依赖webpack-cli <span class="string">`v3.3.11`</span></span><br><span class="line">webpack-dev-<span class="attr">server</span>:  <span class="string">`v2.5.0 `</span>  =&gt; <span class="string">`v3.7.2`</span></span><br><span class="line">html-webpack-<span class="attr">plugin</span>: <span class="string">`v2.29.0`</span>  =&gt; <span class="string">`v4.3.0`</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>InterpolateHtmlPlugin放在HtmlWebpackPlugin之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> =&#123;</span><br><span class="line">   <span class="comment">//...</span></span><br><span class="line">    <span class="attr">plugins</span>:[</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">InterpolateHtmlPlugin</span>(<span class="title class_">HtmlWebpackPlugin</span>, env.<span class="property">raw</span>)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p><strong>问题4：</strong> TypeError [ERR_INVALID_ARG_TYPE]: The “path” argument must be of type string. Received undefined</p>
+<p><strong>解决方案：</strong> 升级webpack-manifest-plugin版本</p>
+<hr>
+<p><strong>问题5：</strong> asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).【配置静态文件大小限制】</p>
+<p><strong>解决方案：</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">performance</span>: &#123;</span><br><span class="line">  <span class="attr">hints</span>: <span class="string">&quot;warning&quot;</span>,</span><br><span class="line">  <span class="attr">maxEntrypointSize</span>: <span class="number">5000</span> * <span class="number">1024</span>,</span><br><span class="line">  <span class="attr">maxAssetSize</span>: <span class="number">5000</span> * <span class="number">1024</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>问题6：</strong> error:despite it was not able to fulfill desired ordering with these modules:</p>
+<p><strong>解决方案：</strong> </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">MiniCssExtractPlugin</span>(&#123;</span><br><span class="line">  <span class="attr">ignoreOrder</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+
+<p>问题7： dev启动开发环境，识别不了css样式中的@符号</p>
+<p>添加参数<code>libraryDirectory：&#39;es&#39;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">	<span class="attr">options</span>: &#123;</span><br><span class="line">		<span class="attr">plugins</span>: [</span><br><span class="line">			[<span class="string">&#x27;import&#x27;</span>, &#123; <span class="attr">libraryName</span>: <span class="string">&#x27;antd&#x27;</span>, <span class="attr">style</span>: <span class="literal">true</span> ,<span class="attr">libraryDirectory</span>: <span class="string">&#x27;es&#x27;</span>&#125;]</span><br><span class="line">		],</span><br><span class="line">		<span class="attr">cacheDirectory</span>: <span class="literal">true</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="webpack4升级优化的点"><a href="#webpack4升级优化的点" class="headerlink" title="webpack4升级优化的点"></a>webpack4升级优化的点</h4><blockquote>
+<p>引入thread-loader加快打包速度</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">  <span class="attr">use</span>: [<span class="string">&#x27;thread-loader&#x27;</span>, <span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>将chunk的方式由<code>all</code>更改为 <code>async</code>, 同时将多个css chunk合并成一个css文件，减少请求</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">splitChunks</span>: &#123;</span><br><span class="line">  <span class="attr">chunks</span>: <span class="string">&#x27;async&#x27;</span>,</span><br><span class="line">	<span class="attr">minSize</span>: <span class="number">30000</span>,</span><br><span class="line">	<span class="attr">maxSize</span>: <span class="number">0</span>,</span><br><span class="line">	<span class="attr">minChunks</span>: <span class="number">1</span>,</span><br><span class="line">	<span class="attr">maxAsyncRequests</span>: <span class="number">5</span>,</span><br><span class="line">	<span class="attr">maxInitialRequests</span>: <span class="number">3</span>,</span><br><span class="line">	<span class="attr">automaticNameDelimiter</span>: <span class="string">&#x27;~&#x27;</span>,</span><br><span class="line">	<span class="attr">automaticNameMaxLength</span>: <span class="number">30</span>,</span><br><span class="line">	<span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">      <span class="attr">commons</span>: &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">		<span class="attr">name</span>: <span class="string">&#x27;vendors&#x27;</span>,</span><br><span class="line">        <span class="attr">priority</span>: -<span class="number">10</span></span><br><span class="line">      &#125;,</span><br><span class="line">	  <span class="attr">styles</span>: &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less|css$/</span>,</span><br><span class="line">	    <span class="attr">name</span>: <span class="string">&#x27;styles&#x27;</span>,</span><br><span class="line">        <span class="attr">priority</span>: -<span class="number">10</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>支持svg引入<code>@svgr/webpack</code></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">test</span>: <span class="regexp">/\.svg$/</span>,</span><br><span class="line">  <span class="attr">use</span>: [<span class="string">&#x27;@svgr/webpack&#x27;</span>],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="优化体验"><a href="#优化体验" class="headerlink" title="优化体验"></a>优化体验</h4><blockquote>
+<p>webpack3.0 打包构建时间</p>
+</blockquote>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210330095657679.png" alt="image-20210330095657679"></p>
+<blockquote>
+<p>webpack4.0 打包构建时间 构建时间上加快了一分多钟</p>
+</blockquote>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210330152441292.png" alt="image-20210330152441292"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210402105429211.png" alt="image-20210402105429211"></p>
+<blockquote>
+<p> webpack3与webpack4开发依赖对比</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">webpack <span class="string">&quot;^3.11.0&quot;</span></span><br><span class="line">webpack-dev-server <span class="string">&quot;^2.5.0&quot;</span></span><br><span class="line">html-webpack-plugin <span class="string">&quot;^2.29.0&quot;</span></span><br><span class="line">extract-text-webpack-plugin <span class="string">&quot;^3.0.2&quot;</span></span><br><span class="line">webpack-manifest-plugin <span class="string">&quot;1.1.1&quot;</span></span><br><span class="line">add-asset-html-webpack-plugin <span class="string">&quot;^2.1.2&quot;</span></span><br><span class="line">uglifyjs-webpack-plugin <span class="string">&quot;^1.2.4&quot;</span></span><br><span class="line">react-dev-utils <span class="string">&quot;^3.0.2&quot;</span></span><br><span class="line">babel-core <span class="string">&quot;6.25.0&quot;</span></span><br><span class="line">happypack <span class="string">&quot;^4.0.0&quot;</span></span><br><span class="line">file-loader <span class="string">&quot;0.11.2&quot;</span></span><br><span class="line">babel-plugin-<span class="keyword">import</span> <span class="string">&quot;^1.2.1&quot;</span></span><br><span class="line">css-loader <span class="string">&quot;0.28.4&quot;</span></span><br><span class="line">less-loader <span class="string">&quot;^4.0.5&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">webpack <span class="string">&quot;^4.46.0&quot;</span></span><br><span class="line">webpack-cli <span class="string">&quot;^3.3.12&quot;</span></span><br><span class="line">webpack-dev-server <span class="string">&quot;^3.11.0&quot;</span></span><br><span class="line">html-webpack-plugin <span class="string">&quot;^4.3.0&quot;</span></span><br><span class="line">mini-css-extract-plugin  <span class="string">&quot;^1.3.9&quot;</span></span><br><span class="line">webpack-manifest-plugin <span class="string">&quot;^2.2.0&quot;</span></span><br><span class="line">add-asset-html-webpack-plugin <span class="string">&quot;^3.1.3&quot;</span></span><br><span class="line">terser-webpack-plugin  <span class="string">&quot;^3.0.6&quot;</span></span><br><span class="line">babel-plugin-<span class="keyword">import</span>  <span class="string">&quot;1.13.0&quot;</span></span><br><span class="line">react-dev-utils <span class="string">&quot;^10.2.1&quot;</span></span><br><span class="line">@babel/core <span class="string">&quot;^7.13.10&quot;</span></span><br><span class="line">thread-loader <span class="string">&quot;^2.1.3&quot;</span></span><br><span class="line">file-loader <span class="string">&quot;6.1.1&quot;</span></span><br><span class="line">optimize-css-assets-webpack-plugin <span class="string">&quot;^5.0.4&quot;</span></span><br><span class="line">postcss-safe-parser <span class="string">&quot;^5.0.2&quot;</span></span><br><span class="line">css-loader <span class="string">&quot;^3.6.0&quot;</span></span><br><span class="line">less-loader <span class="string">&quot;^7.0.0&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>webpack3到webpack4的升级，主要做了以下这些事情</p>
+<ul>
+<li>升级依赖：升级webpack版本 ，升级html-webpack-plugin版本等</li>
+<li>代码分割：移除了CommonsChunkPlugin；引入SplitChunksPlugin，设置mode属性为production，optimization配置splitChunk拆分资源</li>
+<li>压缩css：移除extract-text-webpack-plugin；引入mini-css-extract-plugin，使用mini-css-extract-plugin的loader重新配置less-loader和css-loader，配置svg</li>
+<li>构建加速: 替换happypack为thread-loader，多线程式本地构建和生产构建</li>
+<li>代码热更新：升级webpack-cli和webpack-dev-server，并且设置mode为development</li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yzmHYJ3KjSJ_EUTJ0hbkfA">https://mp.weixin.qq.com/s/yzmHYJ3KjSJ_EUTJ0hbkfA</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022205477">https://segmentfault.com/a/1190000022205477</a></p>
+
+  </article>
+  
+  <hr>
+  <blockquote>
+    <p>
+      本文由 <a href="">Abert</a> 创作，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0</a> 国际许可协议。
+    </p>
+    <p>
+      本站文章除注明转载/出处外，均为本站原创或翻译，转载请务必署名。
+    </p>
+  </blockquote>
+  
+</article>
+
+
+    </div>
+  </div>
+  <footer>
+  
+  
+  <!-- <p>
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/syy11cn/hexo-theme-linear">Linear</a> from <a target="_blank" rel="noopener" href="https://syy11.cn">Yiyang Sun</a>
+  </p> -->
+</footer>
+  
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script>
+    Waline({
+      el: '#waline',
+      placeholder: '',
+      avatar: 'retro',
+      visitor: true,
+      requiredFields: ['nick', 'mail'],
+      serverURL: '',
+      emoji: [
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tw-emoji',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+        'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/tieba',
+      ]
+    });
+  </script>
+</body>
+
+</html>
